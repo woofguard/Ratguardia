@@ -28,6 +28,8 @@ public class Card : MonoBehaviour
     public int atk;
     public int def;
 
+    public Sprite cardSprite;
+
     public bool faceUp;   // what side of the card is facing up visually, true = front, false = back 
     public bool revealed; // whether the opponents can see the card e.g. it is a rubble card
                           // a card can be faceUp visually but not revealed e.g. in your hand
