@@ -33,6 +33,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""CursorPosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""1717ac4b-e204-4a21-b126-5875ee946724"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -43,17 +51,6 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse"",
-                    ""action"": ""Confirm"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e0a8109b-52b3-4731-8ca5-74337462021b"",
-                    ""path"": ""<Touchscreen>/press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touch"",
                     ""action"": ""Confirm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -77,6 +74,50 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Touch"",
                     ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d81fd50-d7ff-4a2a-811a-173133fad8e5"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse"",
+                    ""action"": ""CursorPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""19379966-e8a0-4249-b81d-26a3bf1d283a"",
+                    ""path"": ""<Touchscreen>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""CursorPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bef05920-249b-47ad-88fb-8ea5c6c4e658"",
+                    ""path"": ""<Pointer>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CursorPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e0a8109b-52b3-4731-8ca5-74337462021b"",
+                    ""path"": ""<Touchscreen>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Confirm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -123,6 +164,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_CardGame = asset.FindActionMap("CardGame", throwIfNotFound: true);
         m_CardGame_Confirm = m_CardGame.FindAction("Confirm", throwIfNotFound: true);
         m_CardGame_Cancel = m_CardGame.FindAction("Cancel", throwIfNotFound: true);
+        m_CardGame_CursorPosition = m_CardGame.FindAction("CursorPosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -174,12 +216,14 @@ public class @Controls : IInputActionCollection, IDisposable
     private ICardGameActions m_CardGameActionsCallbackInterface;
     private readonly InputAction m_CardGame_Confirm;
     private readonly InputAction m_CardGame_Cancel;
+    private readonly InputAction m_CardGame_CursorPosition;
     public struct CardGameActions
     {
         private @Controls m_Wrapper;
         public CardGameActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Confirm => m_Wrapper.m_CardGame_Confirm;
         public InputAction @Cancel => m_Wrapper.m_CardGame_Cancel;
+        public InputAction @CursorPosition => m_Wrapper.m_CardGame_CursorPosition;
         public InputActionMap Get() { return m_Wrapper.m_CardGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -195,6 +239,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Cancel.started -= m_Wrapper.m_CardGameActionsCallbackInterface.OnCancel;
                 @Cancel.performed -= m_Wrapper.m_CardGameActionsCallbackInterface.OnCancel;
                 @Cancel.canceled -= m_Wrapper.m_CardGameActionsCallbackInterface.OnCancel;
+                @CursorPosition.started -= m_Wrapper.m_CardGameActionsCallbackInterface.OnCursorPosition;
+                @CursorPosition.performed -= m_Wrapper.m_CardGameActionsCallbackInterface.OnCursorPosition;
+                @CursorPosition.canceled -= m_Wrapper.m_CardGameActionsCallbackInterface.OnCursorPosition;
             }
             m_Wrapper.m_CardGameActionsCallbackInterface = instance;
             if (instance != null)
@@ -205,6 +252,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Cancel.started += instance.OnCancel;
                 @Cancel.performed += instance.OnCancel;
                 @Cancel.canceled += instance.OnCancel;
+                @CursorPosition.started += instance.OnCursorPosition;
+                @CursorPosition.performed += instance.OnCursorPosition;
+                @CursorPosition.canceled += instance.OnCursorPosition;
             }
         }
     }
@@ -240,5 +290,6 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnConfirm(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void OnCursorPosition(InputAction.CallbackContext context);
     }
 }

@@ -10,6 +10,7 @@ public class Board : MonoBehaviour
     private int turn; // which player's turn it is
 
     public CardStack deck;
+    public CardStack rubblePile;
 
     // references to player prefabs
     public GameObject refHumanPlayer;
@@ -73,7 +74,6 @@ public class Board : MonoBehaviour
         turn = player;
         players[player].hasTurn = true;
         players[PrevPlayer()].hasTurn = false;
-
         
         // if the deck is empty, end the game
         if(deck.stack.Count <= 0)

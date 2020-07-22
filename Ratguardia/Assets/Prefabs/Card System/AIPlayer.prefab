@@ -27,8 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.1680726, y: 1.0265838, z: -12.166016}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 5314378234872943378}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45,93 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: []
-  rubblePile: {fileID: 3748873734812985255}
+  faceUp: 0
+  revealed: 0
+  rubblePile: {fileID: 0}
   score: 0
   hasTurn: 0
---- !u!1001 &5761300876892965447
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1058208371618199221}
-    m_Modifications:
-    - target: {fileID: 447041939321215317, guid: d5ec0e9b116fd8ac189c1ee2710a5fb7,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.1680726
-      objectReference: {fileID: 0}
-    - target: {fileID: 447041939321215317, guid: d5ec0e9b116fd8ac189c1ee2710a5fb7,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.0265838
-      objectReference: {fileID: 0}
-    - target: {fileID: 447041939321215317, guid: d5ec0e9b116fd8ac189c1ee2710a5fb7,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -12.166016
-      objectReference: {fileID: 0}
-    - target: {fileID: 447041939321215317, guid: d5ec0e9b116fd8ac189c1ee2710a5fb7,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 447041939321215317, guid: d5ec0e9b116fd8ac189c1ee2710a5fb7,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 447041939321215317, guid: d5ec0e9b116fd8ac189c1ee2710a5fb7,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 447041939321215317, guid: d5ec0e9b116fd8ac189c1ee2710a5fb7,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 447041939321215317, guid: d5ec0e9b116fd8ac189c1ee2710a5fb7,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 447041939321215317, guid: d5ec0e9b116fd8ac189c1ee2710a5fb7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 447041939321215317, guid: d5ec0e9b116fd8ac189c1ee2710a5fb7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 447041939321215317, guid: d5ec0e9b116fd8ac189c1ee2710a5fb7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3338762312479862933, guid: d5ec0e9b116fd8ac189c1ee2710a5fb7,
-        type: 3}
-      propertyPath: m_Name
-      value: RubblePile
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d5ec0e9b116fd8ac189c1ee2710a5fb7, type: 3}
---- !u!4 &5314378234872943378 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 447041939321215317, guid: d5ec0e9b116fd8ac189c1ee2710a5fb7,
-    type: 3}
-  m_PrefabInstance: {fileID: 5761300876892965447}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3748873734812985255 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8931460855813107168, guid: d5ec0e9b116fd8ac189c1ee2710a5fb7,
-    type: 3}
-  m_PrefabInstance: {fileID: 5761300876892965447}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66dbc5c321e36ec0c8ee7b17e4eb10ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  playerIndex: 0

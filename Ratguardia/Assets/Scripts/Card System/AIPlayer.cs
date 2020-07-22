@@ -6,8 +6,7 @@ public class AIPlayer : Player
 {
     public override IEnumerator TakeTurn()
     {
-        StartCoroutine(base.TakeTurn());
-        StartCoroutine(EndTurn());
+        StartCoroutine(PlaceholderAI());
         yield return null; 
     }
 
@@ -15,5 +14,15 @@ public class AIPlayer : Player
     {
         StartCoroutine(base.EndTurn());
         yield return null;
+    }
+
+    // just discards the last card drawn
+    public IEnumerator PlaceholderAI()
+    {
+        Draw();
+        yield return new WaitForSeconds(0.75f);
+        Discard(5);
+        yield return new WaitForSeconds(0.75f);
+        StartCoroutine(EndTurn());
     }
 }

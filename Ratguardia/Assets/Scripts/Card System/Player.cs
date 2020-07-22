@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public abstract class Player : MonoBehaviour
 {
     public List<Card> hand;
     public bool faceUp; // whether the hand is face up or not (true for human player)
     public bool revealed;
-    public CardStack rubblePile;
 
     // public Character character;
     public int score;
@@ -15,11 +14,7 @@ public class Player : MonoBehaviour
     public int playerIndex; // which index this player is in the Board array
 
     // function containing player actions on their turn
-    public virtual IEnumerator TakeTurn()
-    {
-        Draw();
-        yield return null;
-    }
+    public abstract IEnumerator TakeTurn();
 
     public virtual IEnumerator EndTurn()
     {
@@ -27,7 +22,7 @@ public class Player : MonoBehaviour
         yield return null;
     }
 
-    public void Draw()
+    public Card Draw()
     {
         var newCard = Board.main.deck.Pop();
 
@@ -37,23 +32,30 @@ public class Player : MonoBehaviour
 
         hand.Add(newCard);
 
-        // Debug.Log("Player " + playerIndex + " drew a card");
+        Debug.Log("Player " + playerIndex + " drew a card");
+
+        return newCard;
     }
 
     // discard using a specific card reference
-    public void Discard(Card c)
+    public Card Discard(Card c)
     {
-        rubblePile.Push(c);
+        Board.main.rubblePile.Push(c);
         hand.Remove(c);
+        Debug.Log("Player " + playerIndex + " discards a " + c);
         PromptSteal();
+        return c;
     }
 
     // discard using the cards index in the hand
-    public void Discard(int i)
+    public Card Discard(int i)
     {
-        rubblePile.Push(hand[i]);
+        Card c = hand[i];
+        Board.main.rubblePile.Push(hand[i]);
         hand.RemoveAt(i);
+        Debug.Log("Player " + playerIndex + " discards a " + c);
         PromptSteal();
+        return c;
     }
 
     // steal someone else's card from their rubble pile
