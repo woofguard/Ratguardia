@@ -1,2 +1,11 @@
 [Ll]ibrary/
 [Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+Assets/AssetStoreTools*
+*.pidb.meta
+*.pdb.meta
+sysinfo.txt
+*.apk
+*.unitypackage
