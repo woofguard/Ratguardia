@@ -16,11 +16,7 @@ public class HumanPlayer : Player
         }
 
         yield return new WaitUntil(() => PlayerDraws());
-        // yield return new WaitForSeconds(1.0f);
-        // yield return new WaitForEndOfFrame();
         yield return new WaitUntil(() => PlayerDiscards());
-        // yield return new WaitForEndOfFrame();
-        // yield return new WaitForSeconds(1.0f);
         StartCoroutine(EndTurn());
     }
 
