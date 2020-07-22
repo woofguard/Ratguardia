@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CardStack : MonoBehaviour
 {
-    [SerializeField]   
+    [SerializeField]  // does not work, i guess stack cant be serialized......... big F
     public Stack<Card> stack;
 
     // which side the stack is facing (face down for deck, face up for rubble pile)
@@ -56,5 +56,7 @@ public class CardStack : MonoBehaviour
 
         // convert back to stack
         stack = new Stack<Card>(array);
+
+        Debug.Log("deck shuffled");
     }
 }

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1058208371618199221}
   - component: {fileID: 6334531006705810457}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Untagged
+  m_Name: HumanPlayer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,13 +41,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5821434033703883572}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e698127b1cfed0997b1f8b82577ad1a2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0247484509fcc3010975467c2d2012a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hand: []
-  rubblePile: {fileID: 0}
+  faceUp: 1
+  revealed: 0
+  rubblePile: {fileID: 3748873734812985255}
   score: 0
   hasTurn: 0
+  playerIndex: 0
 --- !u!1001 &5761300876892965447
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -123,3 +126,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5761300876892965447}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3748873734812985255 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8931460855813107168, guid: d5ec0e9b116fd8ac189c1ee2710a5fb7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5761300876892965447}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66dbc5c321e36ec0c8ee7b17e4eb10ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
