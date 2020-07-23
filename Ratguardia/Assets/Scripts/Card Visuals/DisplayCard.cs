@@ -60,6 +60,7 @@ public class DisplayCard : MonoBehaviour
         {
             sprite.sprite = card.cardSprite;
 
+            frame.gameObject.SetActive(true);
             cardName.gameObject.SetActive(true);
             atk.gameObject.SetActive(true);
             def.gameObject.SetActive(true);
@@ -70,6 +71,7 @@ public class DisplayCard : MonoBehaviour
         {
             sprite.sprite = cardBack;
 
+            frame.gameObject.SetActive(false);
             cardName.gameObject.SetActive(false);
             atk.gameObject.SetActive(false);
             def.gameObject.SetActive(false);
