@@ -21,9 +21,9 @@ public class AIPlayer : Player
     public IEnumerator PlaceholderAI()
     {
         Draw();
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.5f);
         Discard(5);
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.5f);
         StartCoroutine(EndTurn());
     }
 

@@ -39,7 +39,7 @@ public class HumanPlayer : Player
             cursor.clickedCard = null;
 
             Card drawn = Draw();
-            Debug.Log("drew a " + drawn);
+            // Debug.Log("drew a " + drawn);
             return true;
         }
         else

@@ -58,7 +58,7 @@ public abstract class Player : MonoBehaviour
 
         c.ResetStats();
         
-        Debug.Log("Player " + playerIndex + " discards a " + c);
+        // Debug.Log("Player " + playerIndex + " discards a " + c);
         ArrangeHand();
         PromptSteal();
         return c;
@@ -88,15 +88,42 @@ public abstract class Player : MonoBehaviour
     {
         score = 0; // reset before recalculating
 
+        List<Card> kings = new List<Card>();
+
         foreach(Card card in hand)
         {
-            // if the card is a peasant, activate its effect
-            // if the card is a queen, activate its effect
-
+            // activate effects based on card name
+            switch(card.cardName)
+            {    
+                case "Queen":
+                    card.ActivateEffect();
+                    break;
+                case "Peasant":
+                    card.ActivateEffect();
+                    break;
+                case "King":
+                    kings.Add(card);
+                    break;
+            }
             score += card.def;
         }
 
+        // activate king effects after initial score is added up
+        foreach(Card king in kings)
+        {
+            king.ActivateEffect();
+        }
+
         return score;
+    }
+
+    // flips entire hand face up at final score calculation
+    public void FlipHand()
+    {
+        foreach(var card in hand)
+        {
+            card.Flip(true);
+        }
     }
 
     public virtual void ArrangeHand()

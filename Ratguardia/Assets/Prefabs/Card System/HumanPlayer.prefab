@@ -522,10 +522,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1058208371618199221}
     m_Modifications:
+    - target: {fileID: 2261744978148685232, guid: db83335b7b60d44b3941015ba3e5b3d7,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 6334531006705810457}
     - target: {fileID: 8182530718708795144, guid: db83335b7b60d44b3941015ba3e5b3d7,
         type: 3}
       propertyPath: m_Name
       value: Cursor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8182530718708795144, guid: db83335b7b60d44b3941015ba3e5b3d7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8716901803707322915, guid: db83335b7b60d44b3941015ba3e5b3d7,
         type: 3}

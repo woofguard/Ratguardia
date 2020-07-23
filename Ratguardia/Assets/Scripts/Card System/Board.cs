@@ -105,6 +105,7 @@ public class Board : MonoBehaviour
         // calculate every player's score
         for(int i = 0; i < scores.Length; i++)
         {
+            players[i].FlipHand();
             scores[i] = players[i].CalculateScore();
         }
 
@@ -112,14 +113,14 @@ public class Board : MonoBehaviour
         Card jester = FindJester();
         if(jester != null)
         {
-            // jester.ActivateEffect();
+            jester.ActivateEffect();
         }
 
         // find every witch and activate its effect
         List<Card> witches = FindWitches();
         foreach(Card witch in witches)
         {
-            // witch.ActivateEffect();
+            witch.ActivateEffect();
         }
 
         // find the player with the highest score
