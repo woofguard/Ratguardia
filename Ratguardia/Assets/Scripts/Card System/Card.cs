@@ -14,29 +14,30 @@ public enum Suit
 
 public class Card : MonoBehaviour
 {
-    // struct to contain card effect function
-    [System.Serializable]
-    public struct Effect
-    {
-        public UnityEvent activateEvent;
-        public UnityEvent deactivateEvent;
-        public bool active;
-    }
-
     public string cardName;
     public Suit suit;
     public int atk;
     public int def;
+    private int baseAtk;
+    private int baseDef;
 
-    public Sprite cardSprite;
+    public Sprite cardSprite; // visualization stuff
+    public DisplayCard visualCard;
 
-    public bool faceUp;   // what side of the card is facing up visually, true = front, false = back 
-    public bool revealed; // whether the opponents can see the card e.g. it is a rubble card
-                          // a card can be faceUp visually but not revealed e.g. in your hand
-    public Player owner;  // which player has the card
-    public bool rubble;   // if the card is rubble
+    [HideInInspector] public bool faceUp;   // what side of the card is facing up visually, true = front, false = back 
+    [HideInInspector] public bool revealed; // whether the opponents can see the card e.g. it is a rubble card
+                                            // a card can be faceUp visually but not revealed e.g. in your hand
+    [HideInInspector] public int owner;     // board array index of player who owns the card
+    [HideInInspector] public bool rubble;   // if the card is rubble
 
-    public Effect effect;
+    public UnityEvent effect;
+
+    private void Start()
+    {
+        baseAtk = atk;
+        baseDef = def;
+        visualCard.SetCard(this);
+    }
 
     // flips the card between face down/face up
     public void Flip()
@@ -54,6 +55,7 @@ public class Card : MonoBehaviour
 
             // play flip animation here or something
         }
+        visualCard.UpdateCardDisplay();
     }
 
     // overload to flip to specific state
@@ -106,11 +108,16 @@ public class Card : MonoBehaviour
 
     public void ActivateEffect()
     {
-        effect.activateEvent.Invoke();
+        effect.Invoke();
     }
 
-    public void DeactivateEffect()
+    // reset the card's atk/def to base if it has been modified
+    public void ResetStats()
     {
-        effect.deactivateEvent.Invoke();
+        if(atk != baseAtk || def != baseDef)
+        {
+            atk = baseAtk;
+            def = baseDef;
+        }
     }
 }

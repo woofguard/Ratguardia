@@ -6,9 +6,9 @@ using UnityEngine.InputSystem.Utilities;
 
 public class Cursor : MonoBehaviour
 {
-    public Controls controls;
+    [HideInInspector] public Controls controls;
 
-    public bool confirmPressed;
+    [HideInInspector] public bool confirmPressed;
 
     private void Awake()
     {
