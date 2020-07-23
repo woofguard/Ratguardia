@@ -19,7 +19,7 @@ public class DisplayCard : MonoBehaviour
     SpriteRenderer sprite;
     public SpriteRenderer frame;
 
-    private void Start()
+    private void Awake()
     {
         sprite = gameObject.GetComponent<SpriteRenderer>();
     }
@@ -28,7 +28,7 @@ public class DisplayCard : MonoBehaviour
     public void SetCard(Card c)
     {
         card = c;
-        cardName.text = card.cardName;
+        cardName.text = card.cardName + " of " + card.suit.ToString();
         atk.text = card.atk + "";
         def.text = card.def + "";
 

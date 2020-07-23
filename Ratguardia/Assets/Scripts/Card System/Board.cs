@@ -140,4 +140,16 @@ public class Board : MonoBehaviour
             return turn - 1;
         }
     }
+
+    // organize rubble cards visually
+    public void OrganizeRubble()
+    {
+       Card[] cards = rubblePile.GetComponentsInChildren<Card>();
+        foreach(Card card in cards)
+        {
+            card.transform.localPosition = new Vector3(0f, 0f, 0f);
+            card.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+            card.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f); // bad hardcoding
+        }
+    }
 }

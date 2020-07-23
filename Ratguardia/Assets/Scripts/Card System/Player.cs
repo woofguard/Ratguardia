@@ -13,6 +13,9 @@ public abstract class Player : MonoBehaviour
     [HideInInspector] public bool hasTurn;
     [HideInInspector] public int playerIndex; // which index this player is in the Board array
 
+    public GameObject fiveCardLayout;
+    public GameObject sixCardLayout;
+
     // function containing player actions on their turn
     public abstract IEnumerator TakeTurn();
 
@@ -32,9 +35,9 @@ public abstract class Player : MonoBehaviour
 
         // set card's owner to this player
         newCard.owner = playerIndex;
-
         hand.Add(newCard);
-
+        newCard.transform.SetParent(transform);
+        ArrangeHand();
         // Debug.Log("Player " + playerIndex + " drew a card");
 
         return newCard;
@@ -44,6 +47,8 @@ public abstract class Player : MonoBehaviour
     public Card Discard(Card c)
     {
         Board.main.rubblePile.Push(c);
+        c.transform.SetParent(Board.main.rubblePile.transform);
+        Board.main.OrganizeRubble();
         hand.Remove(c);
 
         // set card's owner to -1 (no player)
@@ -53,7 +58,7 @@ public abstract class Player : MonoBehaviour
         c.ResetStats();
         
         Debug.Log("Player " + playerIndex + " discards a " + c);
-        
+        ArrangeHand();
         PromptSteal();
         return c;
     }
@@ -80,5 +85,31 @@ public abstract class Player : MonoBehaviour
     public int CalculateScore()
     {
         return 0;
+    }
+
+    public virtual void ArrangeHand()
+    {
+        Debug.Log("Arranging player " + playerIndex + "'s hand");
+        if (fiveCardLayout == null || sixCardLayout == null) return;
+        if (hand.Count == 5)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Transform card = fiveCardLayout.transform.GetChild(i);
+                hand[i].transform.localPosition = card.localPosition;
+                hand[i].transform.localRotation = card.localRotation;
+                hand[i].transform.localScale = card.localScale;
+            }
+        }
+        else if (hand.Count == 6)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                Transform card = sixCardLayout.transform.GetChild(i);
+                hand[i].transform.position = card.position;
+                hand[i].transform.rotation = card.rotation;
+                hand[i].transform.localScale = card.localScale;
+            }
+        }
     }
 }
