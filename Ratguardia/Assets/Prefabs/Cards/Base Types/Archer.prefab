@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 656963584109813927, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 794454808658709626, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: cardName
@@ -16,6 +21,22 @@ PrefabInstance:
         type: 3}
       propertyPath: def
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 794454808658709626, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: cardSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 051625e77497005438413944519d8041,
+        type: 3}
+    - target: {fileID: 794454808658709626, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: suit
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3335227154412685027, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5211449086507343672, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
@@ -72,10 +93,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5514428931754800495, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296939979610670743, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373571988361414722, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7262094864740497602, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_Name
       value: Archer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525603985752399074, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7917510349708518839, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c473f3e648497c6a5b667175eb754fa9, type: 3}

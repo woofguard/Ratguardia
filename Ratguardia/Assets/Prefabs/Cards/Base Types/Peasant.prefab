@@ -48,6 +48,12 @@ PrefabInstance:
       propertyPath: effect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 6513293558621754700}
+    - target: {fileID: 794454808658709626, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: cardSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b2deb2fd3aab26a4d922c587d5cd9465,
+        type: 3}
     - target: {fileID: 5211449086507343672, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_LocalPosition.x
