@@ -21,7 +21,8 @@ public class Card : MonoBehaviour
     private int baseAtk;
     private int baseDef;
 
-    public Sprite cardSprite;
+    public Sprite cardSprite; // visualization stuff
+    public DisplayCard visualCard;
 
     [HideInInspector] public bool faceUp;   // what side of the card is facing up visually, true = front, false = back 
     [HideInInspector] public bool revealed; // whether the opponents can see the card e.g. it is a rubble card
@@ -35,6 +36,7 @@ public class Card : MonoBehaviour
     {
         baseAtk = atk;
         baseDef = def;
+        visualCard.SetCard(this);
     }
 
     // flips the card between face down/face up
@@ -53,6 +55,7 @@ public class Card : MonoBehaviour
 
             // play flip animation here or something
         }
+        visualCard.UpdateCardDisplay();
     }
 
     // overload to flip to specific state

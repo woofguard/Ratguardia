@@ -15,7 +15,9 @@ public class DisplayCard : MonoBehaviour
     public TextMeshPro effectDetails;
 
     public Sprite cardBack;
+    public Sprite[] suitFrames;
     SpriteRenderer sprite;
+    public SpriteRenderer frame;
 
     private void Start()
     {
@@ -29,6 +31,25 @@ public class DisplayCard : MonoBehaviour
         cardName.text = card.cardName;
         atk.text = card.atk + "";
         def.text = card.def + "";
+
+        switch(card.suit)
+        {
+            case Suit.Chalices:
+                frame.sprite = suitFrames[0];
+                break;
+            case Suit.Swords:
+                frame.sprite = suitFrames[1];
+                break;
+            case Suit.Wands:
+                frame.sprite = suitFrames[2];
+                break;
+            case Suit.Rings:
+                frame.sprite = suitFrames[3];
+                break;
+            default:
+                break;
+        }
+
         // set effect text
         UpdateCardDisplay();
     }
