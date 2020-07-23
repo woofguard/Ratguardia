@@ -17,6 +17,9 @@ public class Board : MonoBehaviour
     public GameObject refHumanPlayer;
     public GameObject refAIPlayer;
 
+    // reference to board UI
+    public BoardUIManager refBoardUI;
+
     private void Awake()
     {
         // board is a singleton
