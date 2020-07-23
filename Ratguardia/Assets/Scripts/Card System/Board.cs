@@ -45,6 +45,7 @@ public class Board : MonoBehaviour
         var cards = GetComponentsInChildren<Card>();
         foreach(Card card in cards)
         {
+            card.owner = -1;
             deck.Push(card);
         }
 
