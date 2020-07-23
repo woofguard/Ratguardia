@@ -65,12 +65,18 @@ PrefabInstance:
     - target: {fileID: 3867889794126373364, guid: e284a6c1091878144b1843aa2f4fa487,
         type: 3}
       propertyPath: m_Name
-      value: King Variant 1
+      value: King_Chalices
       objectReference: {fileID: 0}
     - target: {fileID: 6513293558621754700, guid: e284a6c1091878144b1843aa2f4fa487,
         type: 3}
       propertyPath: suit
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6513293558621754700, guid: e284a6c1091878144b1843aa2f4fa487,
+        type: 3}
+      propertyPath: cardSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7a0e7da5d1993f94aae352105574ce0c,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e284a6c1091878144b1843aa2f4fa487, type: 3}
