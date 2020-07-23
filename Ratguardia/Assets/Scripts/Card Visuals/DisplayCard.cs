@@ -79,4 +79,26 @@ public class DisplayCard : MonoBehaviour
             effectDetails.gameObject.SetActive(false);
         }
     }
+    
+    public void HideCard()
+    {
+        sprite.enabled = false;
+        frame.gameObject.SetActive(false);
+        cardName.gameObject.SetActive(false);
+        atk.gameObject.SetActive(false);
+        def.gameObject.SetActive(false);
+        effect.gameObject.SetActive(false);
+        effectDetails.gameObject.SetActive(false);
+    }
+
+    public void UnhideCard()
+    {
+        sprite.enabled = true;
+        frame.gameObject.SetActive(true);
+        cardName.gameObject.SetActive(true);
+        atk.gameObject.SetActive(true);
+        def.gameObject.SetActive(true);
+        effect.gameObject.SetActive(true);
+        effectDetails.gameObject.SetActive(true);
+    }
 }

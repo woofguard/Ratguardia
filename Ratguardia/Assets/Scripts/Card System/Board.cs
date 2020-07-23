@@ -144,12 +144,13 @@ public class Board : MonoBehaviour
     // organize rubble cards visually
     public void OrganizeRubble()
     {
-       Card[] cards = rubblePile.GetComponentsInChildren<Card>();
-        foreach(Card card in cards)
+        foreach(Card card in rubblePile.stack)
         {
+            card.visualCard.HideCard(); // hide all cards
             card.transform.localPosition = new Vector3(0f, 0f, 0f);
             card.transform.eulerAngles = new Vector3(0f, 0f, 0f);
-            card.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f); // bad hardcoding
+            card.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f); // bad hardcoding, don't look at me
         }
+        rubblePile.stack.Peek().visualCard.UnhideCard(); // unhide the top card
     }
 }
