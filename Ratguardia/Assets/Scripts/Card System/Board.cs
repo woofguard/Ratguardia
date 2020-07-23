@@ -8,6 +8,7 @@ public class Board : MonoBehaviour
 
     public Player[] players;
     private int turn; // which player's turn it is
+    public int[] scores;
 
     public CardStack deck;
     public CardStack rubblePile;
@@ -40,6 +41,7 @@ public class Board : MonoBehaviour
 
         players = new Player[4];
         turn = 0; // might randomize this in the future or something
+        scores = new int[4];
 
         // add each unique card to deck stack
         var cards = GetComponentsInChildren<Card>();
@@ -97,8 +99,76 @@ public class Board : MonoBehaviour
     // calculates winner based on each player's score, returns player index
     public int DetermineWinner()
     {
-        Debug.Log("Player " + turn + " wins!");
-        return 0;
+        // calculate every player's score
+        for(int i = 0; i < scores.Length; i++)
+        {
+            scores[i] = players[i].CalculateScore();
+        }
+
+        // if any player has a jester, activate its effect
+        Card jester = FindJester();
+        if(jester != null)
+        {
+            // jester.ActivateEffect();
+        }
+
+        // find every witch and activate its effect
+        List<Card> witches = FindWitches();
+        foreach(Card witch in witches)
+        {
+            // witch.ActivateEffect();
+        }
+
+        // find the player with the highest score
+        int winner = 0;
+        for(int i = 0; i < scores.Length; i++)
+        {
+            Debug.Log("Player " + i + " score: " + scores[i]);
+            if(scores[i] > scores[winner])
+            {
+                winner = i;
+            }
+        }
+
+        Debug.Log("Player " + winner + " wins!");
+        return winner;
+    }
+
+    // checks if any player has a jester in their hand
+    public Card FindJester()
+    {
+        // dreaded n^2..... it will only ever look at like 20 cards total so its ok tho
+        foreach(var player in players)
+        {
+            foreach(var card in player.hand)
+            {
+                if(card.cardName == "Jester")
+                {
+                    return card;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    // count up all the witches in players' hands
+    public List<Card> FindWitches()
+    {
+        List<Card> witches = new List<Card>();
+
+        foreach(var player in players)
+        {
+            foreach(var card in player.hand)
+            {
+                if(card.cardName == "Witch")
+                {
+                    witches.Add(card);
+                }
+            }
+        }
+
+        return witches;
     }
 
     // creates the Player game objects for 1 human player and 3 AIs, returns array of players

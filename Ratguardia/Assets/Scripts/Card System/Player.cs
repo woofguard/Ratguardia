@@ -82,9 +82,20 @@ public abstract class Player : MonoBehaviour
 
     }
 
+    // look thru player's hand and add up all the def scores
     public int CalculateScore()
     {
-        return 0;
+        score = 0; // reset before recalculating
+
+        foreach(Card card in hand)
+        {
+            // if the card is a peasant, activate its effect
+            // if the card is a queen, activate its effect
+
+            score += card.def;
+        }
+
+        return score;
     }
 
     public virtual void ArrangeHand()

@@ -38,7 +38,7 @@ public class Cursor : MonoBehaviour
         // whatever the heck a raycast is
         var clickedObj = Physics2D.Raycast(new Vector2(mousePos.x, mousePos.y), Vector2.zero);
 
-        // see if we clicked anything
+        // if we clicked anything
         if(clickedObj.collider != null)
         {
             // get the clicked card and store it for HumanPlayer to read
