@@ -17,6 +17,11 @@ public class DisplayCard : MonoBehaviour
     public Sprite cardBack;
     SpriteRenderer sprite;
 
+    private void Start()
+    {
+        sprite = gameObject.GetComponent<SpriteRenderer>();
+    }
+
     // set card display to current information
     public void SetCard(Card c)
     {
@@ -25,6 +30,7 @@ public class DisplayCard : MonoBehaviour
         atk.text = card.atk + "";
         def.text = card.def + "";
         // set effect text
+        UpdateCardDisplay();
     }
 
     public void UpdateCardDisplay()
