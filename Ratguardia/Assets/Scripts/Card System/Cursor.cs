@@ -9,6 +9,7 @@ public class Cursor : MonoBehaviour
     [HideInInspector] public Controls controls;
 
     [HideInInspector] public bool confirmPressed;
+    [HideInInspector] public Card clickedCard;
 
     private void Awake()
     {
@@ -24,11 +25,25 @@ public class Cursor : MonoBehaviour
         controls.CardGame.CursorPosition.Enable();
 
         confirmPressed = false;
+        clickedCard = null;
     }
 
     public void OnConfirm(InputAction.CallbackContext context)
     {
         confirmPressed = true;
+
+        // get position of cursor
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(controls.CardGame.CursorPosition.ReadValue<Vector2>());
+        
+        // whatever the heck a raycast is
+        var clickedObj = Physics2D.Raycast(new Vector2(mousePos.x, mousePos.y), Vector2.zero);
+
+        // see if we clicked anything
+        if(clickedObj.collider != null)
+        {
+            // get the clicked card and store it for HumanPlayer to read
+            clickedCard = clickedObj.collider.gameObject.GetComponent<DisplayCard>().card;
+        }
     }
 
     public void OnCancel(InputAction.CallbackContext context)

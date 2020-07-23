@@ -29,10 +29,15 @@ public class HumanPlayer : Player
     // returns true when the player draws a card
     public bool PlayerDraws()
     {
-        // for now just if player clicks the mouse, change later
-        if(cursor.confirmPressed)
+        Card card = cursor.clickedCard;
+
+        // if the player clicks a card that is unowned and not rubble (i.e. deck)
+        if(cursor.confirmPressed && card != null && card.owner < 0 && !card.rubble)
         {
+            // reset cursor data
             cursor.confirmPressed = false;
+            cursor.clickedCard = null;
+
             Card drawn = Draw();
             Debug.Log("drew a " + drawn);
             return true;
@@ -45,11 +50,14 @@ public class HumanPlayer : Player
 
     public bool PlayerDiscards()
     {
-        // again just player clicks mouse for now, change later
-        if(cursor.confirmPressed)
+        Card card = cursor.clickedCard;
+
+        // if the player clicks their own card
+        if(cursor.confirmPressed && card != null && card.owner == playerIndex)
         {
             cursor.confirmPressed = false;
-            Card discarded = Discard(0);
+            Card discarded = Discard(card);
+            cursor.clickedCard = null;
             return true;
         }
         else
