@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9196346912133931980}
   - component: {fileID: 2329316924680827908}
   m_Layer: 0
-  m_Name: Card
+  m_Name: VisualCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_Size: {x: 7.32, y: 10.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &9196346912133931980
@@ -109,10 +109,10 @@ MonoBehaviour:
   effectDetails: {fileID: 8569941546050874024}
   cardBack: {fileID: 21300000, guid: abb01ff4b00647d4ea5693eb1b4a2f52, type: 3}
   suitFrames:
-  - {fileID: 21300000, guid: 0e305cedd2fb1b14eac8af7d9cc10def, type: 3}
-  - {fileID: 21300000, guid: 033b3baef7e7b6a409e9aebb5b57496b, type: 3}
-  - {fileID: 21300000, guid: 9648c09287bf2044fbe69b1ee3bea774, type: 3}
-  - {fileID: 21300000, guid: 0de6e9d3225a0684cac377786d2d5c4f, type: 3}
+  - {fileID: 21300000, guid: e7b2a43c35dc55041b158116a2244a0a, type: 3}
+  - {fileID: 21300000, guid: 3e8cf7c76f9bd134a9a18ad47f422e2c, type: 3}
+  - {fileID: 21300000, guid: dac3785206952fe4e9401413170a1e7b, type: 3}
+  - {fileID: 21300000, guid: 27522c02c9e72fb44bd169dbb2827457, type: 3}
   frame: {fileID: 2381454193693514000}
 --- !u!61 &2329316924680827908
 BoxCollider2D:
@@ -1038,7 +1038,7 @@ SpriteRenderer:
   m_Size: {x: 7.32, y: 10.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &8844270675871424894
