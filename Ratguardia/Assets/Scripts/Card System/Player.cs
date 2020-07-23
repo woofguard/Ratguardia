@@ -28,6 +28,7 @@ public abstract class Player : MonoBehaviour
     public Card Draw()
     {
         var newCard = Board.main.deck.Pop();
+        Board.main.refBoardUI.UpdateDeckUI();
 
         // flip card to the same side as rest of hand
         newCard.Flip(faceUp);
