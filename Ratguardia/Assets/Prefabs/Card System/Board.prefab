@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2912273503472159151}
   - component: {fileID: 15767170478089304}
+  - component: {fileID: 4474550199523194375}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -52,6 +53,18 @@ MonoBehaviour:
     type: 3}
   refAIPlayer: {fileID: 5821434033703883572, guid: e6c55cf1dc0ab90c78de8eb839e29836,
     type: 3}
+--- !u!114 &4474550199523194375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3656851078014162665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2d65d2f0f7c99d1a713b7bf549dfe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &723390988926608492
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -9,9 +9,9 @@ public abstract class Player : MonoBehaviour
     public bool revealed;
 
     // public Character character;
-    public int score;
-    public bool hasTurn;
-    public int playerIndex; // which index this player is in the Board array
+    [HideInInspector] public int score;
+    [HideInInspector] public bool hasTurn;
+    [HideInInspector] public int playerIndex; // which index this player is in the Board array
 
     // function containing player actions on their turn
     public abstract IEnumerator TakeTurn();
@@ -30,9 +30,12 @@ public abstract class Player : MonoBehaviour
         newCard.Flip(faceUp);
         newCard.Reveal(revealed);
 
+        // set card's owner to this player
+        newCard.owner = playerIndex;
+
         hand.Add(newCard);
 
-        Debug.Log("Player " + playerIndex + " drew a card");
+        // Debug.Log("Player " + playerIndex + " drew a card");
 
         return newCard;
     }
@@ -42,7 +45,15 @@ public abstract class Player : MonoBehaviour
     {
         Board.main.rubblePile.Push(c);
         hand.Remove(c);
+
+        // set card's owner to -1 (no player)
+        c.owner = -1;
+        c.rubble = true;
+
+        c.ResetStats();
+        
         Debug.Log("Player " + playerIndex + " discards a " + c);
+        
         PromptSteal();
         return c;
     }
@@ -51,11 +62,7 @@ public abstract class Player : MonoBehaviour
     public Card Discard(int i)
     {
         Card c = hand[i];
-        Board.main.rubblePile.Push(hand[i]);
-        hand.RemoveAt(i);
-        Debug.Log("Player " + playerIndex + " discards a " + c);
-        PromptSteal();
-        return c;
+        return Discard(c);
     }
 
     // steal someone else's card from their rubble pile

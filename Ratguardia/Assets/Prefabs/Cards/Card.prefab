@@ -47,15 +47,11 @@ MonoBehaviour:
   suit: 4
   atk: 0
   def: 0
+  cardSprite: {fileID: 0}
   faceUp: 0
   revealed: 0
-  owner: {fileID: 0}
+  owner: -1
   rubble: 0
   effect:
-    activateEvent:
-      m_PersistentCalls:
-        m_Calls: []
-    deactivateEvent:
-      m_PersistentCalls:
-        m_Calls: []
-    active: 0
+    m_PersistentCalls:
+      m_Calls: []

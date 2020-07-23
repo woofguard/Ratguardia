@@ -9,9 +9,45 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 794454808658709626, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
+      propertyPath: effect.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 794454808658709626, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
       propertyPath: cardName
       value: Peasant
       objectReference: {fileID: 0}
+    - target: {fileID: 794454808658709626, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: effect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 794454808658709626, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: effect.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 794454808658709626, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: effect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4474550199523194375, guid: 0443b5fc9303b2ad3934fdca694f0b75,
+        type: 3}
+    - target: {fileID: 794454808658709626, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: effect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PeasantEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 794454808658709626, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: effect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Card, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 794454808658709626, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: effect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 6513293558621754700}
     - target: {fileID: 5211449086507343672, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -74,3 +110,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c473f3e648497c6a5b667175eb754fa9, type: 3}
+--- !u!114 &6513293558621754700 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 794454808658709626, guid: c473f3e648497c6a5b667175eb754fa9,
+    type: 3}
+  m_PrefabInstance: {fileID: 5865276110354864438}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a228eba71e20c0bba931ad6f87c60c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
