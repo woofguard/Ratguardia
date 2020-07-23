@@ -28,7 +28,7 @@ public class DisplayCard : MonoBehaviour
     public void SetCard(Card c)
     {
         card = c;
-        cardName.text = card.cardName + " of " + card.suit.ToString();
+        cardName.text = card.cardName;
         atk.text = card.atk + "";
         def.text = card.def + "";
 
