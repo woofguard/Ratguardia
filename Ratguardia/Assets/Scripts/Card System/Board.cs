@@ -85,6 +85,7 @@ public class Board : MonoBehaviour
         if(deck.stack.Count <= 0)
         {
             DetermineWinner();
+            refBoardUI.DisplayScores();
         }
         else
         {

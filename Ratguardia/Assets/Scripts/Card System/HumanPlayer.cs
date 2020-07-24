@@ -14,9 +14,11 @@ public class HumanPlayer : Player
         {
             Debug.Log(c);
         }
-
+        Board.main.refBoardUI.PromptDraw();
         yield return new WaitUntil(() => PlayerDraws());
+        Board.main.refBoardUI.PromptDiscard();
         yield return new WaitUntil(() => PlayerDiscards());
+        Board.main.refBoardUI.HidePrompts();
         StartCoroutine(EndTurn());
     }
 
