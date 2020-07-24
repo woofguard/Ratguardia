@@ -7,6 +7,51 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_text
+      value: True DEF of this card is equal to the total  # of Queens in this hand.
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 656963584109813927, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 794454808658709626, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: effect.m_PersistentCalls.m_Calls.Array.size
@@ -59,6 +104,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: bf51fe102853bb643b1d0418cb33604f,
         type: 3}
+    - target: {fileID: 2432672051003733249, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 3335227154412685027, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5211449086507343672, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -114,10 +169,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5514428931754800495, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373571988361414722, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7262094864740497602, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_Name
       value: Queen
+      objectReference: {fileID: 0}
+    - target: {fileID: 7917510349708518839, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c473f3e648497c6a5b667175eb754fa9, type: 3}
