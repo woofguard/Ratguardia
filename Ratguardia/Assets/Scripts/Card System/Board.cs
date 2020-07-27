@@ -93,10 +93,10 @@ public class Board : MonoBehaviour
         }
     }
 
-    // resolves a battle, returns index of which player won
-    public int Battle()
+    // resolves a battle, returns the winning player's card
+    public Card Battle(List<Card> combatants)
     {
-        return 0;
+        return null;
     }
 
     // calculates winner based on each player's score, returns player index

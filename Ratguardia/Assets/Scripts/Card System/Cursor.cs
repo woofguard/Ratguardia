@@ -10,6 +10,7 @@ public class Cursor : MonoBehaviour
     [HideInInspector] public Controls controls;
 
     [HideInInspector] public bool confirmPressed;
+    [HideInInspector] public bool cancelPressed;
     [HideInInspector] public Card clickedCard;
 
     private void Awake()
@@ -52,7 +53,10 @@ public class Cursor : MonoBehaviour
 
     public void OnCancel(InputAction.CallbackContext context)
     {
-        
+        if(player.hasTurn)
+        {
+            cancelPressed = true;
+        }
     }
 
     public void ReadCursorPos(InputAction.CallbackContext context)

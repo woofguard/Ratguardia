@@ -55,7 +55,7 @@ public abstract class Player : MonoBehaviour
         // set card's owner to -1 (no player)
         c.owner = -1;
         c.rubble = true;
-
+        
         c.ResetStats();
         
         // Debug.Log("Player " + playerIndex + " discards a " + c);
@@ -71,17 +71,44 @@ public abstract class Player : MonoBehaviour
         return Discard(c);
     }
 
-    // steal someone else's card from their rubble pile
-    public void Steal(Card c)
+    // steal a card from the rubble pile
+    public void Steal()
     {
-
+        Card stolen = Board.main.rubblePile.Pop();
+        stolen.owner = playerIndex;
+        hand.Add(stolen);
     }
 
     // ask other players if they want to steal when you discard
     public void PromptSteal()
     {
+        List<Card> combatants = new List<Card>();
+        
+        // ask each player if they want to steal
+        foreach(var player in Board.main.players)
+        {
+            if(player.playerIndex != this.playerIndex)
+            {
+                // if player decides to steal, add card to combatants list
+                Card combatant = player.DecideSteal();
+                if(combatant != null)
+                {
+                    combatants.Add(combatant);
+                }
+            }
+        }
 
+        // if anyone wants to steal, run the battle
+        if(combatants.Count > 0)
+        {
+            Card winner = Board.main.Battle(combatants);
+            Board.main.players[winner.owner].Steal();
+            Board.main.players[winner.owner].Discard(winner);
+        }
     }
+
+    // choose whether to steal, returns card sent to battle
+    public abstract Card DecideSteal();
 
     // look thru player's hand and add up all the def scores
     public int CalculateScore()

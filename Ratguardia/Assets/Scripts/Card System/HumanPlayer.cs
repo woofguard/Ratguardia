@@ -23,7 +23,28 @@ public class HumanPlayer : Player
     public override IEnumerator EndTurn()
     {
         StartCoroutine(base.EndTurn());
-        yield return null;        
+        yield return null;   
+    }
+
+    public override Card DecideSteal()
+    {
+        Debug.Log("Steal? left click: yes | right click: no");
+        StartCoroutine(ConfirmSteal());
+
+        if(cursor.confirmPressed)
+        {
+            cursor.confirmPressed = false;
+
+            Debug.Log("Click a card you want to send to battle");
+            return DecideCombatant();
+        }
+        else if(cursor.cancelPressed)
+        {
+            cursor.cancelPressed = false;
+            return null;
+        }
+
+        return null;
     }
 
     // returns true when the player draws a card
@@ -39,7 +60,6 @@ public class HumanPlayer : Player
             cursor.clickedCard = null;
 
             Card drawn = Draw();
-            // Debug.Log("drew a " + drawn);
             return true;
         }
         else
@@ -64,5 +84,32 @@ public class HumanPlayer : Player
         {
             return false;
         }
+    }
+
+    // player clicks to steal or not
+    public IEnumerator ConfirmSteal()
+    {
+        yield return new WaitUntil(() => cursor.confirmPressed || cursor.cancelPressed);
+    }
+
+    // player clicks the card they want to use to battle
+    public Card DecideCombatant()
+    {
+        StartCoroutine(PlayerClicksCombatant());
+
+        if(cursor.confirmPressed && cursor.clickedCard != null && cursor.clickedCard.owner == playerIndex)
+        {
+            cursor.confirmPressed = false;
+            Card clicked = cursor.clickedCard;
+            cursor.clickedCard = null;
+            return clicked;
+        }
+
+        return null;
+    }
+
+    public IEnumerator PlayerClicksCombatant()
+    {
+        yield return new WaitUntil(() => cursor.confirmPressed);
     }
 }
