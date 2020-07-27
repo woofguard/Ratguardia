@@ -118,6 +118,7 @@ public class Card : MonoBehaviour
         {
             atk = baseAtk;
             def = baseDef;
+            visualCard.UpdateStats();
         }
     }
 }

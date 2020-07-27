@@ -101,4 +101,10 @@ public class DisplayCard : MonoBehaviour
         effect.gameObject.SetActive(true);
         effectDetails.gameObject.SetActive(true);
     }
+
+    public void UpdateStats()
+    {
+        atk.text = card.atk + "";
+        def.text = card.def + "";
+    }
 }

@@ -11,24 +11,35 @@ public class CardEffects : MonoBehaviour
         if(CountCards(card.owner, "Peasant") == 4)
         {
             card.def = 10;
+            card.visualCard.UpdateStats();
         }
     }
 
     // activated when a card is added to hand
     public void KnightEffect(Card card)
     {
-        // find owner in board
-        // find number of rubble in hand
-        // atk = num rubble
+        int numRubble = 0;
+
+        // count number of rubble cards in hand
+        foreach(var c in Board.main.players[card.owner].hand)
+        {
+            if(c.rubble)
+            {
+                numRubble++;
+            }
+        }
+
+        card.atk = numRubble;
+        card.visualCard.UpdateStats();
     }
 
     // activated after battle
     public void CavalierEffect(Card card)
     {
-        
-        // find owner in board
-        // get last card in hand
-        // def +1
+        // add def to the last card player added (should be the stolen one)
+        var owner = Board.main.players[card.owner];
+        owner.hand[owner.hand.Count - 1].def++;
+        owner.hand[owner.hand.Count - 1].visualCard.UpdateStats();
     }
 
     // activated during score calculation
@@ -43,6 +54,7 @@ public class CardEffects : MonoBehaviour
     {
         // def = number of queens in hand
         card.def = CountCards(card.owner, "Queen");
+        card.visualCard.UpdateStats();
     }
 
     // activated in final game score calculation

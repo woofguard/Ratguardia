@@ -38,10 +38,12 @@ public abstract class Player : MonoBehaviour
 
         // set card's owner to this player
         newCard.owner = playerIndex;
+        
         hand.Add(newCard);
         newCard.transform.SetParent(transform);
         ArrangeHand();
-        // Debug.Log("Player " + playerIndex + " drew a card");
+        
+        score = CalculateScore();
 
         return newCard;
     }
@@ -60,8 +62,8 @@ public abstract class Player : MonoBehaviour
         
         c.ResetStats();
         
-        // Debug.Log("Player " + playerIndex + " discards a " + c);
         ArrangeHand();
+        score = CalculateScore();
         yield return StartCoroutine(PromptSteal());
     }
 
@@ -80,6 +82,7 @@ public abstract class Player : MonoBehaviour
         hand.Add(stolen);
         stolen.transform.SetParent(transform);
         ArrangeHand();
+        score = CalculateScore();
     }
 
     // ask other players if they want to steal when you discard
@@ -107,6 +110,13 @@ public abstract class Player : MonoBehaviour
         {
             Card winner = Board.main.Battle(combatants);
             Board.main.players[winner.owner].Steal();
+
+            // if the winner used a cavalier, activate its effect
+            if(winner.cardName == "Cavalier")
+            {
+                winner.ActivateEffect();
+            }
+
             yield return StartCoroutine(Board.main.players[winner.owner].Discard(winner));
         }
     }
@@ -155,6 +165,9 @@ public abstract class Player : MonoBehaviour
                     break;
                 case "King":
                     kings.Add(card);
+                    break;
+                case "Knight":
+                    card.ActivateEffect();
                     break;
             }
             score += card.def;
