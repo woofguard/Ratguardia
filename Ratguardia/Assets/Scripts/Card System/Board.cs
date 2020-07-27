@@ -85,6 +85,7 @@ public class Board : MonoBehaviour
         if(deck.stack.Count <= 0)
         {
             DetermineWinner();
+            refBoardUI.DisplayScores();
         }
         else
         {
@@ -111,6 +112,8 @@ public class Board : MonoBehaviour
                 winner = combatants[i];
             }
         }
+
+        // yield return StartCoroutine(refBoardUI.DisplayBattle(combatants, winner));
 
         // reset combatant data for all players
         foreach(Player player in players)
