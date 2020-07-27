@@ -96,7 +96,29 @@ public class Board : MonoBehaviour
     // resolves a battle, returns the winning player's card
     public Card Battle(List<Card> combatants)
     {
-        return null;
+        Card winner = combatants[0];
+
+        for(int i = 1; i < combatants.Count; i++)
+        {
+            // if the card has higher attack
+            if(combatants[i].atk > winner.atk)
+            {
+                winner = combatants[i];
+            }
+            // if they have the same attack, take the higher suit
+            else if(combatants[i].atk == winner.atk && combatants[i].suit < winner.suit)
+            {
+                winner = combatants[i];
+            }
+        }
+
+        // reset combatant data for all players
+        foreach(Player player in players)
+        {
+            player.combatant = null;
+        }
+
+        return winner;
     }
 
     // calculates winner based on each player's score, returns player index

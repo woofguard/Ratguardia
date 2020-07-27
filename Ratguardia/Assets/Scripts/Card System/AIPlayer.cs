@@ -17,10 +17,11 @@ public class AIPlayer : Player
         yield return null;
     }
 
-    public override Card DecideSteal()
+    public override IEnumerator DecideSteal()
     {
         // placeholder, send the first card
-        return null;
+        combatant = null;
+        yield return null;
     }
 
     // just discards the last card drawn
@@ -28,8 +29,8 @@ public class AIPlayer : Player
     {
         Draw();
         yield return new WaitForSeconds(1.0f);
-        Discard(5);
-        yield return new WaitForSeconds(1.0f);
+        yield return StartCoroutine(Discard(5));
+        // yield return new WaitForSeconds(1.0f);
         StartCoroutine(EndTurn());
     }
 

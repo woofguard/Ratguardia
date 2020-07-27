@@ -32,7 +32,7 @@ public class Cursor : MonoBehaviour
 
     public void OnConfirm(InputAction.CallbackContext context)
     {
-        if(player.hasTurn)
+        if(player.hasTurn || player.isStealing)
         {
             confirmPressed = true;
 
@@ -53,7 +53,7 @@ public class Cursor : MonoBehaviour
 
     public void OnCancel(InputAction.CallbackContext context)
     {
-        if(player.hasTurn)
+        if(player.hasTurn || player.isStealing)
         {
             cancelPressed = true;
         }

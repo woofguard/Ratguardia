@@ -9,11 +9,11 @@ public class HumanPlayer : Player
     public override IEnumerator TakeTurn()
     {
         // show player's hand in console
-        Debug.Log("Your Hand:");
-        foreach(Card c in hand)
-        {
-            Debug.Log(c);
-        }
+        // Debug.Log("Your Hand:");
+        // foreach(Card c in hand)
+        // {
+        //     Debug.Log(c);
+        // }
 
         yield return new WaitUntil(() => PlayerDraws());
         yield return new WaitUntil(() => PlayerDiscards());
@@ -26,29 +26,50 @@ public class HumanPlayer : Player
         yield return null;   
     }
 
-    public override Card DecideSteal()
+    public override IEnumerator DecideSteal()
     {
         Debug.Log("Steal? left click: yes | right click: no");
-        StartCoroutine(ConfirmSteal());
+        isStealing = true;
+        yield return new WaitUntil(() => cursor.confirmPressed || cursor.cancelPressed);
 
         if(cursor.confirmPressed)
         {
             cursor.confirmPressed = false;
 
             Debug.Log("Click a card you want to send to battle");
-            return DecideCombatant();
+            yield return StartCoroutine(DecideCombatant());
+            isStealing = false;
         }
         else if(cursor.cancelPressed)
         {
             cursor.cancelPressed = false;
-            return null;
+            isStealing = false;
         }
+    }
 
-        return null;
+    // player clicks the card they want to use to battle
+    private IEnumerator DecideCombatant()
+    {
+        yield return new WaitUntil(() => cursor.confirmPressed);
+
+        // player clicked a card in their hand
+        if(cursor.confirmPressed && cursor.clickedCard != null && cursor.clickedCard.owner == playerIndex)
+        {
+            cursor.confirmPressed = false;
+            
+            // store combatant card
+            Card clicked = cursor.clickedCard;
+            cursor.clickedCard = null;
+            combatant = clicked;
+        }
+        else
+        {
+            combatant = null;
+        }
     }
 
     // returns true when the player draws a card
-    public bool PlayerDraws()
+    private bool PlayerDraws()
     {
         Card card = cursor.clickedCard;
 
@@ -68,7 +89,7 @@ public class HumanPlayer : Player
         }
     }
 
-    public bool PlayerDiscards()
+    private bool PlayerDiscards()
     {
         Card card = cursor.clickedCard;
 
@@ -76,7 +97,7 @@ public class HumanPlayer : Player
         if(cursor.confirmPressed && card != null && card.owner == playerIndex)
         {
             cursor.confirmPressed = false;
-            Card discarded = Discard(card);
+            StartCoroutine(Discard(card));
             cursor.clickedCard = null;
             return true;
         }
@@ -84,32 +105,5 @@ public class HumanPlayer : Player
         {
             return false;
         }
-    }
-
-    // player clicks to steal or not
-    public IEnumerator ConfirmSteal()
-    {
-        yield return new WaitUntil(() => cursor.confirmPressed || cursor.cancelPressed);
-    }
-
-    // player clicks the card they want to use to battle
-    public Card DecideCombatant()
-    {
-        StartCoroutine(PlayerClicksCombatant());
-
-        if(cursor.confirmPressed && cursor.clickedCard != null && cursor.clickedCard.owner == playerIndex)
-        {
-            cursor.confirmPressed = false;
-            Card clicked = cursor.clickedCard;
-            cursor.clickedCard = null;
-            return clicked;
-        }
-
-        return null;
-    }
-
-    public IEnumerator PlayerClicksCombatant()
-    {
-        yield return new WaitUntil(() => cursor.confirmPressed);
     }
 }

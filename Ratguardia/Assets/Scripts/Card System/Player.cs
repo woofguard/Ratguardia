@@ -11,7 +11,9 @@ public abstract class Player : MonoBehaviour
     // public Character character;
     [HideInInspector] public int score;
     [HideInInspector] public bool hasTurn;
+    [HideInInspector] public bool isStealing;
     [HideInInspector] public int playerIndex; // which index this player is in the Board array
+    [HideInInspector] public Card combatant;  // card fighting in battle, used for stealing
 
     public GameObject fiveCardLayout;
     public GameObject sixCardLayout;
@@ -45,7 +47,7 @@ public abstract class Player : MonoBehaviour
     }
 
     // discard using a specific card reference
-    public Card Discard(Card c)
+    public IEnumerator Discard(Card c)
     {
         Board.main.rubblePile.Push(c);
         c.transform.SetParent(Board.main.rubblePile.transform);
@@ -60,15 +62,14 @@ public abstract class Player : MonoBehaviour
         
         // Debug.Log("Player " + playerIndex + " discards a " + c);
         ArrangeHand();
-        PromptSteal();
-        return c;
+        yield return StartCoroutine(PromptSteal());
     }
 
     // discard using the cards index in the hand
-    public Card Discard(int i)
+    public IEnumerator Discard(int i)
     {
         Card c = hand[i];
-        return Discard(c);
+        yield return StartCoroutine(Discard(c));
     }
 
     // steal a card from the rubble pile
@@ -77,23 +78,26 @@ public abstract class Player : MonoBehaviour
         Card stolen = Board.main.rubblePile.Pop();
         stolen.owner = playerIndex;
         hand.Add(stolen);
+        stolen.transform.SetParent(transform);
+        ArrangeHand();
     }
 
     // ask other players if they want to steal when you discard
-    public void PromptSteal()
+    public IEnumerator PromptSteal()
     {
         List<Card> combatants = new List<Card>();
         
         // ask each player if they want to steal
         foreach(var player in Board.main.players)
         {
-            if(player.playerIndex != this.playerIndex)
+            // if not the player who discarded and player can steal
+            if(player.playerIndex != this.playerIndex && player.CanSteal())
             {
                 // if player decides to steal, add card to combatants list
-                Card combatant = player.DecideSteal();
-                if(combatant != null)
+                yield return StartCoroutine(player.DecideSteal());
+                if(player.combatant != null)
                 {
-                    combatants.Add(combatant);
+                    combatants.Add(player.combatant);
                 }
             }
         }
@@ -103,12 +107,33 @@ public abstract class Player : MonoBehaviour
         {
             Card winner = Board.main.Battle(combatants);
             Board.main.players[winner.owner].Steal();
-            Board.main.players[winner.owner].Discard(winner);
+            yield return StartCoroutine(Board.main.players[winner.owner].Discard(winner));
         }
     }
 
-    // choose whether to steal, returns card sent to battle
-    public abstract Card DecideSteal();
+    // choose whether to steal
+    public abstract IEnumerator DecideSteal();
+
+    // checks conditions for stealing
+    public bool CanSteal()
+    {
+        bool hasAttack = false;
+        bool hasNonRubble = false;
+
+        foreach(Card c in hand)
+        {
+            if(c.atk > 0)
+            {
+                hasAttack = true;
+            }
+            if(!c.rubble)
+            {
+                hasNonRubble = true;
+            }
+        }
+
+        return (hasAttack && hasNonRubble);
+    }
 
     // look thru player's hand and add up all the def scores
     public int CalculateScore()
