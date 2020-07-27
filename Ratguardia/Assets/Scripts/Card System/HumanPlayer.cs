@@ -9,27 +9,67 @@ public class HumanPlayer : Player
     public override IEnumerator TakeTurn()
     {
         // show player's hand in console
-        Debug.Log("Your Hand:");
-        foreach(Card c in hand)
-        {
-            Debug.Log(c);
-        }
-        Board.main.refBoardUI.PromptDraw();
+        // Debug.Log("Your Hand:");
+        // foreach(Card c in hand)
+        // {
+        //     Debug.Log(c);
+        // }
+
         yield return new WaitUntil(() => PlayerDraws());
-        Board.main.refBoardUI.PromptDiscard();
         yield return new WaitUntil(() => PlayerDiscards());
-        Board.main.refBoardUI.HidePrompts();
         StartCoroutine(EndTurn());
     }
 
     public override IEnumerator EndTurn()
     {
         StartCoroutine(base.EndTurn());
-        yield return null;        
+        yield return null;   
+    }
+
+    public override IEnumerator DecideSteal()
+    {
+        Debug.Log("Steal? left click: yes | right click: no");
+        isStealing = true;
+        yield return new WaitUntil(() => cursor.confirmPressed || cursor.cancelPressed);
+
+        if(cursor.confirmPressed)
+        {
+            cursor.confirmPressed = false;
+
+            Debug.Log("Click a card you want to send to battle");
+            yield return StartCoroutine(DecideCombatant());
+            isStealing = false;
+        }
+        else if(cursor.cancelPressed)
+        {
+            cursor.cancelPressed = false;
+            isStealing = false;
+        }
+    }
+
+    // player clicks the card they want to use to battle
+    private IEnumerator DecideCombatant()
+    {
+        yield return new WaitUntil(() => cursor.confirmPressed);
+
+        // player clicked a card in their hand
+        if(cursor.confirmPressed && cursor.clickedCard != null && cursor.clickedCard.owner == playerIndex)
+        {
+            cursor.confirmPressed = false;
+            
+            // store combatant card
+            Card clicked = cursor.clickedCard;
+            cursor.clickedCard = null;
+            combatant = clicked;
+        }
+        else
+        {
+            combatant = null;
+        }
     }
 
     // returns true when the player draws a card
-    public bool PlayerDraws()
+    private bool PlayerDraws()
     {
         Card card = cursor.clickedCard;
 
@@ -41,7 +81,6 @@ public class HumanPlayer : Player
             cursor.clickedCard = null;
 
             Card drawn = Draw();
-            // Debug.Log("drew a " + drawn);
             return true;
         }
         else
@@ -50,7 +89,7 @@ public class HumanPlayer : Player
         }
     }
 
-    public bool PlayerDiscards()
+    private bool PlayerDiscards()
     {
         Card card = cursor.clickedCard;
 
@@ -58,7 +97,7 @@ public class HumanPlayer : Player
         if(cursor.confirmPressed && card != null && card.owner == playerIndex)
         {
             cursor.confirmPressed = false;
-            Card discarded = Discard(card);
+            StartCoroutine(Discard(card));
             cursor.clickedCard = null;
             return true;
         }
