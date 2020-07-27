@@ -691,6 +691,8 @@ MonoBehaviour:
   def: {fileID: 7852029742248757927}
   effect: {fileID: 1272278387236990081}
   effectDetails: {fileID: 2289185428863225741}
+  ownerName: {fileID: 5553124072717875064}
+  ownerPortrait: {fileID: 5255550902069707104}
 --- !u!1 &6833820440641945577
 GameObject:
   m_ObjectHideFlags: 0

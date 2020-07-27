@@ -74,8 +74,11 @@ public class BoardUIManager : MonoBehaviour
 
         HumanPlayer hp = (HumanPlayer)Board.main.players[0];
         Debug.Log(hp);
+
+        hp.isStealing = true;
         yield return new WaitUntil(() => hp.cursor.confirmPressed);
         hp.cursor.confirmPressed = false;
+        hp.isStealing = false;
 
         foreach (UICard card in cards)
         {

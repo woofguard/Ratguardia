@@ -35,7 +35,8 @@ public class UICard : MonoBehaviour
         def.text = refCard.def.text;
         effectDetails.text = refCard.effectDetails.text;
 
-        ownerName.text = card.owner + ""; // set owner information
+        // commented out until we have character name & portrait info
+        // ownerName.text = card.owner + ""; // set owner information
         // set ownerPortait
     }
 

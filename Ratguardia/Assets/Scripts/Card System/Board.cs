@@ -12,6 +12,7 @@ public class Board : MonoBehaviour
 
     public CardStack deck;
     public CardStack rubblePile;
+    [HideInInspector] public Card winner; // card that wins the battle
 
     // references to player prefabs
     public GameObject refHumanPlayer;
@@ -95,9 +96,9 @@ public class Board : MonoBehaviour
     }
 
     // resolves a battle, returns the winning player's card
-    public Card Battle(List<Card> combatants)
+    public IEnumerator Battle(List<Card> combatants)
     {
-        Card winner = combatants[0];
+        winner = combatants[0];
 
         for(int i = 1; i < combatants.Count; i++)
         {
@@ -113,15 +114,13 @@ public class Board : MonoBehaviour
             }
         }
 
-        // yield return StartCoroutine(refBoardUI.DisplayBattle(combatants, winner));
+        yield return StartCoroutine(refBoardUI.DisplayBattle(combatants, winner));
 
         // reset combatant data for all players
         foreach(Player player in players)
         {
             player.combatant = null;
         }
-
-        return winner;
     }
 
     // calculates winner based on each player's score, returns player index

@@ -108,7 +108,8 @@ public abstract class Player : MonoBehaviour
         // if anyone wants to steal, run the battle
         if(combatants.Count > 0)
         {
-            Card winner = Board.main.Battle(combatants);
+            yield return StartCoroutine(Board.main.Battle(combatants));
+            Card winner = Board.main.winner;
             Board.main.players[winner.owner].Steal();
 
             // if the winner used a cavalier, activate its effect
@@ -118,6 +119,7 @@ public abstract class Player : MonoBehaviour
             }
 
             yield return StartCoroutine(Board.main.players[winner.owner].Discard(winner));
+            Board.main.winner = null;
         }
     }
 
