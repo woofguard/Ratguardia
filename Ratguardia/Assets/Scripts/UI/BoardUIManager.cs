@@ -52,6 +52,11 @@ public class BoardUIManager : MonoBehaviour
         discardPrompt.enabled = false;
     }
 
+    public void Display Battle()
+    {
+
+    }
+
     public void DisplayScores()
     {
         p0Score.enabled = true;

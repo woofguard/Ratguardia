@@ -16,7 +16,8 @@ public class DisplayCard : MonoBehaviour
 
     public Sprite cardBack;
     public Sprite[] suitFrames;
-    SpriteRenderer sprite;
+    [HideInInspector]
+    public SpriteRenderer sprite;
     public SpriteRenderer frame;
 
     private void Awake()
