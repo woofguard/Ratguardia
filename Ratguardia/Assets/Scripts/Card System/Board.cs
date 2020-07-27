@@ -113,6 +113,8 @@ public class Board : MonoBehaviour
             }
         }
 
+        // yield return StartCoroutine(refBoardUI.DisplayBattle(combatants, winner));
+
         // reset combatant data for all players
         foreach(Player player in players)
         {

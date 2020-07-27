@@ -18,6 +18,8 @@ public class BoardUIManager : MonoBehaviour
 
     public TextMeshProUGUI winner;
 
+    public GameObject stealUI;
+
     private void Start()
     {
         p0Score.enabled = false;
@@ -52,9 +54,35 @@ public class BoardUIManager : MonoBehaviour
         discardPrompt.enabled = false;
     }
 
-    public void DisplayBattle()
+    public IEnumerator DisplayBattle(List<Card> combatants, Card winner)
     {
+        Debug.Log("Battle beginning");
+        stealUI.SetActive(true);
 
+        GameObject layout = stealUI.transform.Find(combatants.Count + "CardLayout").gameObject;
+
+        layout.SetActive(true);
+
+        UICard[] cards = layout.GetComponentsInChildren<UICard>();
+
+        for (int i = 0; i < cards.Length; i++)
+        {
+            if (combatants.Count <= i) break;
+            cards[i].DisplayCard(combatants[i]);
+            cards[i].SetDim(combatants[i] != winner);
+        }
+
+        HumanPlayer hp = (HumanPlayer)Board.main.players[0];
+        Debug.Log(hp);
+        yield return new WaitUntil(() => hp.cursor.confirmPressed);
+        hp.cursor.confirmPressed = false;
+
+        foreach (UICard card in cards)
+        {
+            card.SetDim(false);
+        }
+        layout.SetActive(false);
+        stealUI.SetActive(false);
     }
 
     public void DisplayScores()

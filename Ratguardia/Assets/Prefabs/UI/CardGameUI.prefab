@@ -506,6 +506,7 @@ MonoBehaviour:
   p2Score: {fileID: 4174903583308267442}
   p3Score: {fileID: 7834230592279001084}
   winner: {fileID: 6893501199272415587}
+  stealUI: {fileID: 4966949645134218598}
 --- !u!1 &2248068329788445559
 GameObject:
   m_ObjectHideFlags: 0
