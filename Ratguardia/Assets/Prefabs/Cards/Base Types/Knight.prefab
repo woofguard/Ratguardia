@@ -7,6 +7,56 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_text
+      value: "True ATK of this card is equal to the # of Rubble Cards \nin the hand."
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_isRightToLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 656963584109813927, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 794454808658709626, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: effect.m_PersistentCalls.m_Calls.Array.size
@@ -64,6 +114,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 41ab218ab38c7d4498caf4560b821b97,
         type: 3}
+    - target: {fileID: 3335227154412685027, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5211449086507343672, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -119,10 +174,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5514428931754800495, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373571988361414722, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7262094864740497602, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_Name
       value: Knight
+      objectReference: {fileID: 0}
+    - target: {fileID: 7917510349708518839, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c473f3e648497c6a5b667175eb754fa9, type: 3}
