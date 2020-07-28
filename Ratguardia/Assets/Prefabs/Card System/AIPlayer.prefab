@@ -983,9 +983,12 @@ MonoBehaviour:
   revealed: 0
   score: 0
   hasTurn: 0
+  isStealing: 0
   playerIndex: 0
+  combatant: {fileID: 0}
   fiveCardLayout: {fileID: 0}
   sixCardLayout: {fileID: 0}
+  aiType: random
 --- !u!1 &6090223832296380098
 GameObject:
   m_ObjectHideFlags: 0

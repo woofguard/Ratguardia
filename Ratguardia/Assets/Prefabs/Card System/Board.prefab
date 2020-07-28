@@ -48,11 +48,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
+  scores: 
   deck: {fileID: 7707773639167507730}
   rubblePile: {fileID: 1914858616027858981}
-  refHumanPlayer: {fileID: 5821434033703883572, guid: 53e566634000ef218be37bfa22f0075d,
+  winner: {fileID: 0}
+  humanPlayerPrefab: {fileID: 5821434033703883572, guid: 53e566634000ef218be37bfa22f0075d,
     type: 3}
-  refAIPlayer: {fileID: 5821434033703883572, guid: e6c55cf1dc0ab90c78de8eb839e29836,
+  AIPlayerPrefab: {fileID: 5821434033703883572, guid: e6c55cf1dc0ab90c78de8eb839e29836,
     type: 3}
   refBoardUI: {fileID: 6984792526174561425}
 --- !u!114 &4474550199523194375

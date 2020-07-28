@@ -23,6 +23,8 @@ public abstract class Player : MonoBehaviour
 
     public virtual IEnumerator EndTurn()
     {
+        // if not in battle
+        yield return new WaitWhile(() => Board.main.refBoardUI.stealUI.activeSelf);
         Board.main.GiveTurn(Board.main.NextPlayer());
         yield return null;
     }
@@ -129,22 +131,16 @@ public abstract class Player : MonoBehaviour
     // checks conditions for stealing
     public bool CanSteal()
     {
-        bool hasAttack = false;
-        bool hasNonRubble = false;
-
         foreach(Card c in hand)
         {
-            if(c.atk > 0)
+            // player has a card that isn't rubble and has atk points
+            if(c.atk > 0 && !c.rubble)
             {
-                hasAttack = true;
-            }
-            if(!c.rubble)
-            {
-                hasNonRubble = true;
+                return true;
             }
         }
 
-        return (hasAttack && hasNonRubble);
+        return false;
     }
 
     // look thru player's hand and add up all the def scores

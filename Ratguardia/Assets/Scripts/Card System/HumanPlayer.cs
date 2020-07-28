@@ -8,22 +8,16 @@ public class HumanPlayer : Player
 
     public override IEnumerator TakeTurn()
     {
-        // show player's hand in console
-        // Debug.Log("Your Hand:");
-        // foreach(Card c in hand)
-        // {
-        //     Debug.Log(c);
-        // }
-
+        Board.main.refBoardUI.PromptDraw();
         yield return new WaitUntil(() => PlayerDraws());
+        
+        Board.main.refBoardUI.PromptDiscard();
         yield return new WaitUntil(() => PlayerDiscards());
-        StartCoroutine(EndTurn());
-    }
-
-    public override IEnumerator EndTurn()
-    {
-        StartCoroutine(base.EndTurn());
-        yield return null;   
+        yield return StartCoroutine(Discard(cursor.clickedCard));
+        cursor.clickedCard = null;
+        
+        Board.main.refBoardUI.HidePrompts();
+        yield return StartCoroutine(EndTurn());
     }
 
     public override IEnumerator DecideSteal()
@@ -37,34 +31,13 @@ public class HumanPlayer : Player
             cursor.confirmPressed = false;
 
             Debug.Log("Click a card you want to send to battle");
-            yield return StartCoroutine(DecideCombatant());
+            yield return new WaitUntil(() => PlayerDecidesCombatant());
             isStealing = false;
         }
         else if(cursor.cancelPressed)
         {
             cursor.cancelPressed = false;
             isStealing = false;
-        }
-    }
-
-    // player clicks the card they want to use to battle
-    private IEnumerator DecideCombatant()
-    {
-        yield return new WaitUntil(() => cursor.confirmPressed);
-
-        // player clicked a card in their hand
-        if(cursor.confirmPressed && cursor.clickedCard != null && cursor.clickedCard.owner == playerIndex)
-        {
-            cursor.confirmPressed = false;
-            
-            // store combatant card
-            Card clicked = cursor.clickedCard;
-            cursor.clickedCard = null;
-            combatant = clicked;
-        }
-        else
-        {
-            combatant = null;
         }
     }
 
@@ -93,12 +66,30 @@ public class HumanPlayer : Player
     {
         Card card = cursor.clickedCard;
 
-        // if the player clicks their own card
-        if(cursor.confirmPressed && card != null && card.owner == playerIndex)
+        // if the player clicks their own card, card is not rubble
+        if(cursor.confirmPressed && card != null && card.owner == playerIndex && !card.rubble)
         {
             cursor.confirmPressed = false;
-            StartCoroutine(Discard(card));
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private bool PlayerDecidesCombatant()
+    {
+        Card card = cursor.clickedCard;
+
+        // player clicks a non rubble card with atk points
+        if(cursor.confirmPressed && card != null && card.owner == playerIndex && !card.rubble && card.atk > 0)
+        {
+            cursor.confirmPressed = false;
+
+            // store combatant card
             cursor.clickedCard = null;
+            combatant = card;
             return true;
         }
         else

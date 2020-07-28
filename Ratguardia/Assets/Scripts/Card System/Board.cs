@@ -15,8 +15,8 @@ public class Board : MonoBehaviour
     [HideInInspector] public Card winner; // card that wins the battle
 
     // references to player prefabs
-    public GameObject refHumanPlayer;
-    public GameObject refAIPlayer;
+    public GameObject humanPlayerPrefab;
+    public GameObject AIPlayerPrefab;
 
     // reference to board UI
     public BoardUIManager refBoardUI;
@@ -202,10 +202,10 @@ public class Board : MonoBehaviour
     // creates the Player game objects for 1 human player and 3 AIs, returns array of players
     public Player[] GenerateSinglePlayerGame()
     {
-        var humanPlayer = Instantiate(refHumanPlayer);
-        var AIPlayer1 = Instantiate(refAIPlayer);
-        var AIPlayer2 = Instantiate(refAIPlayer);
-        var AIPlayer3 = Instantiate(refAIPlayer);
+        var humanPlayer = Instantiate(humanPlayerPrefab);
+        var AIPlayer1 = Instantiate(AIPlayerPrefab);
+        var AIPlayer2 = Instantiate(AIPlayerPrefab);
+        var AIPlayer3 = Instantiate(AIPlayerPrefab);
 
         Player[] players = new Player[4];
 
