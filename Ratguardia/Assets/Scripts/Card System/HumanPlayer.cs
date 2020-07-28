@@ -22,23 +22,31 @@ public class HumanPlayer : Player
 
     public override IEnumerator DecideSteal()
     {
-        Debug.Log("Steal? left click: yes | right click: no");
         isStealing = true;
-        yield return new WaitUntil(() => cursor.confirmPressed || cursor.cancelPressed);
 
-        if(cursor.confirmPressed)
+        Board.main.refBoardUI.PromptSteal(true);
+        yield return new WaitUntil(() => Board.main.refBoardUI.stealChosen);
+
+        if(Board.main.refBoardUI.stealing)
         {
             cursor.confirmPressed = false;
 
+            Board.main.refBoardUI.PromptChooseSteal(true);
+
             Debug.Log("Click a card you want to send to battle");
             yield return new WaitUntil(() => PlayerDecidesCombatant());
+
+            Board.main.refBoardUI.PromptChooseSteal(false);
+
             isStealing = false;
         }
-        else if(cursor.cancelPressed)
+        else
         {
-            cursor.cancelPressed = false;
+            cursor.confirmPressed = false;
             isStealing = false;
         }
+
+        Board.main.refBoardUI.ResetSteal();
     }
 
     // returns true when the player draws a card
