@@ -87,6 +87,7 @@ public class Board : MonoBehaviour
         {
             DetermineWinner();
             refBoardUI.DisplayScores();
+            StateManager.main.CardGameEnd();
         }
         else
         {

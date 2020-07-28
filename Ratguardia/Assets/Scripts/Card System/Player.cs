@@ -90,6 +90,7 @@ public abstract class Player : MonoBehaviour
     // ask other players if they want to steal when you discard
     public IEnumerator PromptSteal()
     {
+        yield return new WaitForSeconds(0.5f);
         List<Card> combatants = new List<Card>();
         
         // ask each player if they want to steal
@@ -122,6 +123,7 @@ public abstract class Player : MonoBehaviour
 
             yield return StartCoroutine(Board.main.players[winner.owner].Discard(winner));
             Board.main.winner = null;
+            yield return new WaitForSeconds(0.5f);
         }
     }
 

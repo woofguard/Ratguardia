@@ -63,7 +63,7 @@ public class AIPlayer : Player
     // just discards the last card drawn
     public IEnumerator PlaceholderAI()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.75f);
         Draw();
         yield return new WaitForSeconds(1.0f);
         yield return StartCoroutine(Discard(5));
@@ -74,7 +74,7 @@ public class AIPlayer : Player
     // discards random cards
     public IEnumerator RandomAI()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.75f);
         Draw();
         yield return new WaitForSeconds(1.0f);
 

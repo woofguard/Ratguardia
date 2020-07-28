@@ -25,6 +25,7 @@ public class BoardUIManager : MonoBehaviour
     public TextMeshProUGUI p3Score;
     public TextMeshProUGUI winner;
 
+    public GameObject restartPrompt;
 
     private void Start()
     {
