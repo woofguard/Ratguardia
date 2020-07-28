@@ -6,19 +6,25 @@ using TMPro;
 
 public class BoardUIManager : MonoBehaviour
 {
-    public TextMeshProUGUI deckCount;
+    public TextMeshProUGUI deckCount; // UI displaying # of cards left in the deck
 
+    // prompts to draw and discard cards
     public TextMeshProUGUI drawPrompt;
     public TextMeshProUGUI discardPrompt;
 
+    // steal-related UI objects
+    public GameObject stealPrompt;
+    public GameObject stealUI;
+    public bool stealChosen;
+    public bool stealing;
+
+    // placeholder prompts to display player scores and winner
     public TextMeshProUGUI p0Score;
     public TextMeshProUGUI p1Score;
     public TextMeshProUGUI p2Score;
     public TextMeshProUGUI p3Score;
-
     public TextMeshProUGUI winner;
 
-    public GameObject stealUI;
 
     private void Start()
     {
@@ -52,6 +58,30 @@ public class BoardUIManager : MonoBehaviour
     {
         drawPrompt.enabled = false;
         discardPrompt.enabled = false;
+    }
+
+    public void PromptSteal(bool display)
+    {
+        stealPrompt.transform.Find("Prompt").gameObject.SetActive(display);
+    }
+
+    public void DecideSteal(bool decision)
+    {
+        stealChosen = true;
+        stealing = decision;
+        PromptSteal(false);
+    }
+
+    public void ResetSteal()
+    {
+        stealChosen = stealing = false;
+        PromptSteal(false);
+        PromptChooseSteal(false);
+    }
+
+    public void PromptChooseSteal(bool display)
+    {
+        stealPrompt.transform.Find("Card Choose Prompt").gameObject.SetActive(display);
     }
 
     public IEnumerator DisplayBattle(List<Card> combatants, Card winner)
