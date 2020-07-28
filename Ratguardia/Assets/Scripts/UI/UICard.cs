@@ -26,7 +26,8 @@ public class UICard : MonoBehaviour
     {
         DisplayCard refCard = card.visualCard; // grab reference
 
-        illustration.sprite = refCard.sprite.sprite; // update sprites
+        if (card.faceUp) illustration.sprite = refCard.sprite.sprite; // update sprites
+        else illustration.sprite = card.cardSprite;
         frame.sprite = refCard.frame.sprite;
 
         cardName.text = refCard.cardName.text; // update text elements
