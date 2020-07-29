@@ -694,9 +694,9 @@ RectTransform:
   - {fileID: 3662662438419430889}
   - {fileID: 8799791138797549575}
   - {fileID: 7391213403101564714}
+  - {fileID: 4529311027933886608}
   - {fileID: 2688224058732170651}
   - {fileID: 204635769612396842}
-  - {fileID: 4529311027933886608}
   m_Father: {fileID: 2248068329982270400}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1248,7 +1248,7 @@ RectTransform:
   - {fileID: 4987633333450422469}
   - {fileID: 8260113457091908710}
   m_Father: {fileID: 2248068329043454524}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2688,7 +2688,7 @@ Transform:
   - {fileID: 8851382723562352498}
   - {fileID: 1044600338945627445}
   m_Father: {fileID: 2248068329043454524}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6002533543791176438
 GameObject:
@@ -4837,7 +4837,7 @@ PrefabInstance:
     - target: {fileID: 1513308715602701393, guid: 1e1f33ca825ce6349b1b85a56547aedd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1513308715602701393, guid: 1e1f33ca825ce6349b1b85a56547aedd,
         type: 3}
@@ -4996,15 +4996,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e1f33ca825ce6349b1b85a56547aedd, type: 3}
---- !u!224 &2688224058732170651 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1513308715602701393, guid: 1e1f33ca825ce6349b1b85a56547aedd,
-    type: 3}
-  m_PrefabInstance: {fileID: 3480763317728027082}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9110223851458309492 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5629538672204647614, guid: 1e1f33ca825ce6349b1b85a56547aedd,
+    type: 3}
+  m_PrefabInstance: {fileID: 3480763317728027082}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &2688224058732170651 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1513308715602701393, guid: 1e1f33ca825ce6349b1b85a56547aedd,
     type: 3}
   m_PrefabInstance: {fileID: 3480763317728027082}
   m_PrefabAsset: {fileID: 0}
