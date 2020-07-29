@@ -82,7 +82,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cardSprite
       value: 
-      objectReference: {fileID: 21300000, guid: b09c16ecb81f2ec4f8b5c03545f573fc,
+      objectReference: {fileID: 21300000, guid: c5f33a020ca8e484a9b050843448c33b,
         type: 3}
     - target: {fileID: 3335227154412685027, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}

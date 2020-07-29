@@ -19,6 +19,7 @@ public class DisplayCard : MonoBehaviour
     [HideInInspector]
     public SpriteRenderer sprite;
     public SpriteRenderer frame;
+    public SpriteRenderer rubble;
 
     private void Awake()
     {
@@ -67,6 +68,9 @@ public class DisplayCard : MonoBehaviour
             def.gameObject.SetActive(true);
             effect.gameObject.SetActive(true);
             effectDetails.gameObject.SetActive(true);
+
+             rubble.gameObject.SetActive(card.rubble);
+
         }
         else
         {
@@ -78,6 +82,7 @@ public class DisplayCard : MonoBehaviour
             def.gameObject.SetActive(false);
             effect.gameObject.SetActive(false);
             effectDetails.gameObject.SetActive(false);
+            rubble.gameObject.SetActive(false);
         }
     }
     

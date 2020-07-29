@@ -9,6 +9,7 @@ public class UICard : MonoBehaviour
     // card illustration/frame
     public Image illustration;
     public Image frame;
+    public Image rubble;
 
     // card text elements
     public TextMeshProUGUI cardName;
@@ -33,12 +34,57 @@ public class UICard : MonoBehaviour
         cardName.text = refCard.cardName.text; // update text elements
         atk.text = refCard.atk.text;
         def.text = refCard.def.text;
-        def.text = refCard.def.text;
         effectDetails.text = refCard.effectDetails.text;
+
+        rubble.gameObject.SetActive(card.rubble);
 
         // commented out until we have character name & portrait info
         // ownerName.text = card.owner + ""; // set owner information
         // set ownerPortait
+    }
+
+    // inspect a given card
+    // won't show details of cards that aren't face-up
+    public void InspectCard(Card card)
+    {
+        DisplayCard refCard = card.visualCard; // grab reference
+
+        SetCardDisplay(card.faceUp);
+
+        if (card.faceUp)
+        {
+
+            illustration.sprite = refCard.sprite.sprite; // update sprites
+            frame.sprite = refCard.frame.sprite;
+
+            cardName.text = refCard.cardName.text; // update text elements
+            atk.text = refCard.atk.text;
+            def.text = refCard.def.text;
+            effectDetails.text = refCard.effectDetails.text;
+
+            rubble.gameObject.SetActive(card.rubble);
+           
+        }
+        else
+        {
+            illustration.sprite = refCard.sprite.sprite;
+        }
+
+        // commented out until we have character name & portrait info
+        // ownerName.text = card.owner + ""; // set owner information
+        // set ownerPortait
+    }
+
+    // toggle display
+    public void SetCardDisplay(bool disp)
+    {
+        frame.gameObject.SetActive(disp);
+        cardName.gameObject.SetActive(disp);
+        atk.gameObject.SetActive(disp);
+        def.gameObject.SetActive(disp);
+        effect.gameObject.SetActive(disp);
+        effectDetails.gameObject.SetActive(disp);
+        rubble.gameObject.SetActive(disp);
     }
 
     // use to show/hide owner display
