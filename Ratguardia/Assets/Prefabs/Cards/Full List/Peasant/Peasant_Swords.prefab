@@ -65,12 +65,18 @@ PrefabInstance:
     - target: {fileID: 3867889794126373364, guid: 7ab7ccfebcac74026b87ad2d085c847e,
         type: 3}
       propertyPath: m_Name
-      value: Peasant Variant 2
+      value: Peasant_Swords
       objectReference: {fileID: 0}
     - target: {fileID: 6513293558621754700, guid: 7ab7ccfebcac74026b87ad2d085c847e,
         type: 3}
       propertyPath: suit
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6513293558621754700, guid: 7ab7ccfebcac74026b87ad2d085c847e,
+        type: 3}
+      propertyPath: cardSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c4349a78a4ae47242bc5502ab9af9401,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ab7ccfebcac74026b87ad2d085c847e, type: 3}

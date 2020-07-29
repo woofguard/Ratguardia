@@ -10,27 +10,43 @@ PrefabInstance:
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_text
-      value: Cancels the effects of <b>all Kings.</b>
+      value: "Cancels the effects of \n<b>all Kings</b>, \nincluding any in this
+        hand."
       objectReference: {fileID: 0}
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 33
+      value: 63
       objectReference: {fileID: 0}
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 5
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 656963584109813927, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
