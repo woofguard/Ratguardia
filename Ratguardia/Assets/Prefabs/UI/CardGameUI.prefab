@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8389344280696477632}
   - component: {fileID: 5343560828817134573}
   m_Layer: 0
-  m_Name: Controls
+  m_Name: OpenRulebook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
