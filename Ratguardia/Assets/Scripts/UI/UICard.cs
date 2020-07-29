@@ -62,7 +62,7 @@ public class UICard : MonoBehaviour
             def.text = refCard.def.text;
             effectDetails.text = refCard.effectDetails.text;
 
-            rubble.gameObject.SetActive(card.rubble);
+            rubble.gameObject.SetActive(card.rubble && card.owner >= 0);
            
         }
         else

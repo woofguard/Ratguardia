@@ -1105,7 +1105,7 @@ MonoBehaviour:
   stealUI: {fileID: 4966949645134218598}
   stealChosen: 0
   stealing: 0
-  inspectUI: {fileID: 0}
+  inspectUI: {fileID: 238566509262251551}
   p0Score: {fileID: 1292425318083429679}
   p1Score: {fileID: 6751118988865238654}
   p2Score: {fileID: 4174903583308267442}
@@ -6312,10 +6312,20 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2646683312372900938, guid: 2272c2078ab39e04bb07a6eec9a43a80,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2680949121891005236, guid: 2272c2078ab39e04bb07a6eec9a43a80,
         type: 3}
       propertyPath: m_Name
       value: UICard
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680949121891005236, guid: 2272c2078ab39e04bb07a6eec9a43a80,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7496597817090713299, guid: 2272c2078ab39e04bb07a6eec9a43a80,
         type: 3}

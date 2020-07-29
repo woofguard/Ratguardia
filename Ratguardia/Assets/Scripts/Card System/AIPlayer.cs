@@ -27,6 +27,8 @@ public class AIPlayer : Player
 
     public override IEnumerator DecideSteal()
     {
+        yield return new WaitForSeconds(0.25f);
+        
         // decide whether to steal based on AI type
         switch(aiType)
         {

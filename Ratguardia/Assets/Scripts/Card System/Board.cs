@@ -74,6 +74,7 @@ public class Board : MonoBehaviour
 
         // Debug.Log("Cards dealt, num remaining in deck: " + deck.stack.Count);
 
+        yield return new WaitForSeconds(0.25f);
         AudioManager.main.sfxDraw.mute = false;
         GiveTurn(turn);
 

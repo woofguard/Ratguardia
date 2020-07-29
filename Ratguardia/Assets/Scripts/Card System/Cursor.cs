@@ -55,7 +55,21 @@ public class Cursor : MonoBehaviour
     {
         if(player.hasTurn || player.isStealing)
         {
-            cancelPressed = true;
+            // cancelPressed = true;
+
+            // get position of cursor
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(controls.CardGame.CursorPosition.ReadValue<Vector2>());
+            
+            // whatever the heck a raycast is
+            var clickedObj = Physics2D.Raycast(new Vector2(mousePos.x, mousePos.y), Vector2.zero);
+
+            // if we clicked anything
+            if(clickedObj.collider != null)
+            {
+                // inspect the clicked card
+                var clicked = clickedObj.collider.gameObject.GetComponent<DisplayCard>().card;
+                StartCoroutine(Board.main.refBoardUI.InspectCard(clicked));
+            }
         }
     }
 
