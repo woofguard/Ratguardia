@@ -55,9 +55,13 @@ public class Board : MonoBehaviour
             deck.Push(card);
         }
 
+        AudioManager.main.sfxShuffle.Play();
         deck.Shuffle();
 
         players = GenerateSinglePlayerGame();
+
+        // dont play draw sfx when dealing cards
+        AudioManager.main.sfxDraw.mute = true;
 
         // deal each player 5 cards
         for(int i = 0; i < 5; i++)
@@ -68,8 +72,9 @@ public class Board : MonoBehaviour
             }
         }
 
-        Debug.Log("Cards dealt, num remaining in deck: " + deck.stack.Count);
+        // Debug.Log("Cards dealt, num remaining in deck: " + deck.stack.Count);
 
+        AudioManager.main.sfxDraw.mute = false;
         GiveTurn(turn);
 
         yield return null;

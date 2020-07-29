@@ -40,9 +40,12 @@ public abstract class Player : MonoBehaviour
 
         // set card's owner to this player
         newCard.owner = playerIndex;
+
         
         hand.Add(newCard);
         newCard.transform.SetParent(transform);
+        
+        AudioManager.main.sfxDraw.Play();
         ArrangeHand();
         
         score = CalculateScore();
@@ -64,8 +67,11 @@ public abstract class Player : MonoBehaviour
         
         c.ResetStats();
         
+        AudioManager.main.sfxDiscard.Play();
         ArrangeHand();
+        
         score = CalculateScore();
+        
         yield return StartCoroutine(PromptSteal());
     }
 
@@ -82,8 +88,11 @@ public abstract class Player : MonoBehaviour
         Card stolen = Board.main.rubblePile.Pop();
         stolen.owner = playerIndex;
         hand.Add(stolen);
+        
+        AudioManager.main.sfxDraw.Play();
         stolen.transform.SetParent(transform);
         ArrangeHand();
+        
         score = CalculateScore();
     }
 
@@ -121,9 +130,10 @@ public abstract class Player : MonoBehaviour
                 winner.ActivateEffect();
             }
 
+            yield return new WaitForSeconds(0.75f);
             yield return StartCoroutine(Board.main.players[winner.owner].Discard(winner));
             Board.main.winner = null;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.75f);
         }
     }
 
