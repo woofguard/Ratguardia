@@ -88,6 +88,7 @@ public abstract class Player : MonoBehaviour
         Card stolen = Board.main.rubblePile.Pop();
         stolen.owner = playerIndex;
         hand.Add(stolen);
+        stolen.visualCard.UpdateRubble();
         
         AudioManager.main.sfxDraw.Play();
         stolen.transform.SetParent(transform);

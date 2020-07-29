@@ -113,4 +113,9 @@ public class DisplayCard : MonoBehaviour
         atk.text = card.atk + "";
         def.text = card.def + "";
     }
+
+    public void UpdateRubble()
+    {
+        rubble.gameObject.SetActive(card.rubble);
+    }
 }
