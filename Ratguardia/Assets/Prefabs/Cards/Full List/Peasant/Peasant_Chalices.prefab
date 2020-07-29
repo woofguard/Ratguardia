@@ -65,12 +65,18 @@ PrefabInstance:
     - target: {fileID: 3867889794126373364, guid: 7ab7ccfebcac74026b87ad2d085c847e,
         type: 3}
       propertyPath: m_Name
-      value: Peasant Variant 1
+      value: Peasant_Chalices
       objectReference: {fileID: 0}
     - target: {fileID: 6513293558621754700, guid: 7ab7ccfebcac74026b87ad2d085c847e,
         type: 3}
       propertyPath: suit
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6513293558621754700, guid: 7ab7ccfebcac74026b87ad2d085c847e,
+        type: 3}
+      propertyPath: cardSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a1da84ee728380d48930e2983a9c6c73,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ab7ccfebcac74026b87ad2d085c847e, type: 3}

@@ -76,7 +76,7 @@ PrefabInstance:
         type: 3}
       propertyPath: cardSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 83cb4490e70c84249b35420c36673747,
+      objectReference: {fileID: 21300000, guid: ffcd148b2f37c574ba1f3cd9cff43d50,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e284a6c1091878144b1843aa2f4fa487, type: 3}
