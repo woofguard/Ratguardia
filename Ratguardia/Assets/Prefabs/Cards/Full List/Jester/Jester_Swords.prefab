@@ -65,12 +65,18 @@ PrefabInstance:
     - target: {fileID: 3867889794126373364, guid: 4b6730dc287ce9f49a9c47ef50e12713,
         type: 3}
       propertyPath: m_Name
-      value: Jester Variant 2
+      value: Jester_Swords
       objectReference: {fileID: 0}
     - target: {fileID: 6513293558621754700, guid: 4b6730dc287ce9f49a9c47ef50e12713,
         type: 3}
       propertyPath: suit
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6513293558621754700, guid: 4b6730dc287ce9f49a9c47ef50e12713,
+        type: 3}
+      propertyPath: cardSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d1af5120e5402f74185a34327aaca066,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b6730dc287ce9f49a9c47ef50e12713, type: 3}
