@@ -524,7 +524,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7a0e7da5d1993f94aae352105574ce0c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c5f33a020ca8e484a9b050843448c33b, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1046,7 +1046,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e7b2a43c35dc55041b158116a2244a0a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 61ae5e1f314618943a38bad15384283e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2879,6 +2879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   illustration: {fileID: 8142537803912144551}
   frame: {fileID: 4650188386589815721}
+  rubble: {fileID: 0}
   cardName: {fileID: 3258894429263841228}
   atk: {fileID: 7135036289551695540}
   def: {fileID: 8498673416616561363}
@@ -6543,7 +6544,7 @@ PrefabInstance:
     - target: {fileID: 4656989680247158144, guid: a4a3f2aff4141b745a26b7e4cccd84ae,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5110408166801246524, guid: a4a3f2aff4141b745a26b7e4cccd84ae,
         type: 3}

@@ -18,6 +18,9 @@ public class BoardUIManager : MonoBehaviour
     public bool stealChosen;
     public bool stealing;
 
+    // inspection-related UI objects
+    public GameObject inspectUI;
+
     // placeholder prompts to display player scores and winner
     public TextMeshProUGUI p0Score;
     public TextMeshProUGUI p1Score;
@@ -117,6 +120,20 @@ public class BoardUIManager : MonoBehaviour
         }
         layout.SetActive(false);
         stealUI.SetActive(false);
+    }
+
+    public IEnumerator InspectCard(Card card)
+    {
+        inspectUI.SetActive(true);
+        UICard display = inspectUI.GetComponentInChildren<UICard>();
+
+        display.InspectCard(card);
+
+        HumanPlayer hp = (HumanPlayer)Board.main.players[0];
+        yield return new WaitUntil(() => hp.cursor.confirmPressed);
+
+        hp.cursor.confirmPressed = false;
+        inspectUI.SetActive(false);
     }
 
     public void DisplayScores()
