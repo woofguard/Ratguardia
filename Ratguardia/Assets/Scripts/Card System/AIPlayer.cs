@@ -49,7 +49,7 @@ public class AIPlayer : Player
                 }
 
                 // 0.5 ^ (1 + num rubble) chance of stealing
-                if(random.NextDouble() < Math.Pow(0.5, 1 + numRubble) && canBattle.Count > 0)
+                if(random.NextDouble() < Math.Pow(0.25, 1 + numRubble) && canBattle.Count > 0)
                 {
                     // pick a random card to send into battle
                     combatant = canBattle[random.Next(0, canBattle.Count)];
