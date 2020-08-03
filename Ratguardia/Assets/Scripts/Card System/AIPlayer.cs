@@ -7,6 +7,12 @@ public class AIPlayer : Player
 {
     public string aiType; // which AI pattern the player uses
 
+    // seconds to wait before various actions
+    private float drawWaitTime = 0.75f;
+    private float discardWaitTime = 1.0f;
+    private float stealWaitTime = 0.25f;
+
+
     private System.Random random = new System.Random();
 
     public override IEnumerator TakeTurn()
@@ -16,6 +22,9 @@ public class AIPlayer : Player
         {
             case "random":
                 yield return StartCoroutine(RandomAI());
+                break;
+            case "basic":
+                yield return StartCoroutine(BasicAI());
                 break;
             default:
                 yield return StartCoroutine(PlaceholderAI());
@@ -27,33 +36,16 @@ public class AIPlayer : Player
 
     public override IEnumerator DecideSteal()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(stealWaitTime);
         
         // decide whether to steal based on AI type
         switch(aiType)
         {
             case "random":
-                // count number of rubble cards
-                int numRubble = 0;
-                List<Card> canBattle = new List<Card>();
-                foreach(Card card in hand)
-                {
-                    if(card.rubble)
-                    {
-                        numRubble++;
-                    }
-                    else if(!card.rubble && card.atk > 0)
-                    {
-                        canBattle.Add(card);
-                    }
-                }
-
-                // 0.5 ^ (1 + num rubble) chance of stealing
-                if(random.NextDouble() < Math.Pow(0.25, 1 + numRubble) && canBattle.Count > 0)
-                {
-                    // pick a random card to send into battle
-                    combatant = canBattle[random.Next(0, canBattle.Count)];
-                }
+                combatant = RandomSteal();
+                break;
+            case "basic":
+                combatant = BasicSteal();
                 break;
             default:
                 combatant = null;
@@ -63,28 +55,28 @@ public class AIPlayer : Player
     }
 
     // just discards the last card drawn
-    public IEnumerator PlaceholderAI()
+    private IEnumerator PlaceholderAI()
     {
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(drawWaitTime);
         Draw();
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(discardWaitTime);
         yield return StartCoroutine(Discard(5));
         
         yield return StartCoroutine(EndTurn());
     }
 
     // discards random cards
-    public IEnumerator RandomAI()
+    private IEnumerator RandomAI()
     {
-        yield return new WaitForSeconds(0.75f);
-        Draw();
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(drawWaitTime);
+        Card drawn = Draw();
+        yield return new WaitForSeconds(discardWaitTime);
 
         List<Card> nonRubble = new List<Card>();
         Card discard;
 
-        // go thru cards that were in hand before drawing
-        for(int i = 0; i < 6; i++)
+        // go thru cards that were in hand
+        for(int i = 0; i < 5; i++)
         {
             // add to list if not rubble
             if(!hand[i].rubble)
@@ -94,9 +86,9 @@ public class AIPlayer : Player
         }
 
         // if only drawn card was non rubble, discard the drawn card
-        if(nonRubble.Count < 2)
+        if(nonRubble.Count < 1)
         {
-            discard = hand[5];
+            discard = drawn;
         }
         // discard a random card
         else
@@ -106,6 +98,118 @@ public class AIPlayer : Player
 
         yield return StartCoroutine(Discard(discard));
         yield return StartCoroutine(EndTurn());
+    }
+
+    // has a random chance of stealing
+    private Card RandomSteal()
+    {
+        // count number of rubble cards
+        int numRubble = 0;
+        List<Card> canBattle = new List<Card>();
+        foreach(Card card in hand)
+        {
+            if(card.rubble)
+            {
+                numRubble++;
+            }
+            else if(!card.rubble && card.atk > 0)
+            {
+                canBattle.Add(card);
+            }
+        }
+
+        // random chance of stealing based on rubble cards
+        if(random.NextDouble() < Math.Pow(0.30, 1 + numRubble) && canBattle.Count > 0)
+        {
+            // pick a random card to send into battle
+            return canBattle[random.Next(0, canBattle.Count)];
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    // tries to build the hand with the highest raw def score, not counting effects
+    private IEnumerator BasicAI()
+    {
+        yield return new WaitForSeconds(drawWaitTime);
+        Card drawn = Draw();
+        yield return new WaitForSeconds(discardWaitTime);
+
+        List<Card> nonRubble = new List<Card>();
+        Card discard = null;
+
+        // go thru cards that were in hand
+        for(int i = 0; i < 5; i++)
+        {
+            // add to list if not rubble
+            if(!hand[i].rubble)
+            {
+                nonRubble.Add(hand[i]);
+            }
+        }
+
+        // if only drawn card was non rubble, discard the drawn card
+        if(nonRubble.Count < 1)
+        {
+            discard = drawn;
+        }
+        else
+        {
+            // go thru non rubble cards
+            for(int i = 0; i < nonRubble.Count; i++)
+            {
+                // if card has less than drawn card, discard it
+                if(nonRubble[i].def < drawn.def)
+                {
+                    discard = nonRubble[i];
+                    break;
+                }
+            }
+        }
+
+        // just in case, discard drawn card
+        if(discard == null)
+        {
+            discard = drawn;
+        }
+
+        yield return StartCoroutine(Discard(discard));
+        yield return StartCoroutine(EndTurn());
+    }
+
+    private Card BasicSteal()
+    {
+        // get cards in hand that can battle
+        List<Card> canBattle = new List<Card>();
+        foreach(Card card in hand)
+        {
+            if(!card.rubble && card.atk > 0)
+            {
+                canBattle.Add(card);
+            }
+        }
+
+        if(canBattle.Count > 0)
+        {
+            // steal if discarded card has more def than battle card
+            Card discarded = Board.main.rubblePile.Peek();
+            foreach(Card card in canBattle)
+            {
+                if(discarded.def > card.def)
+                {
+                    return card;
+                }
+            }
+
+            // if no card has lower def, dont steal
+            return null;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public override void ArrangeHand()
