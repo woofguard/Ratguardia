@@ -124,16 +124,30 @@ public class BoardUIManager : MonoBehaviour
 
     public IEnumerator InspectCard(Card card)
     {
-        inspectUI.SetActive(true);
-        UICard display = inspectUI.GetComponentInChildren<UICard>();
-
-        display.InspectCard(card);
-
         HumanPlayer hp = (HumanPlayer)Board.main.players[0];
-        yield return new WaitUntil(() => hp.cursor.confirmPressed);
+        
+        // only inspect during player's turn
+        if(hp.hasTurn || hp.isStealing)
+        {
+            hp.cursor.cancelPressed = false;
 
-        hp.cursor.confirmPressed = false;
-        inspectUI.SetActive(false);
+            inspectUI.SetActive(true);
+            UICard display = inspectUI.GetComponentInChildren<UICard>();
+
+            display.InspectCard(card);
+
+            yield return new WaitUntil(() => hp.cursor.cancelReleased);
+
+            hp.cursor.cancelReleased = false;
+            inspectUI.SetActive(false);
+        }
+        else
+        {
+            hp.cursor.cancelPressed = false;
+
+            yield return new WaitUntil(() => hp.cursor.cancelReleased);
+            hp.cursor.cancelReleased = false;
+        }
     }
 
     public void DisplayScores()

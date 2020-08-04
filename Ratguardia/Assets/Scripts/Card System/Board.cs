@@ -14,6 +14,11 @@ public class Board : MonoBehaviour
     public CardStack rubblePile;
     [HideInInspector] public Card winner; // card that wins the battle
 
+    // ai type options
+    public string aiType1;
+    public string aiType2;
+    public string aiType3;
+
     // references to player prefabs
     public GameObject humanPlayerPrefab;
     public GameObject AIPlayerPrefab;
@@ -58,7 +63,7 @@ public class Board : MonoBehaviour
         AudioManager.main.sfxShuffle.Play();
         deck.Shuffle();
 
-        players = GenerateSinglePlayerGame();
+        players = GenerateSinglePlayerGame(aiType1, aiType2, aiType3);
 
         // dont play draw sfx when dealing cards
         AudioManager.main.sfxDraw.mute = true;
@@ -207,7 +212,7 @@ public class Board : MonoBehaviour
     }
 
     // creates the Player game objects for 1 human player and 3 AIs, returns array of players
-    public Player[] GenerateSinglePlayerGame()
+    public Player[] GenerateSinglePlayerGame(string ai1, string ai2, string ai3)
     {
         var humanPlayer = Instantiate(humanPlayerPrefab);
         var AIPlayer1 = Instantiate(AIPlayerPrefab);
@@ -218,12 +223,18 @@ public class Board : MonoBehaviour
 
         players[0] = humanPlayer.GetComponent<Player>();
         players[0].playerIndex = 0;
+
         players[1] = AIPlayer1.GetComponent<Player>();
         players[1].playerIndex = 1;
+        (players[1] as AIPlayer).aiType = ai1;
+
         players[2] = AIPlayer2.GetComponent<Player>();
         players[2].playerIndex = 2;
+        (players[2] as AIPlayer).aiType = ai2;
+
         players[3] = AIPlayer3.GetComponent<Player>();
         players[3].playerIndex = 3;
+        (players[3] as AIPlayer).aiType = ai3;
 
         return players;
     }

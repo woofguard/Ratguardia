@@ -52,6 +52,9 @@ MonoBehaviour:
   deck: {fileID: 7707773639167507730}
   rubblePile: {fileID: 1914858616027858981}
   winner: {fileID: 0}
+  aiType1: basic
+  aiType2: random
+  aiType3: random
   humanPlayerPrefab: {fileID: 5821434033703883572, guid: 53e566634000ef218be37bfa22f0075d,
     type: 3}
   AIPlayerPrefab: {fileID: 5821434033703883572, guid: e6c55cf1dc0ab90c78de8eb839e29836,

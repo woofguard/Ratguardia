@@ -35,6 +35,11 @@ public class CardStack : MonoBehaviour
         c.Reveal(revealed);
     }
 
+    public Card Peek()
+    {
+        return stack.Peek();
+    }
+
     // shuffles the stack
     public void Shuffle()
     {
