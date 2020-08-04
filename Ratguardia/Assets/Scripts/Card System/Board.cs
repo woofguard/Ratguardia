@@ -14,6 +14,11 @@ public class Board : MonoBehaviour
     public CardStack rubblePile;
     [HideInInspector] public Card winner; // card that wins the battle
 
+    // ai type options
+    public string aiType1;
+    public string aiType2;
+    public string aiType3;
+
     // references to player prefabs
     public GameObject humanPlayerPrefab;
     public GameObject AIPlayerPrefab;
@@ -58,7 +63,7 @@ public class Board : MonoBehaviour
         AudioManager.main.sfxShuffle.Play();
         deck.Shuffle();
 
-        players = GenerateSinglePlayerGame("basic", "random", "random");
+        players = GenerateSinglePlayerGame(aiType1, aiType2, aiType3);
 
         // dont play draw sfx when dealing cards
         AudioManager.main.sfxDraw.mute = true;
