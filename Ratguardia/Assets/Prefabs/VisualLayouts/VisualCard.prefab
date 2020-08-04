@@ -69,7 +69,7 @@ MonoBehaviour:
   sprite: {fileID: 1169025631978879101}
   frame: {fileID: 2381454193693514000}
   rubble: {fileID: 8476175437658739314}
-  anim: {fileID: 0}
+  anim: {fileID: -2376185989361795422}
 --- !u!61 &2329316924680827908
 BoxCollider2D:
   m_ObjectHideFlags: 0
