@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Animator))]
+
 public class DisplayCard : MonoBehaviour
 {   
     public Card card;
@@ -14,16 +15,17 @@ public class DisplayCard : MonoBehaviour
     public TextMeshPro effect;
     public TextMeshPro effectDetails;
 
-    public Sprite cardBack;
+    public SpriteRenderer cardBack;
     public Sprite[] suitFrames;
-    [HideInInspector]
     public SpriteRenderer sprite;
     public SpriteRenderer frame;
     public SpriteRenderer rubble;
 
+    public Animator anim;
+
     private void Awake()
     {
-        sprite = gameObject.GetComponent<SpriteRenderer>();
+        anim = gameObject.GetComponent<Animator>();
     }
 
     // set card display to current information
@@ -33,8 +35,9 @@ public class DisplayCard : MonoBehaviour
         cardName.text = card.cardName;
         atk.text = card.atk + "";
         def.text = card.def + "";
+        sprite.sprite = card.cardSprite;
 
-        switch(card.suit)
+        switch (card.suit)
         {
             case Suit.Chalices:
                 frame.sprite = suitFrames[0];
@@ -60,7 +63,7 @@ public class DisplayCard : MonoBehaviour
     {
         if(card.faceUp)
         {
-            sprite.sprite = card.cardSprite;
+            cardBack.gameObject.SetActive(false);
 
             frame.gameObject.SetActive(true);
             cardName.gameObject.SetActive(true);
@@ -74,15 +77,15 @@ public class DisplayCard : MonoBehaviour
         }
         else
         {
-            sprite.sprite = cardBack;
+            cardBack.gameObject.SetActive(true);
 
-            frame.gameObject.SetActive(false);
-            cardName.gameObject.SetActive(false);
-            atk.gameObject.SetActive(false);
-            def.gameObject.SetActive(false);
-            effect.gameObject.SetActive(false);
-            effectDetails.gameObject.SetActive(false);
-            rubble.gameObject.SetActive(false);
+            //frame.gameObject.SetActive(false);
+            //cardName.gameObject.SetActive(false);
+            //atk.gameObject.SetActive(false);
+            //def.gameObject.SetActive(false);
+            //effect.gameObject.SetActive(false);
+            //effectDetails.gameObject.SetActive(false);
+            //rubble.gameObject.SetActive(false);
         }
     }
     
@@ -117,5 +120,17 @@ public class DisplayCard : MonoBehaviour
     public void UpdateRubble()
     {
         rubble.gameObject.SetActive(card.rubble);
+    }
+
+    public void FlipUp()
+    {
+       // if (!card.faceUp) return;
+        anim.Play("CardFlipUp");
+    }
+
+    public void FlipDown()
+    {
+        if (!card.faceUp) return;
+        anim.Play("CardFlipDown");
     }
 }
