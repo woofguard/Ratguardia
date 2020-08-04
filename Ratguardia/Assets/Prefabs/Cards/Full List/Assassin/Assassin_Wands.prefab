@@ -65,12 +65,18 @@ PrefabInstance:
     - target: {fileID: 3867889794126373364, guid: 391ca4f92fd7bbaf1a8aa8361a568cea,
         type: 3}
       propertyPath: m_Name
-      value: Assassin Variant 3
+      value: Assassin_Wands
       objectReference: {fileID: 0}
     - target: {fileID: 6513293558621754700, guid: 391ca4f92fd7bbaf1a8aa8361a568cea,
         type: 3}
       propertyPath: suit
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6513293558621754700, guid: 391ca4f92fd7bbaf1a8aa8361a568cea,
+        type: 3}
+      propertyPath: cardSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2e46c5ae934c265408bfaa17f798e709,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 391ca4f92fd7bbaf1a8aa8361a568cea, type: 3}

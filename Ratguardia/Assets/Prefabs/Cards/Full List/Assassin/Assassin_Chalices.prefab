@@ -72,5 +72,11 @@ PrefabInstance:
       propertyPath: suit
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6513293558621754700, guid: 391ca4f92fd7bbaf1a8aa8361a568cea,
+        type: 3}
+      propertyPath: cardSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4d2ebc6123f4f4a4d843a46f02d1f8f6,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 391ca4f92fd7bbaf1a8aa8361a568cea, type: 3}
