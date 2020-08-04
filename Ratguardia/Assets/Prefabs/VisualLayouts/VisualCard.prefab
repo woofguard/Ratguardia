@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2251813118341066353}
   - component: {fileID: 9196346912133931980}
   - component: {fileID: 2329316924680827908}
+  - component: {fileID: -2376185989361795422}
+  - component: {fileID: 8599944050468806060}
   m_Layer: 0
   m_Name: VisualCard
   m_TagString: Untagged
@@ -143,6 +145,40 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.32, y: 10.5}
   m_EdgeRadius: 0
+--- !u!95 &-2376185989361795422
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385072384716979057}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ede8ad97a12a02945a57fa09a89f27e3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!111 &8599944050468806060
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385072384716979057}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 4e4cc98007b2246499f402bee7e2dc49, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &2653893912452610513
 GameObject:
   m_ObjectHideFlags: 0
