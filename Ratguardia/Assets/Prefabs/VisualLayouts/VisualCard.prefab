@@ -108,7 +108,7 @@ MonoBehaviour:
   def: {fileID: 1698335204541019944}
   effect: {fileID: 6673156817505259013}
   effectDetails: {fileID: 8569941546050874024}
-  cardBack: {fileID: 21300000, guid: abb01ff4b00647d4ea5693eb1b4a2f52, type: 3}
+  cardBack: {fileID: 21300000, guid: c362675c488ab504292fff37bce0e268, type: 3}
   suitFrames:
   - {fileID: 21300000, guid: 61ae5e1f314618943a38bad15384283e, type: 3}
   - {fileID: 21300000, guid: 3e8cf7c76f9bd134a9a18ad47f422e2c, type: 3}
