@@ -10,17 +10,17 @@ PrefabInstance:
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_text
-      value: "True ATK of this card is equal to the # of Rubble Cards \nin the hand."
+      value: True ATK of this card is equal to the # of Rubble Cards in the hand.
       objectReference: {fileID: 0}
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 69
+      value: 68
       objectReference: {fileID: 0}
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
@@ -178,6 +178,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951400669638786088, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6373571988361414722, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
