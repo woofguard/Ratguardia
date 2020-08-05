@@ -27,8 +27,7 @@ public class UICard : MonoBehaviour
     {
         DisplayCard refCard = card.visualCard; // grab reference
 
-        if (card.faceUp) illustration.sprite = refCard.sprite.sprite; // update sprites
-        else illustration.sprite = card.cardSprite;
+        illustration.sprite = card.cardSprite;
         frame.sprite = refCard.frame.sprite;
 
         cardName.text = refCard.cardName.text; // update text elements
@@ -67,12 +66,17 @@ public class UICard : MonoBehaviour
         }
         else
         {
-            illustration.sprite = refCard.sprite.sprite;
+            illustration.sprite = refCard.cardBack.sprite;
         }
 
-        // commented out until we have character name & portrait info
-        // ownerName.text = card.owner + ""; // set owner information
-        // set ownerPortait
+        if (card.owner > -1)
+        {
+            SetOwnerDisplay(true);
+            // commented out until we have character name & portrait info
+            ownerName.text = Board.main.players[card.owner].character.title; // set owner information
+            ownerPortrait.sprite = Board.main.players[card.owner].character.portrait;// set ownerPortait
+        }
+        else SetOwnerDisplay(false);
     }
 
     // toggle display

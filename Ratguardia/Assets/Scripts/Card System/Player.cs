@@ -17,6 +17,12 @@ public abstract class Player : MonoBehaviour
 
     public GameObject fiveCardLayout;
     public GameObject sixCardLayout;
+    public Character character;
+
+    private void Awake()
+    {
+        character = transform.GetComponentInChildren<Character>();
+    }
 
     // function containing player actions on their turn
     public abstract IEnumerator TakeTurn();

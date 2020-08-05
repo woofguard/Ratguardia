@@ -28,6 +28,8 @@ public class BoardUIManager : MonoBehaviour
     public TextMeshProUGUI p3Score;
     public TextMeshProUGUI winner;
 
+    public ResultsDisplay rd;
+
     public GameObject restartPrompt;
 
     private void Start()
@@ -152,17 +154,20 @@ public class BoardUIManager : MonoBehaviour
 
     public void DisplayScores()
     {
-        p0Score.enabled = true;
-        p1Score.enabled = true;
-        p2Score.enabled = true;
-        p3Score.enabled = true;
-        winner.enabled = true;
+        rd.gameObject.SetActive(true);
+        rd.DisplayResults();
 
-        p0Score.text = "Final score: " + Board.main.scores[0] + " points";
-        p1Score.text = "Final score: " + Board.main.scores[1] + " points";
-        p2Score.text = "Final score: " + Board.main.scores[2] + " points";
-        p3Score.text = "Final score: " + Board.main.scores[3] + " points";
+        //p0Score.enabled = true;
+        //p1Score.enabled = true;
+        //p2Score.enabled = true;
+        //p3Score.enabled = true;
+        //winner.enabled = true;
 
-        winner.text = "Player " + Board.main.DetermineWinner() + " wins!";
+        //p0Score.text = "Final score: " + Board.main.scores[0] + " points";
+        //p1Score.text = "Final score: " + Board.main.scores[1] + " points";
+        //p2Score.text = "Final score: " + Board.main.scores[2] + " points";
+        //p3Score.text = "Final score: " + Board.main.scores[3] + " points";
+
+        //winner.text = "Player " + Board.main.DetermineWinner() + " wins!";
     }
 }

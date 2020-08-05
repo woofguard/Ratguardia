@@ -78,14 +78,6 @@ public class DisplayCard : MonoBehaviour
         else
         {
             cardBack.gameObject.SetActive(true);
-
-            //frame.gameObject.SetActive(false);
-            //cardName.gameObject.SetActive(false);
-            //atk.gameObject.SetActive(false);
-            //def.gameObject.SetActive(false);
-            //effect.gameObject.SetActive(false);
-            //effectDetails.gameObject.SetActive(false);
-            //rubble.gameObject.SetActive(false);
         }
     }
     
@@ -98,6 +90,7 @@ public class DisplayCard : MonoBehaviour
         def.gameObject.SetActive(false);
         effect.gameObject.SetActive(false);
         effectDetails.gameObject.SetActive(false);
+        GetComponent<BoxCollider2D>().enabled = false;
     }
 
     public void UnhideCard()
@@ -109,6 +102,7 @@ public class DisplayCard : MonoBehaviour
         def.gameObject.SetActive(true);
         effect.gameObject.SetActive(true);
         effectDetails.gameObject.SetActive(true);
+        GetComponent<BoxCollider2D>().enabled = true;
     }
 
     public void UpdateStats()
