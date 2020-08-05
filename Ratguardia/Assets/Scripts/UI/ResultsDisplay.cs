@@ -6,9 +6,13 @@ using TMPro;
 public class ResultsDisplay : MonoBehaviour
 {
     public PlayerResult[] players;
+    public TextMeshProUGUI roundResults;
 
+    // display results of current round
     public void DisplayResults()
     {
+        roundResults.text = "Round " + StateManager.main.round + " results";
+
         Result[] results = new Result[4];
 
         int i = 0;
@@ -40,12 +44,13 @@ public class ResultsDisplay : MonoBehaviour
 
     }
 
+    // fill out player information for the round ie cards, points, dialogue
     void PopulatePlayerData(PlayerResult player, Result result, int place)
     {
         Player p = Board.main.players[result.playerIndex];
 
         player.roundPoints.text = result.score + " points";
-        player.totalPoints.text = result.score + " points"; // fix later to add total score
+        player.totalPoints.text = StateManager.main.matchScores[result.playerIndex] + " points"; 
 
         // uncomment these when players have proper names/portraits
         player.portrait.sprite = p.character.portrait;

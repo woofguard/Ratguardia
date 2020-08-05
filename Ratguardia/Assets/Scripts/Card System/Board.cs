@@ -170,6 +170,11 @@ public class Board : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < scores.Length; i++)
+        {
+            StateManager.main.matchScores[i] += scores[i];
+        }
+
         Debug.Log("Player " + winner + " wins!");
         return winner;
     }

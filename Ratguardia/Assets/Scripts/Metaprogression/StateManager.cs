@@ -7,6 +7,10 @@ public class StateManager : MonoBehaviour
 {
     public static StateManager main;
 
+    public int[] matchScores;
+
+    public int round;
+
     private void Awake()
     {
         // persistent singleton
@@ -14,6 +18,9 @@ public class StateManager : MonoBehaviour
         {
             main = this;
             DontDestroyOnLoad(this.gameObject);
+
+            round = 1;
+            matchScores = new int[] { 0, 0, 0, 0 };
         }
         else
         {
@@ -23,12 +30,20 @@ public class StateManager : MonoBehaviour
 
     public void CardGameEnd()
     {
-        Board.main.refBoardUI.restartPrompt.SetActive(true);
+        round++;
+
+        if(round <= 3) Board.main.refBoardUI.restartPrompt.SetActive(true);
     }
 
     public void RestartCardGame()
     {
         SceneManager.LoadScene("CardGame");
+    }
+
+    public void ResetMatch()
+    {
+        round = 1;
+        matchScores = new int[] { 0, 0, 0, 0 };
     }
 
     public void ExitGame()
