@@ -17,11 +17,32 @@ public abstract class Player : MonoBehaviour
 
     public GameObject fiveCardLayout;
     public GameObject sixCardLayout;
+
+    public Character[] charList;
     public Character character;
 
-    private void Awake()
+    public GameObject icon;
+
+    public void SetNewCharacter(string name)
     {
-        character = transform.GetComponentInChildren<Character>();
+        Debug.Log("Searching for " + name);
+        int i = 0;
+        for(i = 0; i < charList.Length; i++)
+        {
+            if (charList[i].title == name)
+            {
+                character = charList[i];
+                break;
+            }
+        }
+        //if(i == charList.Length) character = transform.GetComponentInChildren<Character>();
+        SetIcon();
+    }
+
+    public void SetIcon()
+    {
+        icon.GetComponentInChildren<SpriteRenderer>().sprite = character.portrait;
+        icon.GetComponentInChildren<TMPro.TextMeshPro>().text = character.title;
     }
 
     // function containing player actions on their turn
@@ -32,6 +53,7 @@ public abstract class Player : MonoBehaviour
         // if not in battle
         yield return new WaitWhile(() => Board.main.refBoardUI.stealUI.activeSelf);
         Board.main.GiveTurn(Board.main.NextPlayer());
+        icon.transform.Find("Outline").gameObject.SetActive(false);
         yield return null;
     }
 
@@ -223,6 +245,10 @@ public abstract class Player : MonoBehaviour
                 hand[i].transform.localRotation = card.localRotation;
                 hand[i].transform.localScale = card.localScale;
             }
+            Vector3 iconPos = sixCardLayout.transform.GetChild(0).position;
+            iconPos.x -= 1.0f;
+            icon.transform.localPosition = iconPos;
+            icon.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
         }
         else if (hand.Count == 6)
         {
@@ -233,6 +259,11 @@ public abstract class Player : MonoBehaviour
                 hand[i].transform.rotation = card.rotation;
                 hand[i].transform.localScale = card.localScale;
             }
+            Vector3 iconPos = sixCardLayout.transform.GetChild(0).position;
+            iconPos.x -= 2f;
+            icon.transform.localPosition = iconPos;
+            icon.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
         }
+        
     }
 }

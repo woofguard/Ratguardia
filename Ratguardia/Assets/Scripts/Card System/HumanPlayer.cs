@@ -8,15 +8,18 @@ public class HumanPlayer : Player
 
     public override IEnumerator TakeTurn()
     {
+        icon.transform.Find("Outline").gameObject.SetActive(true);
+
         Board.main.refBoardUI.PromptDraw();
         yield return new WaitUntil(() => PlayerDraws());
         
         Board.main.refBoardUI.PromptDiscard();
         yield return new WaitUntil(() => PlayerDiscards());
+        Board.main.refBoardUI.HidePrompts();
         yield return StartCoroutine(Discard(cursor.clickedCard));
         cursor.clickedCard = null;
         
-        Board.main.refBoardUI.HidePrompts();
+        
         yield return StartCoroutine(EndTurn());
     }
 

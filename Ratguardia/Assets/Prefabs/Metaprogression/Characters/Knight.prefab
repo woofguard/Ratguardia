@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6481205218026712675
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5851163998097193215, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_Name
+      value: Knight
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.intro.Array.data[0]
+      value: I'll rid myself of this dreadful pain.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: title
+      value: The Knight
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: d1e6846b53de606439ecc9c6863058df,
+        type: 3}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.round1st.Array.data[0]
+      value: My vision feels clearer.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.round2nd.Array.data[0]
+      value: ...I just haven't warmed up yet.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.roundlast.Array.data[0]
+      value: It hurts...
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.match1st.Array.data[0]
+      value: Victory is only the natural result of my training.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.match2nd.Array.data[0]
+      value: I am unsatisfied.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.matchlast.Array.data[0]
+      value: My failure is my own. This I accept.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.death
+      value: May the afterlife cure me. For my sake and yours.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.spared
+      value: I'll never win this foolish game! Why continue my suffering?
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.feed
+      value: Compared to what I experience every second of my life, death is nothing.
+        I choose to feed.
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b84f66a5fb9697244b0d6300fc22cc0c, type: 3}

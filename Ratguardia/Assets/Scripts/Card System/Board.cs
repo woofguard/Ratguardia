@@ -223,18 +223,22 @@ public class Board : MonoBehaviour
 
         players[0] = humanPlayer.GetComponent<Player>();
         players[0].playerIndex = 0;
+        players[0].SetNewCharacter("The Jester");
 
         players[1] = AIPlayer1.GetComponent<Player>();
         players[1].playerIndex = 1;
         (players[1] as AIPlayer).aiType = ai1;
+        players[1].SetNewCharacter("The Peasant");
 
         players[2] = AIPlayer2.GetComponent<Player>();
         players[2].playerIndex = 2;
         (players[2] as AIPlayer).aiType = ai2;
+        players[2].SetNewCharacter("The Knight");
 
         players[3] = AIPlayer3.GetComponent<Player>();
         players[3].playerIndex = 3;
         (players[3] as AIPlayer).aiType = ai3;
+        players[3].SetNewCharacter("The Cavalier");
 
         return players;
     }

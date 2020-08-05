@@ -37,9 +37,8 @@ public class UICard : MonoBehaviour
 
         rubble.gameObject.SetActive(card.rubble);
 
-        // commented out until we have character name & portrait info
-        // ownerName.text = card.owner + ""; // set owner information
-        // set ownerPortait
+        ownerName.text = Board.main.players[card.owner].character.title; // set owner information
+        ownerPortrait.sprite = Board.main.players[card.owner].character.portrait;// set ownerPortait
     }
 
     // inspect a given card

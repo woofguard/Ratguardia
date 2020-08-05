@@ -71,6 +71,7 @@ public class ResultsDisplay : MonoBehaviour
 
         for(int i = 0; i < 5; i++)
         {
+            player.cards[i].SetOwnerDisplay(false);
             player.cards[i].DisplayCard(p.hand[i]);
         }
     }

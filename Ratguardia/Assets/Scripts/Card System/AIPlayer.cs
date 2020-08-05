@@ -17,8 +17,10 @@ public class AIPlayer : Player
 
     public override IEnumerator TakeTurn()
     {
+        icon.transform.Find("Outline").gameObject.SetActive(true);
+
         // run coroutine based on which strategy the AI is using
-        switch(aiType)
+        switch (aiType)
         {
             case "random":
                 yield return StartCoroutine(RandomAI());
@@ -31,15 +33,15 @@ public class AIPlayer : Player
                 break;
         }
 
-        yield return null; 
+        yield return null;
     }
 
     public override IEnumerator DecideSteal()
     {
         yield return new WaitForSeconds(stealWaitTime);
-        
+
         // decide whether to steal based on AI type
-        switch(aiType)
+        switch (aiType)
         {
             case "random":
                 combatant = RandomSteal();
@@ -61,7 +63,7 @@ public class AIPlayer : Player
         Draw();
         yield return new WaitForSeconds(discardWaitTime);
         yield return StartCoroutine(Discard(5));
-        
+
         yield return StartCoroutine(EndTurn());
     }
 
@@ -76,17 +78,17 @@ public class AIPlayer : Player
         Card discard;
 
         // go thru cards that were in hand
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             // add to list if not rubble
-            if(!hand[i].rubble)
+            if (!hand[i].rubble)
             {
                 nonRubble.Add(hand[i]);
             }
         }
 
         // if only drawn card was non rubble, discard the drawn card
-        if(nonRubble.Count < 1)
+        if (nonRubble.Count < 1)
         {
             discard = drawn;
         }
@@ -106,20 +108,20 @@ public class AIPlayer : Player
         // count number of rubble cards
         int numRubble = 0;
         List<Card> canBattle = new List<Card>();
-        foreach(Card card in hand)
+        foreach (Card card in hand)
         {
-            if(card.rubble)
+            if (card.rubble)
             {
                 numRubble++;
             }
-            else if(!card.rubble && card.atk > 0)
+            else if (!card.rubble && card.atk > 0)
             {
                 canBattle.Add(card);
             }
         }
 
         // random chance of stealing based on rubble cards
-        if(random.NextDouble() < Math.Pow(0.30, 1 + numRubble) && canBattle.Count > 0)
+        if (random.NextDouble() < Math.Pow(0.30, 1 + numRubble) && canBattle.Count > 0)
         {
             // pick a random card to send into battle
             return canBattle[random.Next(0, canBattle.Count)];
@@ -141,27 +143,27 @@ public class AIPlayer : Player
         Card discard = null;
 
         // go thru cards that were in hand
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             // add to list if not rubble
-            if(!hand[i].rubble)
+            if (!hand[i].rubble)
             {
                 nonRubble.Add(hand[i]);
             }
         }
 
         // if only drawn card was non rubble, discard the drawn card
-        if(nonRubble.Count < 1)
+        if (nonRubble.Count < 1)
         {
             discard = drawn;
         }
         else
         {
             // go thru non rubble cards
-            for(int i = 0; i < nonRubble.Count; i++)
+            for (int i = 0; i < nonRubble.Count; i++)
             {
                 // if card has less than drawn card, discard it
-                if(nonRubble[i].def < drawn.def)
+                if (nonRubble[i].def < drawn.def)
                 {
                     discard = nonRubble[i];
                     break;
@@ -170,7 +172,7 @@ public class AIPlayer : Player
         }
 
         // just in case, discard drawn card
-        if(discard == null)
+        if (discard == null)
         {
             discard = drawn;
         }
@@ -183,21 +185,21 @@ public class AIPlayer : Player
     {
         // get cards in hand that can battle
         List<Card> canBattle = new List<Card>();
-        foreach(Card card in hand)
+        foreach (Card card in hand)
         {
-            if(!card.rubble && card.atk > 0)
+            if (!card.rubble && card.atk > 0)
             {
                 canBattle.Add(card);
             }
         }
 
-        if(canBattle.Count > 0)
+        if (canBattle.Count > 0)
         {
             // steal if discarded card has more def than battle card
             Card discarded = Board.main.rubblePile.Peek();
-            foreach(Card card in canBattle)
+            foreach (Card card in canBattle)
             {
-                if(discarded.def > card.def)
+                if (discarded.def > card.def)
                 {
                     return card;
                 }
@@ -217,23 +219,26 @@ public class AIPlayer : Player
         Transform layout = transform.Find("Layout" + playerIndex);
         Debug.Log(layout);
         if (layout == null) return;
-        if (hand.Count == 5 || hand.Count == 6)
+        if (!(hand.Count == 5 || hand.Count == 6)) return;
+        try
         {
-            try
-            {
-                fiveCardLayout = layout.Find(hand.Count + "CardLayout").gameObject;
-            }
-            catch (Exception e)
-            {
-                return;
-            }
-            for (int i = 0; i < hand.Count; i++)
-            {
-                Transform card = fiveCardLayout.transform.GetChild(i);
-                hand[i].transform.localPosition = card.localPosition;
-                hand[i].transform.localRotation = card.localRotation;
-                hand[i].transform.localScale = card.localScale;
-            }
+            fiveCardLayout = layout.Find(hand.Count + "CardLayout").gameObject;
         }
+        catch (Exception e)
+        {
+            Debug.Log(e.ToString()); // puts this here to suppress warning in console
+            return;
+        }
+        for (int i = 0; i < hand.Count; i++)
+        {
+            Transform card = fiveCardLayout.transform.GetChild(i);
+            hand[i].transform.localPosition = card.localPosition;
+            hand[i].transform.localRotation = card.localRotation;
+            hand[i].transform.localScale = card.localScale;
+        }
+
+        Transform iconTrans = fiveCardLayout.transform.Find("Icon");
+        icon.transform.localPosition = iconTrans.position;
+        icon.transform.localScale = iconTrans.localScale;
     }
 }
