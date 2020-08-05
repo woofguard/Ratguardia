@@ -65,12 +65,18 @@ PrefabInstance:
     - target: {fileID: 3867889794126373364, guid: c02a2e04b981ef96dbdcd4237e9764a5,
         type: 3}
       propertyPath: m_Name
-      value: Archer Variant 2
+      value: Archer_Swords
       objectReference: {fileID: 0}
     - target: {fileID: 6513293558621754700, guid: c02a2e04b981ef96dbdcd4237e9764a5,
         type: 3}
       propertyPath: suit
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6513293558621754700, guid: c02a2e04b981ef96dbdcd4237e9764a5,
+        type: 3}
+      propertyPath: cardSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 649a6cd4a5ae0e64ea1014c86a4e0070,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c02a2e04b981ef96dbdcd4237e9764a5, type: 3}
