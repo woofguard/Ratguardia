@@ -66,12 +66,17 @@ public class UICard : MonoBehaviour
         }
         else
         {
-            illustration.sprite = refCard.rubble.sprite;
+            illustration.sprite = refCard.cardBack.sprite;
         }
 
-        // commented out until we have character name & portrait info
-        // ownerName.text = card.owner + ""; // set owner information
-        // set ownerPortait
+        if (card.owner > -1)
+        {
+            SetOwnerDisplay(true);
+            // commented out until we have character name & portrait info
+            ownerName.text = Board.main.players[card.owner].character.title; // set owner information
+            ownerPortrait.sprite = Board.main.players[card.owner].character.portrait;// set ownerPortait
+        }
+        else SetOwnerDisplay(false);
     }
 
     // toggle display
