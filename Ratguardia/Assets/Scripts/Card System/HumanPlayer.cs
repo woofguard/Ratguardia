@@ -70,6 +70,32 @@ public class HumanPlayer : Player
         }
     }
 
+    public override Card Draw()
+    {
+        var newCard = Board.main.deck.Pop();
+        Board.main.refBoardUI.UpdateDeckUI();
+
+        // flip card to the same side as rest of hand
+        newCard.Flip(faceUp);
+        newCard.Reveal(revealed);
+
+        // set card's owner to this player
+        newCard.owner = playerIndex;
+
+
+        hand.Add(newCard);
+        newCard.transform.SetParent(transform);
+
+        AudioManager.main.sfxDraw.Play();
+        ArrangeHand();
+
+        newCard.visualCard.FlipUp();
+
+        score = CalculateScore();
+
+        return newCard;
+    }
+
     private bool PlayerDiscards()
     {
         Card card = cursor.clickedCard;

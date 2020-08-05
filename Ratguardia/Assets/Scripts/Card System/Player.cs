@@ -29,7 +29,7 @@ public abstract class Player : MonoBehaviour
         yield return null;
     }
 
-    public Card Draw()
+    public virtual Card Draw()
     {
         var newCard = Board.main.deck.Pop();
         Board.main.refBoardUI.UpdateDeckUI();
@@ -66,7 +66,9 @@ public abstract class Player : MonoBehaviour
         c.rubble = true;
         
         c.ResetStats();
-        
+
+        c.visualCard.FlipUp();
+
         AudioManager.main.sfxDiscard.Play();
         ArrangeHand();
         
