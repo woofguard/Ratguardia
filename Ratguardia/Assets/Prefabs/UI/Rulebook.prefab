@@ -2987,7 +2987,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 0, y: -75}
   m_SizeDelta: {x: 1000, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5473584804830285618
@@ -3017,20 +3017,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You can only steal with a card that:
-
-
-    1. Has an ATK of 1 or higher
-
-    2.
-    Is not a rubble card
-
-
-    Select any card that qualifies to steal with it.
-
-
-    Successfully
-    stealing with a card will discard it from your hand.'
+  m_text: "You can only steal with a card that:\n\n1. Has an ATK of 1 or higher\n2.
+    Is not a rubble card\n\nSelect any card that qualifies to steal with it.\n\nStealing
+    with a card will discard it from your hand.\n\nIf another player beats your steal
+    in battle, \nyou keep your previous card."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3099,12 +3089,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 6327527493498856578}
-    characterCount: 207
+    characterCount: 271
     spriteCount: 0
-    spaceCount: 44
-    wordCount: 42
+    spaceCount: 58
+    wordCount: 54
     linkCount: 0
-    lineCount: 8
+    lineCount: 11
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -5009,7 +4999,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6271644080823786562
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6165,7 +6155,7 @@ PrefabInstance:
     - target: {fileID: 5851261099071654987, guid: a4a3f2aff4141b745a26b7e4cccd84ae,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6037404809894573849, guid: a4a3f2aff4141b745a26b7e4cccd84ae,
         type: 3}
@@ -6544,7 +6534,7 @@ PrefabInstance:
     - target: {fileID: 4656989680247158144, guid: a4a3f2aff4141b745a26b7e4cccd84ae,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5110408166801246524, guid: a4a3f2aff4141b745a26b7e4cccd84ae,
         type: 3}
