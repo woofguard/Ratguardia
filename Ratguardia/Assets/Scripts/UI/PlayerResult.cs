@@ -14,4 +14,15 @@ public class PlayerResult : MonoBehaviour
     public TextMeshProUGUI line;
 
     public UICard[] cards;
+
+    public bool showCards = false;
+
+    public void ToggleCards()
+    {
+        showCards = !showCards;
+        Animator anim = GetComponent<Animator>();
+
+        if (showCards) anim.Play("ShowCards");
+        else anim.Play("HideCards");
+    }
 }

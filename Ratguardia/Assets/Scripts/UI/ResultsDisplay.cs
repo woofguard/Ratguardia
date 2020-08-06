@@ -50,7 +50,7 @@ public class ResultsDisplay : MonoBehaviour
         Player p = Board.main.players[result.playerIndex];
 
         player.roundPoints.text = result.score + " points";
-        player.totalPoints.text = StateManager.main.matchScores[result.playerIndex] + " points"; 
+        player.totalPoints.text = StateManager.main.matchScores[result.playerIndex] + ""; 
 
         // uncomment these when players have proper names/portraits
         player.portrait.sprite = p.character.portrait;
