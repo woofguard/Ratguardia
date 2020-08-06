@@ -21,25 +21,14 @@ public class BoardUIManager : MonoBehaviour
     // inspection-related UI objects
     public GameObject inspectUI;
 
-    // placeholder prompts to display player scores and winner
-    public TextMeshProUGUI p0Score;
-    public TextMeshProUGUI p1Score;
-    public TextMeshProUGUI p2Score;
-    public TextMeshProUGUI p3Score;
-    public TextMeshProUGUI winner;
-
     public ResultsDisplay rd;
+    public MatchResultsDisplay mrd;
 
+    public GameObject continuePrompt;
     public GameObject restartPrompt;
 
     private void Start()
     {
-        p0Score.enabled = false;
-        p1Score.enabled = false;
-        p2Score.enabled = false;
-        p3Score.enabled = false;
-        winner.enabled = false;
-
         HidePrompts();
     }
 
@@ -155,19 +144,33 @@ public class BoardUIManager : MonoBehaviour
     public void DisplayScores()
     {
         rd.gameObject.SetActive(true);
+        continuePrompt.SetActive(true);
         rd.DisplayResults();
+    }
 
-        //p0Score.enabled = true;
-        //p1Score.enabled = true;
-        //p2Score.enabled = true;
-        //p3Score.enabled = true;
-        //winner.enabled = true;
+    public void SetContinue(bool cont)
+    {
+        Button continueButton = continuePrompt.transform.Find("Restart").GetComponent<Button>();
+        continueButton.onClick.RemoveAllListeners();
 
-        //p0Score.text = "Final score: " + Board.main.scores[0] + " points";
-        //p1Score.text = "Final score: " + Board.main.scores[1] + " points";
-        //p2Score.text = "Final score: " + Board.main.scores[2] + " points";
-        //p3Score.text = "Final score: " + Board.main.scores[3] + " points";
+        if (cont)
+        {
+            continuePrompt.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "Continue to next round?";
+            continueButton.onClick.AddListener(StateManager.main.RestartCardGame);
+        } else
+        {
+            continuePrompt.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "View results";
+            continueButton.onClick.AddListener(DisplayMatchResults);
+        }
+    }
 
-        //winner.text = "Player " + Board.main.DetermineWinner() + " wins!";
+    public void DisplayMatchResults()
+    {
+        rd.gameObject.SetActive(false);
+        continuePrompt.SetActive(false);
+
+        mrd.gameObject.SetActive(true);
+        restartPrompt.gameObject.SetActive(true);
+        mrd.DisplayMatchResults();
     }
 }

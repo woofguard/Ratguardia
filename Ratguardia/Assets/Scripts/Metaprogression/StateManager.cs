@@ -11,6 +11,8 @@ public class StateManager : MonoBehaviour
 
     public int round;
 
+    public int roundsPerMatch = 3;
+
     private void Awake()
     {
         // persistent singleton
@@ -32,7 +34,9 @@ public class StateManager : MonoBehaviour
     {
         round++;
 
-        if(round <= 3) Board.main.refBoardUI.restartPrompt.SetActive(true);
+        Board.main.refBoardUI.continuePrompt.SetActive(true);
+
+        Board.main.refBoardUI.SetContinue(round <= roundsPerMatch);
     }
 
     public void RestartCardGame()
@@ -42,8 +46,10 @@ public class StateManager : MonoBehaviour
 
     public void ResetMatch()
     {
+        Debug.Log("Resetting Match");
         round = 1;
         matchScores = new int[] { 0, 0, 0, 0 };
+        RestartCardGame();
     }
 
     public void ExitGame()
