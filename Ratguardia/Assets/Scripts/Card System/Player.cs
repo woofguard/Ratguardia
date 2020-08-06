@@ -246,23 +246,25 @@ public abstract class Player : MonoBehaviour
                 hand[i].transform.localScale = card.localScale;
             }
             Vector3 iconPos = sixCardLayout.transform.GetChild(0).position;
-            iconPos.x -= 1.0f;
+            iconPos.x -= 1.05f;
+            iconPos.y -= 0.2f;
             icon.transform.localPosition = iconPos;
-            icon.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
+            icon.transform.localScale = new Vector3(0.65f, 0.65f, 1.0f);
         }
         else if (hand.Count == 6)
         {
             for (int i = 0; i < 6; i++)
             {
                 Transform card = sixCardLayout.transform.GetChild(i);
-                hand[i].transform.position = card.position;
-                hand[i].transform.rotation = card.rotation;
+                hand[i].transform.localPosition = card.localPosition;
+                hand[i].transform.localRotation = card.localRotation;
                 hand[i].transform.localScale = card.localScale;
             }
             Vector3 iconPos = sixCardLayout.transform.GetChild(0).position;
-            iconPos.x -= 2f;
+            iconPos.x -= 2.15f;
+            iconPos.y -= 0.2f;
             icon.transform.localPosition = iconPos;
-            icon.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
+            icon.transform.localScale = new Vector3(0.65f, 0.65f, 1.0f);
         }
         
     }

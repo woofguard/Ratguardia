@@ -238,7 +238,7 @@ public class AIPlayer : Player
         }
 
         Transform iconTrans = fiveCardLayout.transform.Find("Icon");
-        icon.transform.localPosition = iconTrans.position;
+        icon.transform.localPosition = iconTrans.localPosition;
         icon.transform.localScale = iconTrans.localScale;
     }
 }

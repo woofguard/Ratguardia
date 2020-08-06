@@ -234,6 +234,7 @@ public class Board : MonoBehaviour
         players[1].playerIndex = 1;
         (players[1] as AIPlayer).aiType = ai1;
         players[1].SetNewCharacter("The Peasant");
+        players[1].transform.Translate(0f, 0.2f, 0f);
 
         players[2] = AIPlayer2.GetComponent<Player>();
         players[2].playerIndex = 2;
@@ -244,6 +245,7 @@ public class Board : MonoBehaviour
         players[3].playerIndex = 3;
         (players[3] as AIPlayer).aiType = ai3;
         players[3].SetNewCharacter("The Cavalier");
+        players[3].transform.Translate(0f, 0.2f, 0f);
 
         return players;
     }
