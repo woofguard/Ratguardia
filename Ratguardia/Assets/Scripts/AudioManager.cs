@@ -6,6 +6,8 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager main;
 
+    public AudioSource cardTheme;
+
     public AudioSource sfxDraw;
     public AudioSource sfxDiscard;
     public AudioSource sfxFlip;

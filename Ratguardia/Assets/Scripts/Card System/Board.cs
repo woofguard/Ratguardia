@@ -60,6 +60,7 @@ public class Board : MonoBehaviour
             deck.Push(card);
         }
 
+        AudioManager.main.cardTheme.Play();
         AudioManager.main.sfxShuffle.Play();
         deck.Shuffle();
 
