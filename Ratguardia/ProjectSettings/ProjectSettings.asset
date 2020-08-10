@@ -121,8 +121,9 @@ PlayerSettings:
     16:10: 0
     16:9: 1
     Others: 0
-  bundleVersion: Alpha Playtest
-  preloadedAssets: []
+  bundleVersion: Beta
+  preloadedAssets:
+  - {fileID: 11400000, guid: 5da8e6d4f67a85aea929b467ad747227, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
