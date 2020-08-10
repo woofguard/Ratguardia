@@ -65,12 +65,18 @@ PrefabInstance:
     - target: {fileID: 3867889794126373364, guid: 4e60c0056ebb540b6b1ce7d28f37ae73,
         type: 3}
       propertyPath: m_Name
-      value: Cavalier Variant 2
+      value: Cavalier_Swords
       objectReference: {fileID: 0}
     - target: {fileID: 6513293558621754700, guid: 4e60c0056ebb540b6b1ce7d28f37ae73,
         type: 3}
       propertyPath: suit
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6513293558621754700, guid: 4e60c0056ebb540b6b1ce7d28f37ae73,
+        type: 3}
+      propertyPath: cardSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fe1414b07efc1c749b36217e6e6a9b41,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e60c0056ebb540b6b1ce7d28f37ae73, type: 3}

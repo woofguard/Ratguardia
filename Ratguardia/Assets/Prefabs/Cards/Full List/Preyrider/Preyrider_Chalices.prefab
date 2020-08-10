@@ -65,12 +65,18 @@ PrefabInstance:
     - target: {fileID: 3867889794126373364, guid: fd854f60a431a580d981ebe8d52eca3a,
         type: 3}
       propertyPath: m_Name
-      value: Preyrider Variant 1
+      value: Preyrider_Chalices
       objectReference: {fileID: 0}
     - target: {fileID: 6513293558621754700, guid: fd854f60a431a580d981ebe8d52eca3a,
         type: 3}
       propertyPath: suit
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6513293558621754700, guid: fd854f60a431a580d981ebe8d52eca3a,
+        type: 3}
+      propertyPath: cardSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 036294dd797fee04fa5996cea68d88a1,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd854f60a431a580d981ebe8d52eca3a, type: 3}
