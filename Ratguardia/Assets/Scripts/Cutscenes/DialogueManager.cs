@@ -22,7 +22,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
-        PlayCutscene("Intro");
+        PlayCutscene(StateManager.main.currentCutscene);
     }
 
     public void PlayCutscene(string name)
@@ -39,7 +39,9 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitUntil(() => cursor.confirmPressed);
             cursor.confirmPressed = false;
         }
-        yield return null;
+        yield return new WaitUntil(() => cursor.confirmPressed);
+        cursor.confirmPressed = false;
+        StateManager.main.RestartCardGame();
     }
 
     public IEnumerator RunLine(Dialogue line)
