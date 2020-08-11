@@ -1,0 +1,27 @@
+Scene	Intro			
+Character	Line	Special	Notes	
+x	Long ago, there were four Families.		narration, no character portraits	
+x	The wealthy Chalices, headed by their King,		show the king of chalices	
+x	The mighty Swords, commanded by their Queen,		show the queen of swords	
+x	The crafty Wands, lead by the Witches,		show the witch of wands	
+x	And the Rings, weakest of all, but ruled by none.		show the peasant of rings	
+x	The Families lived in relative peace, and settled their differences with games of cards.			
+x	When a great monster emerged from the earth,			
+x	the Families swore to use their powers to contain it.			
+x	But the King of Chalices saw an opportunity			
+x	He bribed the warriors of every Family to join him in conquering the monster.			
+x	They chained the great beast, and the King rode upon it like a chariot.			
+x	To test his power, the King destroyed the Rings' meager wall and claimed their land.			
+x	The monster simply passed through the Wands's magic, and so it too became the King's.			
+x	The Swords put up the greatest fight, but even their Queen soon fell.			
+x	The King thus abolished the Families and declared the land The Kingdom of Chalices.			
+x	To populate his new royal staff, The King created a game, Ratguardia.			
+x	This game was modeled after his conquest, designed to filter out the weak.			
+x	Those who could survive a Ratguardia tournament are seen as fit to serve The King.		fade out cards, start normal cutscene	
+The Child	I don't get it. Can I practice my lute now?		maybe special profile? jester for now	
+The Mother	No. We want what is best for you.		peasant profile	
+The Mother	Come sit down and play. We must know if you have a chance at a better life.			
+The Child	But I'm bored...			
+The Father	...It is also a fun game.		peasant profile	
+The Sibling	Are you playing Ratguardia? I want to join!		peasant profile	bro we are all peasants we
+The Mother	Let us begin.			
