@@ -9,7 +9,8 @@ using TMPro;
 public class NetworkUI : MonoBehaviour
 {
     public TMP_InputField inputField;
-    public TextMeshProUGUI ipAddressText;
+    public TextMeshProUGUI ipv6Text;
+    public TextMeshProUGUI ipv4Text;
     public TextMeshProUGUI joinStatus;
     public TextMeshProUGUI hostStatus;
 
@@ -23,11 +24,12 @@ public class NetworkUI : MonoBehaviour
 
         yield return new WaitUntil(() => socket.listener != null);
 
-        string ip = NetworkManager.main.GetIPAddress();
-        Debug.Log("Your IP Address: " + ip);
+        string ipv6 = NetworkManager.main.GetIPv6Address();
+        string ipv4 = NetworkManager.main.GetIPv4Address();
 
         // text mesh pro................
-        ipAddressText.text = ("Your IP Address: " + ip);
+        ipv6Text.text = ipv6;
+        ipv4Text.text = ipv4;
         UpdateNumPlayers();
     }
 
@@ -64,6 +66,24 @@ public class NetworkUI : MonoBehaviour
     {
         joinStatus.text = "Status: not joined";
         hostStatus.text = "Status: not hosting";
-        ipAddressText.text = "Your IP Address: ";
+        ipv6Text.text = "";
+        ipv4Text.text = "";
+    }
+
+    // functions to copy ip to clipboard
+    public void CopyIPv6()
+    {
+        TextEditor te = new TextEditor();
+        te.text = ipv6Text.text.Trim();
+        te.SelectAll();
+        te.Copy();
+    }
+
+    public void CopyIPv4()
+    {
+        TextEditor te = new TextEditor();
+        te.text = ipv4Text.text.Trim();
+        te.SelectAll();
+        te.Copy();
     }
 }

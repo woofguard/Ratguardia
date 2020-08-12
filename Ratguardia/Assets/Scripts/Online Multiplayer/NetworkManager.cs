@@ -147,17 +147,21 @@ public class NetworkManager : MonoBehaviour
     }
 
     // helper function to get host's ip address to share with clients
-    public string GetIPAddress()
+    public string GetIPv6Address()
     {
         // send a web request to an external webpage to find public ip
         // i just really love this url also
         string ipv6 = new WebClient().DownloadString("http://icanhazip.com");
 
+        return ipv6;
+    }
+
+    public string GetIPv4Address()
+    {
         // alternate website that give ipv4? will possibly test
         string ipv4 = new WebClient().DownloadString("http://ipinfo.io/ip").Trim();
-        Debug.Log("if needed alternatively try this one: " + ipv4);
 
-        return ipv6;
+        return ipv4;
     }
 
     // close sockets on quit just in case
@@ -225,6 +229,7 @@ public class NetworkManager : MonoBehaviour
                             break;
                         case Telepathy.EventType.Disconnected:
                             Debug.Log("Disconnected");
+                            ui.ResetStatus();
                             break;
                     }
                 }
