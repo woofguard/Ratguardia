@@ -8,12 +8,36 @@ using Telepathy;
 // our Trademarked Copyrighted Patented Ratguardia Message Protocol aka RMP(tm)(c)(r) /s
 public enum RMP: byte
 {
+    // card game actions
     Draw = 0x1,      // standalone
     Discard = 0x2,   // followed by index of card to discard
     Steal = 0x3,     // standalone
     NoSteal = 0x4,   // standalone
     Combatant = 0x5, // followed by index of card sent into battle
-    Player = 0x6     // followed by board index of player
+    Player = 0x6,    // followed by board index of player
+
+    // board/deck data
+    Deck = 0xA1,     // standalone
+    EndDeck = 0xA2,  // standalone
+    Card = 0xA3,     // followed by card suit and card name
+
+    // cards suits
+    Chalices = 0xB1,
+    Swords = 0xB2,
+    Wands = 0xB3,
+    Rings = 0xB4,
+
+    // card names
+    Assassin = 0xB5,
+    Archer = 0xB6,
+    Cavalier = 0xB7,
+    Jester = 0xB8,
+    King = 0xB9,
+    Knight = 0xBA,
+    Peasant = 0xBB,
+    Preyrider = 0xBC,
+    Queen = 0xBD,
+    Witch = 0xBE
 }
 
 // manages network connection for both client & server players
