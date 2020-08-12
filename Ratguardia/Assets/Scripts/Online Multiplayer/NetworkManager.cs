@@ -149,15 +149,15 @@ public class NetworkManager : MonoBehaviour
     // helper function to get host's ip address to share with clients
     public string GetIPAddress()
     {
-        // get a list of local ip addresses
-        var ipList = Dns.GetHostAddresses(Dns.GetHostName());
-        // foreach(var ip in ipList)
-        // {
-        //     Debug.Log(ip.ToString());
-        // }
+        // send a web request to an external webpage to find public ip
+        // i just really love this url also
+        string ipv6 = new WebClient().DownloadString("http://icanhazip.com");
 
-        // just return the first address for now??
-        return ipList[0].ToString();
+        // alternate website that give ipv4? will possibly test
+        string ipv4 = new WebClient().DownloadString("http://ipinfo.io/ip").Trim();
+        Debug.Log("if needed alternatively try this one: " + ipv4);
+
+        return ipv6;
     }
 
     // close sockets on quit just in case

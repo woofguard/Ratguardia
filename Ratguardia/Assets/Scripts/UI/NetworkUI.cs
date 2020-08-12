@@ -23,10 +23,11 @@ public class NetworkUI : MonoBehaviour
 
         yield return new WaitUntil(() => socket.listener != null);
 
-        Debug.Log("Your IP Address: " + NetworkManager.main.GetIPAddress());
+        string ip = NetworkManager.main.GetIPAddress();
+        Debug.Log("Your IP Address: " + ip);
 
         // text mesh pro................
-        ipAddressText.text = ("Your IP Address: " + NetworkManager.main.GetIPAddress());
+        ipAddressText.text = ("Your IP Address: " + ip);
         UpdateNumPlayers();
     }
 
