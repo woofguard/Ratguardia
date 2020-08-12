@@ -10,7 +10,6 @@ public class StateManager : MonoBehaviour
     public int[] matchScores;
 
     public int round;
-
     public int roundsPerMatch = 3;
 
     private void Awake()
@@ -28,6 +27,13 @@ public class StateManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void StartMultiplayer()
+    {
+        
+
+        SceneManager.LoadScene("CardGame");
     }
 
     public void CardGameEnd()

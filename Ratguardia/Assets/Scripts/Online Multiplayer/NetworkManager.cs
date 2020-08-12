@@ -37,7 +37,12 @@ public enum RMP: byte
     Peasant = 0xBB,
     Preyrider = 0xBC,
     Queen = 0xBD,
-    Witch = 0xBE
+    Witch = 0xBE,
+
+    // game status/timing stuff?
+    QueryPlayers = 0xC1, // client asks server if room is full (standalone)
+    NumPlayers = 0xC2,   // server tells if room is full (followed by num players)
+    StartGame = 0xC3
 }
 
 // manages network connection for both client & server players
@@ -46,8 +51,8 @@ public class NetworkManager : MonoBehaviour
     public static NetworkManager main;
 
     // flags for whether the game is online and if the player is server/client
-    [HideInInspector] public bool isNetworkGame;
-    [HideInInspector] public bool isServer;
+    [HideInInspector] public bool isNetworkGame = false;
+    [HideInInspector] public bool isServer = false;
 
     // Telepathy TCP sockets (only one should ever be not null)
     public Server serverSocket;
@@ -55,13 +60,10 @@ public class NetworkManager : MonoBehaviour
 
     // port number for TCP connection, should be Nice by default and if problems arise with it being taken
     // then the player should be able to change it
-    public int port;
-
-    // maps Telepathy connection id to player index in board state
-    public Dictionary<int, int> players;
+    public int port = 42069;
 
     // how many players are connected to the server
-    public int numPlayers = 0; 
+    [HideInInspector] public int numPlayers = 0; 
 
     // UI reference
     public NetworkUI ui;
@@ -78,11 +80,6 @@ public class NetworkManager : MonoBehaviour
             Telepathy.Logger.Log = Debug.Log;
             Telepathy.Logger.LogWarning = Debug.LogWarning;
             Telepathy.Logger.LogError = Debug.LogError;
-
-            // set initial flag values
-            isNetworkGame = false;
-            isServer = false;
-            port = 42069;
         }
         else
         {
