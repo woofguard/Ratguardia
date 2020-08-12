@@ -13,6 +13,9 @@ public class StateManager : MonoBehaviour
 
     public int roundsPerMatch = 3;
 
+    public string currentCutscene = "Intro";
+    public bool inCutscene = false;
+
     private void Awake()
     {
         // persistent singleton
@@ -30,6 +33,13 @@ public class StateManager : MonoBehaviour
         }
     }
 
+    public void LoadCutscene(string scene)
+    {
+        inCutscene = true;
+        currentCutscene = scene;
+        SceneManager.LoadScene("Cutscene");
+    }
+
     public void CardGameEnd()
     {
         round++;
@@ -41,6 +51,7 @@ public class StateManager : MonoBehaviour
 
     public void RestartCardGame()
     {
+        inCutscene = false;
         SceneManager.LoadScene("CardGame");
     }
 
