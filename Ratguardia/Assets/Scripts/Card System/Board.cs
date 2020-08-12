@@ -251,6 +251,18 @@ public class Board : MonoBehaviour
         return players;
     }
 
+    // checks how many players are connected to network and creates network players for them
+    // fills the rest in with AI players
+    public Player[] GenerateMultiplayerGame()
+    {
+        Player[] players = new Player[4];
+
+        // if server send each player their index
+        // if client recieve index from server
+
+        return players;
+    }
+
     // helper functions to return which player is next/previous in the turn order
     public int NextPlayer()
     {

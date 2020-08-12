@@ -10,7 +10,6 @@ public class StateManager : MonoBehaviour
     public int[] matchScores;
 
     public int round;
-
     public int roundsPerMatch = 3;
 
     public string currentCutscene = "Intro";
@@ -38,6 +37,13 @@ public class StateManager : MonoBehaviour
         inCutscene = true;
         currentCutscene = scene;
         SceneManager.LoadScene("Cutscene");
+    }
+    
+    public void StartMultiplayer()
+    {
+        
+
+        SceneManager.LoadScene("CardGame");
     }
 
     public void CardGameEnd()
