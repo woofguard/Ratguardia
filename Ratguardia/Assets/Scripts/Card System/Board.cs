@@ -61,11 +61,14 @@ public class Board : MonoBehaviour
             deck.Push(card);
         }
 
-        AudioManager.main.cardTheme.Play();
-        AudioManager.main.sfxShuffle.Play();
         deck.Shuffle();
 
         players = GenerateSinglePlayerGame(player, aiType1, aiType2, aiType3);
+
+        yield return StartCoroutine(refBoardUI.DisplayBeginning());
+
+        AudioManager.main.cardTheme.Play();
+        AudioManager.main.sfxShuffle.Play();
 
         // dont play draw sfx when dealing cards
         AudioManager.main.sfxDraw.mute = true;

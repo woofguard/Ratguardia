@@ -21,6 +21,7 @@ public class BoardUIManager : MonoBehaviour
     // inspection-related UI objects
     public GameObject inspectUI;
 
+    public BeginRoundDisplay brd;
     public ResultsDisplay rd;
     public MatchResultsDisplay mrd;
 
@@ -77,6 +78,12 @@ public class BoardUIManager : MonoBehaviour
     public void PromptChooseSteal(bool display)
     {
         stealPrompt.transform.Find("Card Choose Prompt").gameObject.SetActive(display);
+    }
+
+    public IEnumerator DisplayBeginning()
+    {
+        brd.DisplayNewRound();
+        yield return new WaitUntil(() => !brd.gameObject.activeSelf);
     }
 
     public IEnumerator DisplayBattle(List<Card> combatants, Card winner)
