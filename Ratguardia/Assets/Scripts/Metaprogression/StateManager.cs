@@ -9,6 +9,9 @@ public class StateManager : MonoBehaviour
 
     public int[] matchScores;
 
+    public int match = 0;
+    public string[] combatants;
+
     public int round;
     public int roundsPerMatch = 3;
 
@@ -22,9 +25,12 @@ public class StateManager : MonoBehaviour
         {
             main = this;
             DontDestroyOnLoad(this.gameObject);
-
+            match = 0;
             round = 1;
+            combatants = new string[] { "The Jester", "The Peasant", "The Knight", "The Cavalier" };
             matchScores = new int[] { 0, 0, 0, 0 };
+            Debug.Log(SceneManager.GetActiveScene().name);
+            if (SceneManager.GetActiveScene().name == "Cutscene") LoadTutorial();
         }
         else
         {
@@ -37,6 +43,12 @@ public class StateManager : MonoBehaviour
         inCutscene = true;
         currentCutscene = scene;
         SceneManager.LoadScene("Cutscene");
+    }
+
+    public void LoadTutorial()
+    {
+        combatants = new string[] { "The Child", "The Mother", "The Sibling", "The Father" };
+        LoadCutscene("Intro");
     }
     
     public void StartMultiplayer()
