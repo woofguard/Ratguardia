@@ -41,7 +41,7 @@ public class DialogueManager : MonoBehaviour
         }
         yield return new WaitUntil(() => cursor.confirmPressed);
         cursor.confirmPressed = false;
-        StateManager.main.RestartCardGame();
+        StateManager.main.AdvanceNarrative();
     }
 
     public IEnumerator RunLine(Dialogue line)

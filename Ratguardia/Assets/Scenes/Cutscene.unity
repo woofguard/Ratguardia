@@ -664,6 +664,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2860622315434469177, guid: a6670e0d8be55c1339111289f149af64,
+        type: 3}
+      propertyPath: roundsPerMatch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3534553276169078005, guid: a6670e0d8be55c1339111289f149af64,
         type: 3}
       propertyPath: m_Name
