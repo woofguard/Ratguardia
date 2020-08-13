@@ -9,13 +9,16 @@ public class StateManager : MonoBehaviour
 
     public int[] matchScores;
 
-    public int match = 0;
+    public static int match;
+
     public string[] combatants;
+    public Stack<string> replacements;
 
     public int round;
-    public int roundsPerMatch = 1;
+    public int roundsPerMatch = 3;
 
-    public string currentCutscene = "Intro";
+    public static string currentCutscene;
+
     public bool inCutscene = false;
 
     public int charDeath = -1;
@@ -30,9 +33,14 @@ public class StateManager : MonoBehaviour
             match = 0;
             round = 1;
             combatants = new string[] { "The Jester", "The Peasant", "The Knight", "The Cavalier" };
+
+            replacements = new Stack<string>();
+            replacements.Push("The Preyrider");
+            replacements.Push("The Assassin");
+
             matchScores = new int[] { 0, 0, 0, 0 };
+            currentCutscene = "Intro";
             Debug.Log(SceneManager.GetActiveScene().name);
-            if (SceneManager.GetActiveScene().name == "Cutscene") LoadTutorial();
         }
         else
         {
@@ -42,8 +50,9 @@ public class StateManager : MonoBehaviour
 
     public void LoadCutscene(string scene)
     {
+        Debug.Log("Loading " + currentCutscene + " because the match is " + match);
         inCutscene = true;
-        currentCutscene = scene;
+        //currentCutscene = scene;
         SceneManager.LoadScene("Cutscene");
     }
 
@@ -54,6 +63,7 @@ public class StateManager : MonoBehaviour
 
     public void AdvanceNarrative()
     {
+        Debug.Log("Advancing narrative..." + inCutscene + " " + match);
         if(inCutscene)
         {
             switch(match)
@@ -66,37 +76,55 @@ public class StateManager : MonoBehaviour
                     break;
                 case 2:
                 case 3:
+                    if (charDeath > -1) ReplaceCombatant(charDeath);
+                    charDeath = -1;
                     break;
                 case 4:
+                    ReplaceCombatant(2, "The King");
+                    break;
+                case 5:
+                    ExitGame();
                     break;
                 default:
                     break;
             }
-            RestartCardGame();
+            inCutscene = false;
+            ResetMatch();
         }
         else
         {
             inCutscene = true;
-            string cutscene = "Intro";
+            currentCutscene = "Intro";
             switch (match)
             {
                 case 0: // i don't think this should happen
                     break;
                 case 1:
-                    cutscene = "Intro";
+                    currentCutscene = "Pre Match 1";
                     break;
                 case 2:
                 case 3:
-                    cutscene = "Intro";
+                    currentCutscene = "Placeholder";
                     break;
                 case 4:
-                    cutscene = "Intro";
+                    currentCutscene = "Placeholder";
                     break;
                 default:
                     break;
             }
-            if (!(cutscene == "")) LoadCutscene(cutscene);
-            else RestartCardGame();
+            LoadCutscene(currentCutscene);
+        }
+    }
+
+    public void ReplaceCombatant(int combatant, string replacement = "")
+    {
+        if(replacement != "")
+        {
+            combatants[combatant] = replacement;
+        }
+        else
+        {
+            combatants[combatant] = replacements.Pop();
         }
     }
     
@@ -133,9 +161,13 @@ public class StateManager : MonoBehaviour
     public void EndMatch()
     {
         Debug.Log("Ending Match");
-        match++;
+        Debug.Log("the match was " + match);
+        match = match + 1;
         round = 1;
+        inCutscene = false;
         matchScores = new int[] { 0, 0, 0, 0 };
+        Debug.Log("the match was " + (match - 1) + " but is now " + match);
+        AudioManager.main.cardTheme.Stop();
         AdvanceNarrative();
     }
 

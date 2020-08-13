@@ -1,0 +1,5 @@
+Scene	Placeholder		
+Character	Line	Special	Notes
+The Jester	There's no dialogue here yet.		
+The King	Please come back later.		
+The Jester	You..!		
