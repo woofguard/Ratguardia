@@ -176,7 +176,11 @@ public class NetworkManager : MonoBehaviour
     // ****************************************
     public void TestSendClient()
     {
-        serverSocket.Send(1, new byte[]{(byte)RMP.Draw});
+        // send to all clients
+        for(int i = 0; i < numPlayers; i++)
+        {
+            serverSocket.Send(i + 1, new byte[]{(byte)RMP.Draw});
+        }
     }
 
     public void TestSendServer()
@@ -203,7 +207,9 @@ public class NetworkManager : MonoBehaviour
                             ui.UpdateNumPlayers();
                             break;
                         case Telepathy.EventType.Data:
-                            Debug.Log("Data: " + BitConverter.ToString(msg.data));
+                            string data = BitConverter.ToString(msg.data);
+                            Debug.Log("Data: " + data);
+                            ui.testPackets.text += data;
                             break;
                         case Telepathy.EventType.Disconnected:
                             Debug.Log("Disconnected");
@@ -225,7 +231,9 @@ public class NetworkManager : MonoBehaviour
                             Debug.Log("Connected");
                             break;
                         case Telepathy.EventType.Data:
-                            Debug.Log("Data: " + BitConverter.ToString(msg.data));
+                            string data = BitConverter.ToString(msg.data);
+                            Debug.Log("Data: " + data);
+                            ui.testPackets.text += data;
                             break;
                         case Telepathy.EventType.Disconnected:
                             Debug.Log("Disconnected");

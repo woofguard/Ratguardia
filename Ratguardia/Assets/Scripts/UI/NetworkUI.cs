@@ -13,6 +13,7 @@ public class NetworkUI : MonoBehaviour
     public TextMeshProUGUI ipv4Text;
     public TextMeshProUGUI joinStatus;
     public TextMeshProUGUI hostStatus;
+    public TextMeshProUGUI testPackets;
 
     // this needs to be a coroutine bc otherwise itll run before the socket is finished being
     // created and give a null reference exception bc telepathy is actually multithreaded
