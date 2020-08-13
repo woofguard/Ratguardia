@@ -83,7 +83,7 @@ public class StateManager : MonoBehaviour
                     ReplaceCombatant(2, "The King");
                     break;
                 case 5:
-                    ExitGame();
+                    ReturnToTitle();
                     break;
                 default:
                     break;
@@ -175,6 +175,28 @@ public class StateManager : MonoBehaviour
         if (charDeath == 0 && match > 1) ExitGame(); // just exit the game if you die bro
 
         AdvanceNarrative();
+    }
+
+    public void LoadNetworkTest()
+    {
+        SceneManager.LoadScene("NetworkTest");
+    }
+
+    public void ReturnToTitle()
+    {
+        match = 0;
+        round = 1;
+        combatants = new string[] { "The Jester", "The Peasant", "The Knight", "The Cavalier" };
+
+        replacements = new Stack<string>();
+        replacements.Push("The Preyrider");
+        replacements.Push("The Assassin");
+
+        matchScores = new int[] { 0, 0, 0, 0 };
+        currentCutscene = "Intro";
+
+        Destroy(AudioManager.main.gameObject);
+        SceneManager.LoadScene("TitleScreen");
     }
 
     public void ExitGame()
