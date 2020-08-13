@@ -110,7 +110,7 @@ PrefabInstance:
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.death
-      value: I would feed! Haha, you're dead now!
+      value: I would never get eaten! This doesn't count!
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
@@ -120,12 +120,17 @@ PrefabInstance:
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.feed
-      value: I would never get eaten! This doesn't count!
+      value: I would feed! Haha, you're dead now!
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: ai
       value: random
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.spare
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84f66a5fb9697244b0d6300fc22cc0c, type: 3}
