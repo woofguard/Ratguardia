@@ -127,4 +127,14 @@ public class DisplayCard : MonoBehaviour
         if (!card.faceUp) return;
         anim.Play("CardFlipDown");
     }
+	//plays send card to battle animation
+	public void sendCard()
+	{
+		anim.Play("SendBattleCard");
+	}
+	//plays the retract card from battle animation 
+	public void retractCard()
+	{
+		anim.Play("RetractBattleCard");
+	}
 }

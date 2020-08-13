@@ -123,6 +123,9 @@ public class HumanPlayer : Player
         if(cursor.confirmPressed && card != null && card.owner == playerIndex && !card.rubble && card.atk > 0)
         {
             cursor.confirmPressed = false;
+			
+			//plays send to battle card animation
+			card.visualCard.sendCard();
 
             // store combatant card
             cursor.clickedCard = null;

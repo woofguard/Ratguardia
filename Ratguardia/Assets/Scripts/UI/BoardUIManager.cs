@@ -89,6 +89,7 @@ public class BoardUIManager : MonoBehaviour
     public IEnumerator DisplayBattle(List<Card> combatants, Card winner)
     {
         Debug.Log("Battle beginning");
+		yield return new WaitForSeconds(0.5f);
         stealUI.SetActive(true);
 
         GameObject layout = stealUI.transform.Find(combatants.Count + "CardLayout").gameObject;
