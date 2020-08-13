@@ -172,7 +172,7 @@ public class StateManager : MonoBehaviour
         Debug.Log("the match was " + (match - 1) + " but is now " + match);
         AudioManager.main.cardTheme.Stop();
 
-        if (charDeath == 0 && match > 1) ExitGame(); // just exit the game if you die bro
+        if (charDeath == 0 && match > 1) ReturnToTitle(); // just exit the game if you die bro
 
         AdvanceNarrative();
     }
