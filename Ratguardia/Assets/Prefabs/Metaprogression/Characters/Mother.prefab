@@ -65,52 +65,54 @@ PrefabInstance:
     - target: {fileID: 5851163998097193215, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: m_Name
-      value: Peasant
+      value: Mother
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: title
-      value: The Peasant
+      value: The Mother
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.intro.Array.data[0]
-      value: A prayer for my success, so that those I love can live in comfort.
+      value: Pay attention.
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.round1st.Array.data[0]
-      value: Thank the gods. I must keep this up.
+      value: Don't let this happen!
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.round2nd.Array.data[0]
-      value: ...I cannot afford to fall behind.
+      value: Victory isn't assured.
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.roundlast.Array.data[0]
-      value: I must collect myself!
+      value: This is why practice is important.
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.match1st.Array.data[0]
-      value: A divine blessing... I will not waste this.
+      value: Try harder, all of you! Now, I will choose to feed or spare the player
+        in last.
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.match2nd.Array.data[0]
-      value: I have been spared. I must do better.
+      value: And that is Ratguardia. Now, the player in first will choose to feed
+        or spare the player in last.
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.matchlast.Array.data[0]
-      value: No... I cannot afford to die!
+      value: Good, good. Now, the player in first will choose to feed or spare me.
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.death
-      value: I'm sorry...
+      value: If this were the real tournament, I would be dead now.
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
@@ -120,12 +122,12 @@ PrefabInstance:
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.feed
-      value: For the sake of my countrymen, I must secure victory. I choose to feed!
+      value: If this were the real game, I would choose to feed.
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: ai
-      value: basic
+      value: random
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84f66a5fb9697244b0d6300fc22cc0c, type: 3}

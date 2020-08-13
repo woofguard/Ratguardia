@@ -7,6 +7,8 @@ public class Character : MonoBehaviour
     public string title;
     public Sprite portrait;
 
+    public string ai;
+
     public MatchDialogue dialogue;
 
     [System.Serializable]

@@ -65,52 +65,52 @@ PrefabInstance:
     - target: {fileID: 5851163998097193215, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: m_Name
-      value: Peasant
+      value: Father
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: title
-      value: The Peasant
+      value: The Father
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.intro.Array.data[0]
-      value: A prayer for my success, so that those I love can live in comfort.
+      value: Do your best!
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.round1st.Array.data[0]
-      value: Thank the gods. I must keep this up.
+      value: Me?
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.round2nd.Array.data[0]
-      value: ...I cannot afford to fall behind.
+      value: Keep it up!
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.roundlast.Array.data[0]
-      value: I must collect myself!
+      value: I've terrible luck.
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.match1st.Array.data[0]
-      value: A divine blessing... I will not waste this.
+      value: Oh, dear.
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.match2nd.Array.data[0]
-      value: I have been spared. I must do better.
+      value: Did you have fun?
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.matchlast.Array.data[0]
-      value: No... I cannot afford to die!
+      value: I knew this would happen...
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.death
-      value: I'm sorry...
+      value: '"Oh no, I''ve been eaten!" How is my acting?'
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
@@ -120,12 +120,12 @@ PrefabInstance:
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: dialogue.feed
-      value: For the sake of my countrymen, I must secure victory. I choose to feed!
+      value: '"No mercy! I choose to feed!" How is my acting?'
       objectReference: {fileID: 0}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
       propertyPath: ai
-      value: basic
+      value: random
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84f66a5fb9697244b0d6300fc22cc0c, type: 3}
