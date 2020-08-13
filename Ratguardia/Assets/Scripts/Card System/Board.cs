@@ -42,6 +42,10 @@ public class Board : MonoBehaviour
 
     private void Start()
     {
+        player = StateManager.main.combatants[0];
+        aiType1 = StateManager.main.combatants[1];
+        aiType2 = StateManager.main.combatants[2];
+        aiType3 = StateManager.main.combatants[3];
         StartCoroutine(InitializeBoard());
     }
 

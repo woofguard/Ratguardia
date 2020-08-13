@@ -9,11 +9,16 @@ public class StateManager : MonoBehaviour
 
     public int[] matchScores;
 
+    public int match = 0;
+    public string[] combatants;
+
     public int round;
-    public int roundsPerMatch = 3;
+    public int roundsPerMatch = 1;
 
     public string currentCutscene = "Intro";
     public bool inCutscene = false;
+
+    public int charDeath = -1;
 
     private void Awake()
     {
@@ -22,9 +27,12 @@ public class StateManager : MonoBehaviour
         {
             main = this;
             DontDestroyOnLoad(this.gameObject);
-
+            match = 0;
             round = 1;
+            combatants = new string[] { "The Jester", "The Peasant", "The Knight", "The Cavalier" };
             matchScores = new int[] { 0, 0, 0, 0 };
+            Debug.Log(SceneManager.GetActiveScene().name);
+            if (SceneManager.GetActiveScene().name == "Cutscene") LoadTutorial();
         }
         else
         {
@@ -37,6 +45,59 @@ public class StateManager : MonoBehaviour
         inCutscene = true;
         currentCutscene = scene;
         SceneManager.LoadScene("Cutscene");
+    }
+
+    public void LoadTutorial()
+    { 
+        LoadCutscene("Intro");
+    }
+
+    public void AdvanceNarrative()
+    {
+        if(inCutscene)
+        {
+            switch(match)
+            {
+                case 0:
+                    combatants = new string[] { "The Child", "The Mother", "The Sibling", "The Father" };
+                    break;
+                case 1:
+                    combatants = new string[] { "The Jester", "The Peasant", "The Knight", "The Cavalier" };
+                    break;
+                case 2:
+                case 3:
+                    break;
+                case 4:
+                    break;
+                default:
+                    break;
+            }
+            RestartCardGame();
+        }
+        else
+        {
+            inCutscene = true;
+            string cutscene = "Intro";
+            switch (match)
+            {
+                case 0: // i don't think this should happen
+                    break;
+                case 1:
+                    cutscene = "Intro";
+                    break;
+                case 2:
+                case 3:
+                    cutscene = "Intro";
+                    break;
+                case 4:
+                    cutscene = "Intro";
+                    break;
+                default:
+                    break;
+            }
+            if (!(cutscene == "")) LoadCutscene(cutscene);
+            else RestartCardGame();
+        }
     }
     
     public void StartMultiplayer()
@@ -67,6 +128,15 @@ public class StateManager : MonoBehaviour
         round = 1;
         matchScores = new int[] { 0, 0, 0, 0 };
         RestartCardGame();
+    }
+
+    public void EndMatch()
+    {
+        Debug.Log("Ending Match");
+        match++;
+        round = 1;
+        matchScores = new int[] { 0, 0, 0, 0 };
+        AdvanceNarrative();
     }
 
     public void ExitGame()

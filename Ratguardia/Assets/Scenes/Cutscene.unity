@@ -402,6 +402,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1710395904}
     m_Modifications:
+    - target: {fileID: 985601618552450523, guid: a7b84a49c7cdb8443b3661b62d8964ec,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 58198e224b4143346b6e2e99c4d1aa9e,
+        type: 3}
     - target: {fileID: 1327787692748711612, guid: a7b84a49c7cdb8443b3661b62d8964ec,
         type: 3}
       propertyPath: m_HorizontalAlignment
@@ -658,6 +664,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2860622315434469177, guid: a6670e0d8be55c1339111289f149af64,
+        type: 3}
+      propertyPath: roundsPerMatch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3534553276169078005, guid: a6670e0d8be55c1339111289f149af64,
         type: 3}
       propertyPath: m_Name
