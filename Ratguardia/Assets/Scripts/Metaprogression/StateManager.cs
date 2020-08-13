@@ -171,6 +171,9 @@ public class StateManager : MonoBehaviour
         matchScores = new int[] { 0, 0, 0, 0 };
         Debug.Log("the match was " + (match - 1) + " but is now " + match);
         AudioManager.main.cardTheme.Stop();
+
+        if (charDeath == 0 && match > 1) ExitGame(); // just exit the game if you die bro
+
         AdvanceNarrative();
     }
 
