@@ -109,6 +109,9 @@ public class StateManager : MonoBehaviour
                 case 4:
                     currentCutscene = "Placeholder";
                     break;
+                case 5:
+                    currentCutscene = "Placeholder";
+                    break;
                 default:
                     break;
             }
