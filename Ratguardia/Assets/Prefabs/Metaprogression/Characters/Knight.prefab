@@ -129,5 +129,10 @@ PrefabInstance:
       value: Compared to what I experience every second of my life, death is nothing.
         I choose to feed.
       objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: ai
+      value: random
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84f66a5fb9697244b0d6300fc22cc0c, type: 3}

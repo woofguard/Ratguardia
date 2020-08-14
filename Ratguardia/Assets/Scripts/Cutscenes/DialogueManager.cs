@@ -22,11 +22,13 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
-        PlayCutscene(StateManager.main.currentCutscene);
+        Debug.Log(StateManager.currentCutscene);
+        PlayCutscene(StateManager.currentCutscene);
     }
 
     public void PlayCutscene(string name)
     {
+        StateManager.main.inCutscene = true;
         currentDialogue = sp.LoadFile(name);
         StartCoroutine(RunDialogue());
     }
@@ -35,13 +37,11 @@ public class DialogueManager : MonoBehaviour
     {
        for(int i = 0; i < currentDialogue.Length; i++)
         {
-            yield return StartCoroutine(RunLine(currentDialogue[i]));
+            if (!(currentDialogue[i].name == null || currentDialogue[i].name == "")) yield return StartCoroutine(RunLine(currentDialogue[i]));
             yield return new WaitUntil(() => cursor.confirmPressed);
             cursor.confirmPressed = false;
         }
-        yield return new WaitUntil(() => cursor.confirmPressed);
-        cursor.confirmPressed = false;
-        StateManager.main.RestartCardGame();
+        StateManager.main.AdvanceNarrative();
     }
 
     public IEnumerator RunLine(Dialogue line)

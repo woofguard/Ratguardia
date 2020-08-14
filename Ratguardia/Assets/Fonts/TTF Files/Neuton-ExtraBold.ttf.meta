@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: d3ff507dd0f87614dbc3a307d0626f4c
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Neuton
+  fontNames:
+  - Neuton
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 33f02a5870cdb854bb4fe5bef2b436f4, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -122,5 +122,10 @@ PrefabInstance:
       propertyPath: dialogue.feed
       value: For the sake of my countrymen, I must secure victory. I choose to feed!
       objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: ai
+      value: basic
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84f66a5fb9697244b0d6300fc22cc0c, type: 3}

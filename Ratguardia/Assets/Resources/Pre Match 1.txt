@@ -1,0 +1,37 @@
+Scene	Jester Monologue/Pre-Match 1 Conversation		
+Character	Line	Special	Notes
+The Jester	...I've trained each day since then.		thonking
+The Jester	Finally, I've been scouted for the tournament.		
+The Jester	If I win, I could become the court's Royal Jester...		
+The Jester	...But the only way to ensure my success is to sacrifice my opponents.		
+The Jester	I can't bring myself to be so cruel.		
+The Jester	Please, let us all survive!		
+			
+The Peasant	...So we meet. Where are the others?		
+The Jester	Ah, hello. It seems they've yet to arrive.		
+The Jester	Might I have your name? I am--		
+The Peasant	I am not here to make friends.		
+The Peasant	I am participating in this tournament to become the royal chef.		
+The Peasant	If I can convince The King to source ingredients from my village...		
+The Peasant	My people may yet be saved from ruin.		
+The Jester	A noble goal, indeed.		
+The Peasant	So you understand.		
+The Peasant	I cannot show kindness if I am to survive.		
+The Cavalier	Ho, there. Brighten up, you lot!		
+The Cavalier	Tis but a game, a game!		
+The Cavalier	Say hello, Dogy.		
+Dogy	bark		
+The Jester	Hello, Dogy. And to you as well, sir.		
+The Knight	I have arrived. Is there a seat around?		
+The Knight	I cannot stand for too long. I am wounded, you see.		
+The Jester	It seems not. My apologies.		
+The Knight	It is fine. I will simply win before I am incapacitated.		
+The Jester	...I see.		
+The Jester	Might I remind us all that we may all survive this tournament,		
+The Jester	even if we do not succeed?		
+The Cavalier	Hear, hear.		
+The Peasant	I am doubtful.		
+The Knight	I will win, and when I do, I will choose to feed to The Monster.		
+The Knight	I suggest you all pray for another to fail.		
+The Jester	...		
+The Jester	...Let us begin.		

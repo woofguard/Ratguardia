@@ -71,7 +71,7 @@ PrefabInstance:
         type: 3}
       propertyPath: portrait
       value: 
-      objectReference: {fileID: 21300000, guid: a1f490f2bb182d844bd8996a5b4c26fc,
+      objectReference: {fileID: 21300000, guid: b7bfc25a2a24b8040bb132bec234ecee,
         type: 3}
     - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
         type: 3}
@@ -128,6 +128,11 @@ PrefabInstance:
         type: 3}
       propertyPath: title
       value: The Cavalier
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: ai
+      value: random
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84f66a5fb9697244b0d6300fc22cc0c, type: 3}

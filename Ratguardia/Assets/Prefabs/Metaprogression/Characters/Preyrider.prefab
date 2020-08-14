@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1255284426734904577
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056626457320621, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5851163998097193215, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: m_Name
+      value: Preyrider
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 0fb9f9682af32e54c970884e7cdf90ea,
+        type: 3}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: ai
+      value: basic
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.intro.Array.data[0]
+      value: I've come to treat myself.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.round1st.Array.data[0]
+      value: Naturally.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.round2nd.Array.data[0]
+      value: Hmph.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.roundlast.Array.data[0]
+      value: Truly awful.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.match1st.Array.data[0]
+      value: Of course.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.match2nd.Array.data[0]
+      value: Disappointing. Ah, well.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.matchlast.Array.data[0]
+      value: What?!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.death
+      value: I knew this would happen one day. Alas.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.spared
+      value: A cowardly move. You'll regret this one day.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: dialogue.feed
+      value: I spare, of course. My mount hungers, and I must feed it!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205478552133728049, guid: b84f66a5fb9697244b0d6300fc22cc0c,
+        type: 3}
+      propertyPath: title
+      value: The Preyrider
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b84f66a5fb9697244b0d6300fc22cc0c, type: 3}
