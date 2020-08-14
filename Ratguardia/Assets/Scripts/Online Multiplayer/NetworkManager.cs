@@ -20,6 +20,12 @@ public enum RMP: byte
     Deck = 0xA1,     // standalone
     EndDeck = 0xA2,  // standalone
     Card = 0xA3,     // followed by card suit and card name
+    
+    // player types
+    Human = 0xA4,
+    Network = 0xA5,
+    RandomAI = 0xA6,
+    BasicAI = 0xA7,
 
     // cards suits
     Chalices = 0xB1,
@@ -162,6 +168,15 @@ public class NetworkManager : MonoBehaviour
         string ipv4 = new WebClient().DownloadString("http://ipinfo.io/ip").Trim();
 
         return ipv4;
+    }
+
+    // as server, takes a packet and sends it to all players
+    public void SendToAllClients(byte[] packet)
+    {
+        for(int i = 0; i < numPlayers; i++)
+        {
+            serverSocket.Send(i + 1,packet);
+        }
     }
 
     // close sockets on quit just in case

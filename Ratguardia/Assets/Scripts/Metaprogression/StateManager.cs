@@ -133,8 +133,6 @@ public class StateManager : MonoBehaviour
     
     public void StartMultiplayer()
     {
-        
-
         SceneManager.LoadScene("CardGame");
     }
 

@@ -105,7 +105,7 @@ public class BoardUIManager : MonoBehaviour
             cards[i].SetDim(combatants[i] != winner);
         }
 
-        HumanPlayer hp = (HumanPlayer)Board.main.players[0];
+        HumanPlayer hp = Board.main.GetHumanPlayer();
         Debug.Log(hp);
 
         hp.isStealing = true;
@@ -123,7 +123,7 @@ public class BoardUIManager : MonoBehaviour
 
     public IEnumerator InspectCard(Card card)
     {
-        HumanPlayer hp = (HumanPlayer)Board.main.players[0];
+        HumanPlayer hp = Board.main.GetHumanPlayer();
         
         // only inspect during player's turn
         if(hp.hasTurn || hp.isStealing)

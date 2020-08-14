@@ -121,6 +121,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &6494590 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2860622315434469177, guid: a6670e0d8be55c1339111289f149af64,
+    type: 3}
+  m_PrefabInstance: {fileID: 1705018908}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89a07c16105288597b020c74677ae576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &274829709 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6167522659664086238, guid: 02ea3477fea7b3a4fa25179fe5faf254,
@@ -305,6 +317,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2078466846727011104, guid: 02ea3477fea7b3a4fa25179fe5faf254,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6494590}
+    - target: {fileID: 2078466846727011104, guid: 02ea3477fea7b3a4fa25179fe5faf254,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartMultiplayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078466846727011104, guid: 02ea3477fea7b3a4fa25179fe5faf254,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3024460148676712786, guid: 02ea3477fea7b3a4fa25179fe5faf254,
         type: 3}
       propertyPath: m_Name
@@ -429,6 +456,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916603226229751945, guid: 02ea3477fea7b3a4fa25179fe5faf254,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02ea3477fea7b3a4fa25179fe5faf254, type: 3}

@@ -23,6 +23,7 @@ public class Board : MonoBehaviour
     // references to player prefabs
     public GameObject humanPlayerPrefab;
     public GameObject AIPlayerPrefab;
+    public GameObject networkPlayerPrefab;
 
     // reference to board UI
     public BoardUIManager refBoardUI;
@@ -46,7 +47,19 @@ public class Board : MonoBehaviour
         aiType1 = StateManager.main.combatants[1];
         aiType2 = StateManager.main.combatants[2];
         aiType3 = StateManager.main.combatants[3];
-        StartCoroutine(InitializeBoard());
+
+        if(NetworkManager.main != null && NetworkManager.main.isNetworkGame && NetworkManager.main.isServer)
+        {
+            StartCoroutine(InitializeBoardServer());
+        }
+        else if(NetworkManager.main != null && NetworkManager.main.isNetworkGame && !NetworkManager.main.isServer)
+        {
+            StartCoroutine(InitializeBoardClient());
+        }
+        else
+        {
+            StartCoroutine(InitializeBoard());
+        }     
     }
 
     private IEnumerator InitializeBoard()
@@ -93,6 +106,135 @@ public class Board : MonoBehaviour
         GiveTurn(turn);
 
         yield return null;
+    }
+
+    // initialize board as server, send initial board state to clients
+    private IEnumerator InitializeBoardServer()
+    {
+        Debug.Log("setting up board as server");
+
+        players = new Player[4];
+        turn = 0; // might randomize this in the future or something
+        scores = new int[4];
+
+        // add each unique card to deck stack
+        var cards = GetComponentsInChildren<Card>();
+        foreach(Card card in cards)
+        {
+            card.owner = -1;
+            deck.Push(card);
+        }
+
+        AudioManager.main.cardTheme.Play();
+        AudioManager.main.sfxShuffle.Play();
+
+        // shuffle deck, record each card in byte array
+        byte[] deckPacket = deck.ShuffleServer();
+
+        // send deck data to clients
+
+        // generate list of players, send to clients
+        // 
+
+        // deal out cards
+
+        yield return null;
+    }
+
+    // receive data from server and construct board from it
+    private IEnumerator InitializeBoardClient()
+    {
+        Debug.Log("setting up board as client");
+
+        turn = 0;
+        scores = new int[4];
+
+        // receive deck data from server
+
+        // go thru deck packet and push each card to deck stack
+
+        // receive player data from server
+
+        // generate players from server data
+
+        // deal out cards
+
+
+        yield return null;
+    }
+
+    // creates the Player game objects for 1 human player and 3 AIs, returns array of players
+    public Player[] GenerateSinglePlayerGame(string player, string ai1, string ai2, string ai3)
+    {
+        var humanPlayer = Instantiate(humanPlayerPrefab);
+        var AIPlayer1 = Instantiate(AIPlayerPrefab);
+        var AIPlayer2 = Instantiate(AIPlayerPrefab);
+        var AIPlayer3 = Instantiate(AIPlayerPrefab);
+
+        Player[] players = new Player[4];
+
+        players[0] = humanPlayer.GetComponent<Player>();
+        players[0].playerIndex = 0;
+        players[0].SetNewCharacter(player);
+
+        players[1] = AIPlayer1.GetComponent<Player>();
+        players[1].playerIndex = 1;
+        players[1].SetNewCharacter(ai1);
+        (players[1] as AIPlayer).aiType = players[1].character.ai;
+        players[1].transform.Translate(0f, 0.2f, 0f);
+
+        players[2] = AIPlayer2.GetComponent<Player>();
+        players[2].playerIndex = 2;
+        players[2].SetNewCharacter(ai2);
+        (players[2] as AIPlayer).aiType = players[2].character.ai;
+        
+
+        players[3] = AIPlayer3.GetComponent<Player>();
+        players[3].playerIndex = 3;
+        players[3].SetNewCharacter(ai3);
+        (players[3] as AIPlayer).aiType = players[3].character.ai;
+        players[3].transform.Translate(0f, 0.2f, 0f);
+
+        return players;
+    }
+
+    // checks how many players are connected to network and creates network players for them
+    // fills the rest in with AI players
+    public Player[] GenerateServerGame()
+    {
+        Player[] players = new Player[4];
+
+        // player 0 is human player for server
+        players[0] = Instantiate(humanPlayerPrefab).GetComponent<Player>();
+        players[0].playerIndex = 0;
+
+        // create network players based on how many players are connected
+        for(int i = 1; i < 4; i++)
+        {
+            // if enough players are connected
+            if(i <= NetworkManager.main.numPlayers)
+            {
+                players[i] = Instantiate(networkPlayerPrefab).GetComponent<Player>();
+                players[i].playerIndex = i;
+            }
+            // else create an ai player
+            else
+            {
+                players[i] = Instantiate(AIPlayerPrefab).GetComponent<Player>();
+                players[i].playerIndex = i;
+            }
+        }
+
+        return players;
+    }
+
+    public Player[] GenerateClientGame()
+    {
+        Player[] players = new Player[4];
+
+        
+
+        return players;
     }
 
     // gives control to the player whose turn it is
@@ -225,53 +367,6 @@ public class Board : MonoBehaviour
         return witches;
     }
 
-    // creates the Player game objects for 1 human player and 3 AIs, returns array of players
-    public Player[] GenerateSinglePlayerGame(string player, string ai1, string ai2, string ai3)
-    {
-        var humanPlayer = Instantiate(humanPlayerPrefab);
-        var AIPlayer1 = Instantiate(AIPlayerPrefab);
-        var AIPlayer2 = Instantiate(AIPlayerPrefab);
-        var AIPlayer3 = Instantiate(AIPlayerPrefab);
-
-        Player[] players = new Player[4];
-
-        players[0] = humanPlayer.GetComponent<Player>();
-        players[0].playerIndex = 0;
-        players[0].SetNewCharacter(player);
-
-        players[1] = AIPlayer1.GetComponent<Player>();
-        players[1].playerIndex = 1;
-        players[1].SetNewCharacter(ai1);
-        (players[1] as AIPlayer).aiType = players[1].character.ai;
-        players[1].transform.Translate(0f, 0.2f, 0f);
-
-        players[2] = AIPlayer2.GetComponent<Player>();
-        players[2].playerIndex = 2;
-        players[2].SetNewCharacter(ai2);
-        (players[2] as AIPlayer).aiType = players[2].character.ai;
-        
-
-        players[3] = AIPlayer3.GetComponent<Player>();
-        players[3].playerIndex = 3;
-        players[3].SetNewCharacter(ai3);
-        (players[3] as AIPlayer).aiType = players[3].character.ai;
-        players[3].transform.Translate(0f, 0.2f, 0f);
-
-        return players;
-    }
-
-    // checks how many players are connected to network and creates network players for them
-    // fills the rest in with AI players
-    public Player[] GenerateMultiplayerGame()
-    {
-        Player[] players = new Player[4];
-
-        // if server send each player their index
-        // if client recieve index from server
-
-        return players;
-    }
-
     // helper functions to return which player is next/previous in the turn order
     public int NextPlayer()
     {
@@ -288,6 +383,19 @@ public class Board : MonoBehaviour
         {
             return turn - 1;
         }
+    }
+
+    // finds human player on board and returns them
+    public HumanPlayer GetHumanPlayer()
+    {
+        foreach(var player in players)
+        {
+            if(player is HumanPlayer)
+            {
+                return (HumanPlayer)player;
+            }
+        }
+        return null;
     }
 
     // organize rubble cards visually
