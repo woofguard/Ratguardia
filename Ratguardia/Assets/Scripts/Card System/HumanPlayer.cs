@@ -125,7 +125,7 @@ public class HumanPlayer : Player
             cursor.confirmPressed = false;
 			
 			//plays send to battle card animation
-			card.visualCard.sendCard();
+			//card.visualCard.sendCard();
 
             // store combatant card
             cursor.clickedCard = null;
