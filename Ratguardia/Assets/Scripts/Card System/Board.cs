@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class Board : MonoBehaviour
 {
@@ -132,11 +134,25 @@ public class Board : MonoBehaviour
         byte[] deckPacket = deck.ShuffleServer();
 
         // send deck data to clients
+        NetworkManager.main.SendToAllClients(deckPacket);
 
         // generate list of players, send to clients
-        // 
+        players = GenerateServerGame();
+        for(int i = 1; i <= NetworkManager.main.numPlayers; i++)
+        {
+            byte[] playerPacket = CreatePlayerDataPacket(i);
+            NetworkManager.main.serverSocket.Send(i, playerPacket);
+            Debug.Log(BitConverter.ToString(playerPacket));
+        }
 
-        // deal out cards
+        // deal out cards, player order is synced so it should turn out the same for clients
+        for(int i = 0; i < 5; i++)
+        {
+            for(int j = 0; j < players.Length; j++)
+            {
+                players[j].Draw();
+            }
+        }
 
         yield return null;
     }
@@ -226,6 +242,35 @@ public class Board : MonoBehaviour
         }
 
         return players;
+    }
+
+    // assembles the packet that contains player info to send to the player
+    // takes in the index of the client that is being sent to
+    public byte[] CreatePlayerDataPacket(int playerIndex)
+    {
+        // 5 bytes for now, will later have to include player names/portraits
+        byte[] packet = new byte[5];
+        packet[0] = (byte)RMP.Players;
+
+        for(int i = 1; i < packet.Length; i++)
+        {
+            // if index is the same, that is the human player
+            if(playerIndex == i - 1)
+            {
+                packet[i] = (byte)RMP.Human;
+            }
+            else if(i - 1 <= NetworkManager.main.numPlayers)
+            {
+                packet[i] = (byte)RMP.Network;
+            }
+            else
+            {
+                // maybe let the players choose ai type later
+                packet[i] = (byte)RMP.RandomAI;
+            }
+        }
+
+        return packet;
     }
 
     public Player[] GenerateClientGame()

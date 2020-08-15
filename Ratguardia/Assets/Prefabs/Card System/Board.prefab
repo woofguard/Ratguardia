@@ -60,6 +60,8 @@ MonoBehaviour:
     type: 3}
   AIPlayerPrefab: {fileID: 5821434033703883572, guid: e6c55cf1dc0ab90c78de8eb839e29836,
     type: 3}
+  networkPlayerPrefab: {fileID: 7626097026898083795, guid: 54d770d7859b68e6586030a915a0d8b1,
+    type: 3}
   refBoardUI: {fileID: 6984792526174561425}
 --- !u!114 &4474550199523194375
 MonoBehaviour:

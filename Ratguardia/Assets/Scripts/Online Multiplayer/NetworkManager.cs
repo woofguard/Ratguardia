@@ -5,52 +5,6 @@ using System.Net;
 using UnityEngine;
 using Telepathy;
 
-// our Trademarked Copyrighted Patented Ratguardia Message Protocol aka RMP(tm)(c)(r) /s
-public enum RMP: byte
-{
-    // card game actions
-    Draw = 0x1,      // standalone
-    Discard = 0x2,   // followed by index of card to discard
-    Steal = 0x3,     // standalone
-    NoSteal = 0x4,   // standalone
-    Combatant = 0x5, // followed by index of card sent into battle
-    Player = 0x6,    // followed by board index of player
-
-    // board/deck data
-    Deck = 0xA1,     // standalone
-    EndDeck = 0xA2,  // standalone
-    Card = 0xA3,     // followed by card suit and card name
-    
-    // player types
-    Human = 0xA4,
-    Network = 0xA5,
-    RandomAI = 0xA6,
-    BasicAI = 0xA7,
-
-    // cards suits
-    Chalices = 0xB1,
-    Swords = 0xB2,
-    Wands = 0xB3,
-    Rings = 0xB4,
-
-    // card names
-    Assassin = 0xB5,
-    Archer = 0xB6,
-    Cavalier = 0xB7,
-    Jester = 0xB8,
-    King = 0xB9,
-    Knight = 0xBA,
-    Peasant = 0xBB,
-    Preyrider = 0xBC,
-    Queen = 0xBD,
-    Witch = 0xBE,
-
-    // game status/timing stuff?
-    QueryPlayers = 0xC1, // client asks server if room is full (standalone)
-    NumPlayers = 0xC2,   // server tells if room is full (followed by num players)
-    StartGame = 0xC3
-}
-
 // manages network connection for both client & server players
 public class NetworkManager : MonoBehaviour
 {
@@ -106,6 +60,7 @@ public class NetworkManager : MonoBehaviour
             serverSocket.Start(port);
 
             StartCoroutine(ui.DisplayPlayerIPAddress());
+            StartCoroutine(WaitForGameStart());
         }
         else
         {
@@ -119,6 +74,9 @@ public class NetworkManager : MonoBehaviour
         // dont create socket if already open
         if(!isNetworkGame)
         {
+            isNetworkGame = true;
+            isServer = true;
+
             // get ip address from input field
             string ip = ui.inputField.text;
 
@@ -126,6 +84,7 @@ public class NetworkManager : MonoBehaviour
             clientSocket.Connect(ip, port);
 
             StartCoroutine(ui.UpdateConnectStatus(ip));
+            StartCoroutine(WaitForServerStart());
         }
         else
         {
@@ -175,7 +134,7 @@ public class NetworkManager : MonoBehaviour
     {
         for(int i = 0; i < numPlayers; i++)
         {
-            serverSocket.Send(i + 1,packet);
+            serverSocket.Send(i + 1, packet);
         }
     }
 
@@ -185,78 +144,75 @@ public class NetworkManager : MonoBehaviour
         CloseSocket();
     }
 
-
-    // ****************************************
-    // testing stuff
-    // ****************************************
-    public void TestSendClient()
+    // server waits until start button is pressed
+    private IEnumerator WaitForGameStart()
     {
-        // send to all clients
-        for(int i = 0; i < numPlayers; i++)
+        while(isNetworkGame && !ui.GameStarted())
         {
-            serverSocket.Send(i + 1, new byte[]{(byte)RMP.Draw});
-        }
-    }
-
-    public void TestSendServer()
-    {
-        clientSocket.Send(new byte[]{(byte)RMP.Draw});
-    }
-
-    // for testing, will probably not read messages in update later
-    private void Update()
-    {
-        if(isNetworkGame)
-        {
-            if(isServer)
+            // recieve connect/disconnect messages and update number of players
+            Message msg;
+            if(serverSocket.GetNextMessage(out msg))
             {
-                // show all new messages
-                Message msg;
-                while (serverSocket.GetNextMessage(out msg))
+                switch (msg.eventType)
                 {
-                    switch (msg.eventType)
-                    {
-                        case Telepathy.EventType.Connected:
-                            Debug.Log("Connected");
-                            numPlayers++;
-                            ui.UpdateNumPlayers();
-                            break;
-                        case Telepathy.EventType.Data:
-                            string data = BitConverter.ToString(msg.data);
-                            Debug.Log("Data: " + data);
-                            ui.testPackets.text += data;
-                            break;
-                        case Telepathy.EventType.Disconnected:
-                            Debug.Log("Disconnected");
-                            numPlayers--;
-                            ui.UpdateNumPlayers();
-                            break;
-                    }
+                    case Telepathy.EventType.Connected:
+                        Debug.Log("Connected");
+                        
+                        if(numPlayers < 4)
+                        {
+                          numPlayers++;  
+                        }
+                        
+                        ui.UpdateNumPlayers();
+                        break;
+                    case Telepathy.EventType.Data:
+                        string data = BitConverter.ToString(msg.data);
+                        Debug.Log("Data: " + data);
+                        break;
+                    case Telepathy.EventType.Disconnected:
+                        Debug.Log("Disconnected");
+                        numPlayers--;
+                        ui.UpdateNumPlayers();
+                        break;
                 }
             }
-            else
+            yield return null;
+        }
+
+        // send clients message that game started
+        SendToAllClients(new byte[]{((byte)RMP.StartGame)});
+        StateManager.main.StartMultiplayer();
+    }
+
+    // client waits until server sends game start message
+    private IEnumerator WaitForServerStart()
+    {
+        bool started = false;
+
+        // read messages until one of them says the game started
+        while(isNetworkGame && !started)
+        {
+            Message msg;
+            if(clientSocket.GetNextMessage(out msg))
             {
-                // show all new messages
-                Message msg;
-                while (clientSocket.GetNextMessage(out msg))
+                switch (msg.eventType)
                 {
-                    switch (msg.eventType)
-                    {
-                        case Telepathy.EventType.Connected:
-                            Debug.Log("Connected");
-                            break;
-                        case Telepathy.EventType.Data:
-                            string data = BitConverter.ToString(msg.data);
-                            Debug.Log("Data: " + data);
-                            ui.testPackets.text += data;
-                            break;
-                        case Telepathy.EventType.Disconnected:
-                            Debug.Log("Disconnected");
-                            ui.ResetStatus();
-                            break;
-                    }
+                    // if the message says to start the game, do so
+                    case Telepathy.EventType.Data:
+                        if((RMP)msg.data[0] == RMP.StartGame)
+                        {    
+                            started = true;
+                            StateManager.main.StartMultiplayer();
+                        }
+                        break;
+                    // if disconnected from the host, reset the ui
+                    case Telepathy.EventType.Disconnected:
+                        Debug.Log("Disconnected");
+                        ui.ResetStatus();
+                        break;
                 }
             }
-        }
+            yield return null;
+        } 
     }
 }

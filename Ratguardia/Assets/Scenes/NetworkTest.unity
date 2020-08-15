@@ -319,17 +319,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2078466846727011104, guid: 02ea3477fea7b3a4fa25179fe5faf254,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078466846727011104, guid: 02ea3477fea7b3a4fa25179fe5faf254,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6494590}
+      objectReference: {fileID: 274829709}
     - target: {fileID: 2078466846727011104, guid: 02ea3477fea7b3a4fa25179fe5faf254,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartMultiplayer
+      value: ButtonPressed
       objectReference: {fileID: 0}
     - target: {fileID: 2078466846727011104, guid: 02ea3477fea7b3a4fa25179fe5faf254,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078466846727011104, guid: 02ea3477fea7b3a4fa25179fe5faf254,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 6494590}
+    - target: {fileID: 2078466846727011104, guid: 02ea3477fea7b3a4fa25179fe5faf254,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: StartMultiplayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078466846727011104, guid: 02ea3477fea7b3a4fa25179fe5faf254,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3024460148676712786, guid: 02ea3477fea7b3a4fa25179fe5faf254,
