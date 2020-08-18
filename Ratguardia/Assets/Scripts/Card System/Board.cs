@@ -9,7 +9,7 @@ public class Board : MonoBehaviour
     public static Board main; // static reference
 
     public Player[] players;
-    private int turn; // which player's turn it is
+    [HideInInspector] public int turn; // which player's turn it is
     public int[] scores;
 
     public CardStack deck;
@@ -144,7 +144,6 @@ public class Board : MonoBehaviour
         {
             byte[] playerPacket = CreatePlayerDataPacket(i);
             NetworkManager.main.serverSocket.Send(i, playerPacket);
-            Debug.Log(BitConverter.ToString(playerPacket));
         }
 
         // dont play draw sfx when dealing cards

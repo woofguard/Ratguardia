@@ -17,6 +17,11 @@ public class NetworkUI : MonoBehaviour
 
     private bool buttonPressed = false;
 
+    private void Awake()
+    {
+        NetworkManager.main.ui = this;
+    }
+
     // this needs to be a coroutine bc otherwise itll run before the socket is finished being
     // created and give a null reference exception bc telepathy is actually multithreaded
     public IEnumerator DisplayPlayerIPAddress()
@@ -108,5 +113,22 @@ public class NetworkUI : MonoBehaviour
     public void ButtonPressed()
     {
         buttonPressed = true;
+    }
+
+    // these button functions need to be in here actually bc the network manager hookup might not be the right one
+    public void HostButton()
+    {
+        NetworkManager.main.HostGame();
+    }
+
+    public void JoinButton()
+    {
+        NetworkManager.main.JoinGame();
+    }
+
+    public void CancelButton()
+    {
+        NetworkManager.main.CloseSocket();
+        ResetStatus();
     }
 }

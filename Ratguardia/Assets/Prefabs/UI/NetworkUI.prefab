@@ -1573,9 +1573,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8703823927868914446, guid: b3c6a86e664acee1984c067092ddb928,
-          type: 3}
-        m_MethodName: JoinGame
+      - m_Target: {fileID: 6167522659664086238}
+        m_MethodName: JoinButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1877,9 +1876,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8703823927868914446, guid: b3c6a86e664acee1984c067092ddb928,
-          type: 3}
-        m_MethodName: HostGame
+      - m_Target: {fileID: 6167522659664086238}
+        m_MethodName: HostButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3372,20 +3370,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8703823927868914446, guid: b3c6a86e664acee1984c067092ddb928,
-          type: 3}
-        m_MethodName: CloseSocket
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 6167522659664086238}
-        m_MethodName: ResetStatus
+        m_MethodName: CancelButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

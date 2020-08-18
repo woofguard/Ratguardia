@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,6 +59,8 @@ public abstract class Player : MonoBehaviour
 
     public virtual Card Draw()
     {
+        SendDrawPacket();
+
         var newCard = Board.main.deck.Pop();
         Board.main.refBoardUI.UpdateDeckUI();
 
@@ -67,7 +70,6 @@ public abstract class Player : MonoBehaviour
 
         // set card's owner to this player
         newCard.owner = playerIndex;
-
         
         hand.Add(newCard);
         newCard.transform.SetParent(transform);
@@ -83,6 +85,8 @@ public abstract class Player : MonoBehaviour
     // discard using a specific card reference
     public IEnumerator Discard(Card c)
     {
+        SendDiscardPacket(c);
+
         Board.main.rubblePile.Push(c);
         c.transform.SetParent(Board.main.rubblePile.transform);
         Board.main.OrganizeRubble();
@@ -265,6 +269,51 @@ public abstract class Player : MonoBehaviour
             icon.transform.localPosition = iconPos;
             icon.transform.localScale = new Vector3(0.65f, 0.65f, 1.0f);
         }
-        
+    }
+
+    // if game is online, send data to other players that player drew
+    protected void SendDrawPacket()
+    {
+        if(NetworkManager.main.isNetworkGame)
+        {
+            // literally send one byte
+            byte[] packet = new byte[1];
+            packet[0] = (byte)RMP.Draw;
+
+            // whether player is client/server
+            if(NetworkManager.main.isServer)
+            {
+                NetworkManager.main.SendToAllClients(packet);
+            }
+            else
+            {
+                NetworkManager.main.clientSocket.Send(packet);
+            }        
+        }
+    }
+
+    // if game is online, tell players what card was discarded
+    protected void SendDiscardPacket(Card card)
+    {
+        if(NetworkManager.main.isNetworkGame)
+        {
+            // discard byte, index byte
+            byte[] packet = new byte[2];
+            packet[0] = (byte)RMP.Discard;
+
+            // look for index of card in hand
+            int index = hand.IndexOf(card);
+            packet[1] = Convert.ToByte(index);
+
+            // whether player is client/server
+            if(NetworkManager.main.isServer)
+            {
+                NetworkManager.main.SendToAllClients(packet);
+            }
+            else
+            {
+                NetworkManager.main.clientSocket.Send(packet);
+            }  
+        }
     }
 }

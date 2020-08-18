@@ -26,7 +26,7 @@ public class NetworkManager : MonoBehaviour
     [HideInInspector] public int numPlayers = 0; 
 
     // temporary storage for other scripts to read from
-    public byte[] packet;
+    [HideInInspector] public byte[] packet;
 
     // UI reference
     public NetworkUI ui;
@@ -135,16 +135,26 @@ public class NetworkManager : MonoBehaviour
     // as server, takes a packet and sends it to all players
     public void SendToAllClients(byte[] packet)
     {
-        for(int i = 0; i < numPlayers; i++)
+        for(int i = 1; i <= numPlayers; i++)
         {
-            serverSocket.Send(i + 1, packet);
+            serverSocket.Send(i, packet);
         }
     }
 
-    // close sockets on quit just in case
-    private void OnApplicationQuit()
+    // when recieving a packet as server, sends to the rest of the players besides the one who sent it
+    public void ForwardPacket(byte[] packet)
     {
-        CloseSocket();
+        if(isServer)
+        {
+            for(int i = 1; i <= numPlayers; i++)
+            {
+                // dont send to the player whos turn it is, they already know
+                if(i != Board.main.turn)
+                {
+                    serverSocket.Send(i, packet);
+                }
+            }
+        } 
     }
 
     // server waits until start button is pressed
@@ -237,6 +247,7 @@ public class NetworkManager : MonoBehaviour
                     {
                         received = true;
                         packet = msg.data;
+                        ForwardPacket(packet);
                     }
                 }
             }
@@ -253,5 +264,56 @@ public class NetworkManager : MonoBehaviour
             }
             yield return null;
         }
+    }
+
+    // overload that waits to recieve one of two types of packets
+    public IEnumerator WaitForPacket(RMP data1, RMP data2)
+    {
+        bool received = false;
+
+        // read messages until deck message is recieved
+        while(isNetworkGame && !received)
+        {
+            Message msg;
+            // listen on different sockets based on whether player is server/client
+            if(isServer)
+            {
+                if(serverSocket.GetNextMessage(out msg))
+                {
+                    if(msg.eventType == Telepathy.EventType.Data)
+                    {
+                        // either the first type or second type
+                        if((RMP)msg.data[0] == data1 || (RMP)msg.data[0] == data2)
+                        {
+                            received = true;
+                            packet = msg.data;
+                            ForwardPacket(packet);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if(clientSocket.GetNextMessage(out msg))
+                {
+                    if(msg.eventType == Telepathy.EventType.Data)
+                    {
+                        // either the first type or second type
+                        if((RMP)msg.data[0] == data1 || (RMP)msg.data[0] == data2)
+                        {
+                            received = true;
+                            packet = msg.data;
+                        }
+                    }
+                }
+            }
+            yield return null;
+        }
+    }
+
+    // close sockets on quit just in case
+    private void OnApplicationQuit()
+    {
+        CloseSocket();
     }
 }
