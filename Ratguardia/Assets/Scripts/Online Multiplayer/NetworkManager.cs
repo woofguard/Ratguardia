@@ -219,7 +219,7 @@ public class NetworkManager : MonoBehaviour
         } 
     }
 
-    // client waits for server to send a certain type of data packet
+    // waits to recieve to send a certain type of data packet
     public IEnumerator WaitForPacket(RMP data)
     {
         bool received = false;
@@ -228,12 +228,27 @@ public class NetworkManager : MonoBehaviour
         while(isNetworkGame && !received)
         {
             Message msg;
-            if(clientSocket.GetNextMessage(out msg))
+            // listen on different sockets based on whether player is server/client
+            if(isServer)
             {
-                if(msg.eventType == Telepathy.EventType.Data && (RMP)msg.data[0] == data)
+                if(serverSocket.GetNextMessage(out msg))
                 {
-                    received = true;
-                    packet = msg.data;
+                    if(msg.eventType == Telepathy.EventType.Data && (RMP)msg.data[0] == data)
+                    {
+                        received = true;
+                        packet = msg.data;
+                    }
+                }
+            }
+            else
+            {
+                if(clientSocket.GetNextMessage(out msg))
+                {
+                    if(msg.eventType == Telepathy.EventType.Data && (RMP)msg.data[0] == data)
+                    {
+                        received = true;
+                        packet = msg.data;
+                    }
                 }
             }
             yield return null;

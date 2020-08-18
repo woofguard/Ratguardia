@@ -8,10 +8,11 @@ public enum RMP: byte
     // card game actions
     Draw = 0x1,      // standalone
     Discard = 0x2,   // followed by index of card to discard
-    Steal = 0x3,     // standalone
-    NoSteal = 0x4,   // standalone
+    Steal = 0x3,     // followed by Player
+    NoSteal = 0x4,   // followed by Player
     Combatant = 0x5, // followed by index of card sent into battle
     Player = 0x6,    // followed by board index of player
+    EndTurn = 0x7,
 
     // board/deck data
     Deck = 0xA1,     // standalone
