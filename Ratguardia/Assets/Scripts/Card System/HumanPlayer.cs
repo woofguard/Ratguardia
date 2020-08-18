@@ -171,8 +171,8 @@ public class HumanPlayer : Player
             byte[] packet = new byte[2];
             packet[0] = (byte)RMP.Discard;
 
-
-
+            // look for index of card in hand
+            int index = hand.IndexOf(card);
         }
     }
 }
