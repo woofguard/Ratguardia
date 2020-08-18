@@ -94,6 +94,8 @@ public class BoardUIManager : MonoBehaviour
 
         GameObject layout = stealUI.transform.Find(combatants.Count + "CardLayout").gameObject;
 
+		
+		
         layout.SetActive(true);
 
         UICard[] cards = layout.GetComponentsInChildren<UICard>();
@@ -103,6 +105,12 @@ public class BoardUIManager : MonoBehaviour
             if (combatants.Count <= i) break;
             cards[i].DisplayCard(combatants[i]);
             cards[i].SetDim(combatants[i] != winner);
+			if(combatants[i] == winner)
+			{ 
+			   GameObject halo = layout.transform.Find("BattleVictorHalo" + i).gameObject;
+			   halo.SetActive(true);
+		    }				
+			
         }
 
         HumanPlayer hp = (HumanPlayer)Board.main.players[0];
@@ -117,6 +125,11 @@ public class BoardUIManager : MonoBehaviour
         {
             card.SetDim(false);
         }
+		for(int i = 0; i < cards.Length; i++)
+		{
+			GameObject halo = layout.transform.Find("BattleVictorHalo" + i).gameObject;
+			halo.SetActive(false);
+		}
         layout.SetActive(false);
         stealUI.SetActive(false);
     }
