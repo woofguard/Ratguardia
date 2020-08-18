@@ -25,6 +25,9 @@ public class NetworkManager : MonoBehaviour
     // how many players are connected to the server
     [HideInInspector] public int numPlayers = 0; 
 
+    // temporary storage for other scripts to read from
+    public byte[] packet;
+
     // UI reference
     public NetworkUI ui;
 
@@ -214,5 +217,26 @@ public class NetworkManager : MonoBehaviour
             }
             yield return null;
         } 
+    }
+
+    // client waits for server to send a certain type of data packet
+    public IEnumerator WaitForPacket(RMP data)
+    {
+        bool received = false;
+
+        // read messages until deck message is recieved
+        while(isNetworkGame && !received)
+        {
+            Message msg;
+            if(clientSocket.GetNextMessage(out msg))
+            {
+                if(msg.eventType == Telepathy.EventType.Data && (RMP)msg.data[0] == data)
+                {
+                    received = true;
+                    packet = msg.data;
+                }
+            }
+            yield return null;
+        }
     }
 }

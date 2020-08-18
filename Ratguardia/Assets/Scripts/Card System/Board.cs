@@ -50,6 +50,7 @@ public class Board : MonoBehaviour
         aiType2 = StateManager.main.combatants[2];
         aiType3 = StateManager.main.combatants[3];
 
+        // start board based on type of game and whether player is client/server
         if(NetworkManager.main != null && NetworkManager.main.isNetworkGame && NetworkManager.main.isServer)
         {
             StartCoroutine(InitializeBoardServer());
@@ -64,6 +65,7 @@ public class Board : MonoBehaviour
         }     
     }
 
+    // sets up board for a single player game
     private IEnumerator InitializeBoard()
     {
         Debug.Log("setting up board");
@@ -145,6 +147,9 @@ public class Board : MonoBehaviour
             Debug.Log(BitConverter.ToString(playerPacket));
         }
 
+        // dont play draw sfx when dealing cards
+        AudioManager.main.sfxDraw.mute = true;
+
         // deal out cards, player order is synced so it should turn out the same for clients
         for(int i = 0; i < 5; i++)
         {
@@ -153,6 +158,10 @@ public class Board : MonoBehaviour
                 players[j].Draw();
             }
         }
+
+        yield return new WaitForSeconds(0.25f);
+        AudioManager.main.sfxDraw.mute = false;
+        GiveTurn(turn);
 
         yield return null;
     }
@@ -165,18 +174,71 @@ public class Board : MonoBehaviour
         turn = 0;
         scores = new int[4];
 
+        // HERES MY GALAXY BRAIN PLAY: 2D DICTIONARY OF CARDS
+        // THIS IS HOW WE CAN STILL ACHIEVE O(N) DECK CONSTRUCTION!!!!!!
+        Dictionary<string, Dictionary<string, Card>> dictCards = new Dictionary<string, Dictionary<string, Card>>();
+        dictCards["Chalices"] = new Dictionary<string, Card>();
+        dictCards["Swords"] = new Dictionary<string, Card>();
+        dictCards["Wands"] = new Dictionary<string, Card>();
+        dictCards["Rings"] = new Dictionary<string, Card>();
+
+        // add all the cards to my massive brained 2d dictionary
+        var cards = GetComponentsInChildren<Card>();
+        foreach(Card card in cards)
+        {
+            card.owner = -1;
+            dictCards[card.suit.ToString()][card.cardName] = card;
+        }
+
+        AudioManager.main.cardTheme.Play();
+        AudioManager.main.sfxShuffle.Play();
+
         // receive deck data from server
+        yield return StartCoroutine(NetworkManager.main.WaitForPacket(RMP.Deck));
+        byte[] deckPacket = NetworkManager.main.packet;
 
         // go thru deck packet and push each card to deck stack
+        for(int i = 1; i < deckPacket.Length - 1; i += 3)
+        {
+            // make sure this is actually card data
+            if(deckPacket[i] != (byte)RMP.Card)
+            {
+                Debug.Log("something has went terribly wrong");
+                break;
+            }
+            else
+            {
+                // get card suit/name data from packet
+                string suit = ((RMP)deckPacket[i+1]).ToString();
+                string name = ((RMP)deckPacket[i+2]).ToString();
+
+                // find the right card in O(1) thanks to my 2d dictionary
+                deck.Push(dictCards[suit][name]);
+            }
+        }
 
         // receive player data from server
+        yield return StartCoroutine(NetworkManager.main.WaitForPacket(RMP.Players));
+        byte[] playerPacket = NetworkManager.main.packet;
 
         // generate players from server data
+        players = GenerateClientGame(playerPacket);
 
-        // deal out cards
+        // dont play draw sfx when dealing cards
+        AudioManager.main.sfxDraw.mute = true;
 
+        // deal out cards, player order is synced so it should turn out the same as server
+        for(int i = 0; i < 5; i++)
+        {
+            for(int j = 0; j < players.Length; j++)
+            {
+                players[j].Draw();
+            }
+        }
 
-        yield return null;
+        yield return new WaitForSeconds(0.25f);
+        AudioManager.main.sfxDraw.mute = false;
+        GiveTurn(turn);
     }
 
     // creates the Player game objects for 1 human player and 3 AIs, returns array of players
@@ -273,11 +335,31 @@ public class Board : MonoBehaviour
         return packet;
     }
 
-    public Player[] GenerateClientGame()
+    public Player[] GenerateClientGame(byte[] packet)
     {
         Player[] players = new Player[4];
 
-        
+        // populate player array based on recieved data
+        for(int i = 0; i < 4; i++)
+        {
+            switch(packet[i+1])
+            {
+                case (byte)RMP.Human:
+                    players[i] = Instantiate(humanPlayerPrefab).GetComponent<Player>();
+                    break;
+                case (byte)RMP.Network:
+                    players[i] = Instantiate(networkPlayerPrefab).GetComponent<Player>();
+                    break;
+                case (byte)RMP.RandomAI:
+                    players[i] = Instantiate(AIPlayerPrefab).GetComponent<Player>();
+                    (players[i] as AIPlayer).aiType = "random";
+                    break;
+                case (byte)RMP.BasicAI:
+                    players[i] = Instantiate(AIPlayerPrefab).GetComponent<Player>();
+                    (players[i] as AIPlayer).aiType = "basic";
+                    break;
+            }
+        }
 
         return players;
     }
