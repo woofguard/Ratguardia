@@ -1,0 +1,15 @@
+Scene	Match1(Feed)		
+Character	Line	Special	Notes
+The Jester	This is unforgivable!		
+The Jester	Is the entire life of a rat only worth a few additional points in a card game?		
+The Assassin	Ten points, to be exact.	updatePos	
+The Assassin	And I believe you'll find that lives are worth very little these days.		
+The Jester	Who are you?		
+The Assassin	The replacement for our dearly departed.		
+The Assassin	Luckily for you all, I'm a horrible player.		
+The Peasant	You musn't admit such a thing.	ifAlive	
+The Knight	Luck will have no part in your defeat.	ifAlive	
+The Cavalier	Have some faith in yourself, my girl! Our lives are at stake here.	ifAlive	
+The Assassin	It's no matter to me. Let's have some fun, shall we?		
+The Jester	There is no entertainment to be had here.		
+The Jester	Not anymore.		

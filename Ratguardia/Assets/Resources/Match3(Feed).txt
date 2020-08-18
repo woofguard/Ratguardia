@@ -1,0 +1,34 @@
+Scene	Pre-vs.King(Spare)		
+Character	Line	Special	Notes
+The Jester	We've survived...		
+The Cavalier	I've done it, I've won! Cheers, all.	ifAlive,ifFirst	
+The Peasant	Finally, my village may know peace.	ifAlive,ifFirst	
+The Knight	Get me a seat! I am entitled to one as the victor.	ifAlive,ifFirst	
+The Assassin	So I've won, huh.	ifAlive,ifFirst,updatePos	
+The Preyrider	Despite my victory, I still hunger...	ifAlive,ifFirst,updatePos	
+The Cavalier	What a game! I've quite enjoyed myself.	ifAlive,ifNotFirst	
+The Peasant	I... I've failed. I've doomed my village.	ifAlive,ifNotFirst	
+The Knight	Why! Why must my suffering continue!	ifAlive,ifNotFirst	
+The Assassin	Least my head's still on my shoulders.	ifAlive,ifNotFirst,updatePos	
+The Preyrider	Feh.	ifAlive,ifNotFirst,updatePos	
+The King	Players, your attention!		
+The King	Hear my words and accept them as truth.		
+The King	The winner of this Ratguardia tournament is -		
+The Jester	Wait!		
+The King	What is it, fool?		
+The Jester	I... I have a proposition!		
+The King	How dare you interrupt me. Out with it!		
+The Jester	We have an empty space at the table, my lord.		
+The Jester	I acknowledge the true winner of this tournament, but I wish to play once more.		
+The Jester	Step down, King! I challenge you to Ratguardia!		
+The King	How delightfully stupid. And from a loser, no less.		
+The King	Very well! I'll indulge in your silly game.	updatePos	
+The King	Know that you've doomed both yourself and the others.		
+The Jester	I am sorry, everyone, for my selfishness.		
+The Cavalier	Pay it no mind. To play with The King is a rare pleasure.	ifAlive,ifFirst	
+The Peasant	Is this a sick joke by the gods? I've already won! It should be enough!	ifAlive,ifFirst	
+The Knight	Jester. At the end of this match, you will die my blade.	ifAlive,ifFirst	
+The Assassin	Intriguing. You've got gusto, fool.	ifAlive,ifFirst	
+The Preyrider	Another opportunity to feed is welcome to me.	ifAlive,ifFirst	
+The Jester	I promise to you all that I will win. And when I do, you will see.		
+The Jester	...Let us begin.		

@@ -1,0 +1,12 @@
+Scene	Match1(SpareAfterFeed)		
+Character	Line	Special	Notes
+The Jester	Thank goodness.		
+The Jester	All of you, please rest a moment.		
+The Peasant	I see now why you seek The King's employ.	ifAlive	
+The Peasant	You are truly the greatest of fools.	ifAlive	
+The Cavalier	What a fine play!	ifAlive	
+The Knight	The rest of us were simply mediocre.	ifAlive	
+The Assassin	What an interesting character, this Jester.	updatePos	
+The Jester	Please, all of you.		
+The Jester	May the next victor follow in my path.		
+The Jester	...Let us begin again.		

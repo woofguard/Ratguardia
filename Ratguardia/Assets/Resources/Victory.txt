@@ -1,0 +1,17 @@
+Scene	Post-King(Win)		
+Character	Line	Special	Notes
+The Jester	By Ratguardia rules, I am allowed to feed the loser to The Monster.		
+The Jester	Is this not correct?		
+The King	You cannot feed me to anything!	updatePos	
+The King	I am your King!		
+The Jester	No, you are yourself a monster!		
+The Jester	Why must we master a card game in order to be gainfully employed?		
+The Jester	Why must we be pushed to murder in order to live comfortably?		
+The Jester	You've used us all for your own sick amusement, King.		
+The Jester	It's only right that you pay for your crimes with the same fate as your victims!		
+The King	NO!		
+The Jester	Farewell.	hideLast	
+The Jester	The King has been fed to The Monster.		
+The Jester	His rule is now invalid. The Kingdom of Chalices shall fall!		
+The Jester	Tear down the castle walls and restore sovereignty to the Families!		
+The Jester	The legacy of Ratguardia ends here.		
