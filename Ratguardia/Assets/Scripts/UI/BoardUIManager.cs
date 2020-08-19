@@ -24,9 +24,13 @@ public class BoardUIManager : MonoBehaviour
     public BeginRoundDisplay brd;
     public ResultsDisplay rd;
     public MatchResultsDisplay mrd;
+    public SpareFeedDisplay sfd;
+    public GameObject gameOver;
+
 
     public GameObject continuePrompt;
     public GameObject restartPrompt;
+    public GameObject sfdPrompt;
 
     private void Start()
     {
@@ -193,5 +197,12 @@ public class BoardUIManager : MonoBehaviour
         mrd.gameObject.SetActive(true);
         restartPrompt.gameObject.SetActive(true);
         mrd.DisplayMatchResults();
+    }
+
+    public void DisplayGameOver()
+    {
+        sfd.gameObject.SetActive(false);
+        sfdPrompt.gameObject.SetActive(false);
+        gameOver.SetActive(true);
     }
 }
