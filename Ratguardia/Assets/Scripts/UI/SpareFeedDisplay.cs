@@ -49,15 +49,16 @@ public class SpareFeedDisplay : MonoBehaviour
             decision.text = "Spare";
             players[0].line.text = Board.main.players[0].character.dialogue.spare;
             players[3].line.text = Board.main.players[results[3].playerIndex].character.dialogue.spared;
-            StateManager.main.charDeath = -1;
+            StateManager.charDeath = -1;
         }
         else
         {
             decision.text = "Feed";
             players[0].line.text = Board.main.players[results[0].playerIndex].character.dialogue.feed;
             players[3].line.text = Board.main.players[results[3].playerIndex].character.dialogue.death;
-            StateManager.main.charDeath = results[3].playerIndex;
+            StateManager.charDeath = results[3].playerIndex;
         }
+        StateManager.lastVictor = results[0].playerIndex;
 
     }
 

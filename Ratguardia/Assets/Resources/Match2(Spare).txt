@@ -1,0 +1,14 @@
+Scene	Match2(Spare)		
+Character	Line	Special	Notes
+The Jester	My luck continues. I am so grateful.		
+The Peasant	Do you keep us alive for your own amusement?		
+The Peasant	Two of us should have died!		
+The Jester	But for what? I have proven I can succeed without the paltry bonus of a kill.		
+The Cavalier	The fool is correct. Hats off to ye, for both thine skill and charity.		
+Dogy	bark		
+The Knight	Your luck wears thin, much like my tolerance for this pain.		
+The Peasant	Jester, cease this cruel play.		
+The Peasant	There is no purpose to my survival if I am to fail.		
+The Jester	You have purpose, my friend.		
+The Jester	If I am to remain victorious, I will need assistance from all of you.		
+The Jester	...Let us begin one last time.		

@@ -15,13 +15,14 @@ public class StateManager : MonoBehaviour
     public Stack<string> replacements;
 
     public int round;
-    public int roundsPerMatch = 3;
+    public static int roundsPerMatch = 3;
 
     public static string currentCutscene;
 
     public bool inCutscene = false;
 
-    public int charDeath = -1;
+    public static int charDeath = -1;
+    public static int lastVictor = -1;
 
     private void Awake()
     {
@@ -70,9 +71,11 @@ public class StateManager : MonoBehaviour
             {
                 case 0:
                     combatants = new string[] { "The Child", "The Mother", "The Sibling", "The Father" };
+                    roundsPerMatch = 1;
                     break;
                 case 1:
                     combatants = new string[] { "The Jester", "The Peasant", "The Knight", "The Cavalier" };
+                    roundsPerMatch = 2;
                     break;
                 case 2:
                 case 3:
@@ -81,6 +84,7 @@ public class StateManager : MonoBehaviour
                     break;
                 case 4:
                     ReplaceCombatant(2, "The King");
+                    roundsPerMatch = 3;
                     break;
                 case 5:
                     ReturnToTitle();
@@ -103,14 +107,27 @@ public class StateManager : MonoBehaviour
                     currentCutscene = "Pre Match 1";
                     break;
                 case 2:
+                    if (charDeath == -1) currentCutscene = "Match1(Spare)";
+                    else currentCutscene = "Match1(Feed)";
+                    break;
                 case 3:
-                    currentCutscene = "Placeholder";
+                    if (charDeath == -1)
+                    {
+                        if (replacements.Count == 2) currentCutscene = "Match2(Spare)";
+                        else currentCutscene = "Match2(SpareAfterFeed)";
+                    }
+                    else
+                    {
+                        if(replacements.Count == 2) currentCutscene = "Match1(Feed)";
+                        else currentCutscene = "Match2(Feed)";
+                    }
                     break;
                 case 4:
-                    currentCutscene = "Placeholder";
+                    if (charDeath == -1) currentCutscene = "Match3(Spare)";
+                    else currentCutscene = "Match3(Feed)";
                     break;
                 case 5:
-                    currentCutscene = "Placeholder";
+                    currentCutscene = "Victory";
                     break;
                 default:
                     break;

@@ -1,0 +1,18 @@
+Scene	Match2(Feed)		
+Character	Line	Special	Notes
+The Jester	Enough of this, I beg you all!		
+The Jester	I cannot sit idly by while this senseless violence continues!		
+The Preyrider	I concur.	updatePos	
+The Preyrider	I see no point in sacrifice to The Monster.		
+The Jester	Ah, hello. Finally, a kindred soul.		
+The Preyrider	Do not misunderstand me.		
+The Preyrider	I care not for the logistics of this silly game.		
+The Preyrider	Losers ought to be fed to a mount such as mine.		
+The Jester	...		
+The Cavalier	Dogy would never!	ifAlive	
+The Peasant	...I cannot argue against this in good faith.	ifAlive	
+The Knight	As long as I win, your choice will not matter.	ifAlive	
+The Assassin	I like this one.	ifAlive	
+The Jester	Please, all of you. Stop this talk.		
+The Jester	You have all shown enough cruelty.		
+The Jester	Let us begin, one last time.		

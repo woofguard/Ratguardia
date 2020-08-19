@@ -1,0 +1,15 @@
+Scene	Match1(Spare)		
+Character	Line	Special	Notes
+The Jester	Thank goodness.		
+The Jester	All of you, please rest a moment.		
+The Peasant	I see now why you seek The King's employ.		
+The Peasant	You are truly the greatest of fools.		
+The Jester	That I may be, but I am also alive.		
+The Jester	As are you.		
+The Cavalier	And what a fine play!		
+The Knight	The rest of us were simply mediocre.		
+The Peasant	Do not insult me this way.		
+The Jester	Please, all of you.		
+The Jester	May the next victor follow in my path.		
+The Knight	I will not. You have my word.		
+The Jester	...Let us begin again.		
