@@ -7,22 +7,22 @@ public class StateManager : MonoBehaviour
 {
     public static StateManager main;
 
-    public int[] matchScores;
+    public int round;
+    public static int roundsPerMatch = 3;
 
     public static int match;
+    public int[] matchScores;
 
     public string[] combatants;
     public Stack<string> replacements;
 
-    public int round;
-    public static int roundsPerMatch = 3;
-
-    public static string currentCutscene;
-
-    public bool inCutscene = false;
-
     public static int charDeath = -1;
     public static int lastVictor = -1;
+
+    public static string currentCutscene;
+    public bool inCutscene = false;
+
+    public static string background = "";
 
     private void Awake()
     {
@@ -72,21 +72,26 @@ public class StateManager : MonoBehaviour
                 case 0:
                     combatants = new string[] { "The Child", "The Mother", "The Sibling", "The Father" };
                     roundsPerMatch = 1;
+                    background = "Table";
                     break;
                 case 1:
                     combatants = new string[] { "The Jester", "The Peasant", "The Knight", "The Cavalier" };
                     roundsPerMatch = 2;
+                    background = "TableCarvings";
                     break;
                 case 2:
                 case 3:
                     if (charDeath > -1) ReplaceCombatant(charDeath);
                     charDeath = -1;
+                    background = "TableCarvings";
                     break;
                 case 4:
                     ReplaceCombatant(2, "The King");
                     roundsPerMatch = 3;
+                    background = "Tablecloth";
                     break;
                 case 5:
+                    background = "";
                     ReturnToTitle();
                     break;
                 default:
@@ -99,6 +104,7 @@ public class StateManager : MonoBehaviour
         {
             inCutscene = true;
             currentCutscene = "Intro";
+            background = "Pattern";
             switch (match)
             {
                 case 0: // i don't think this should happen
