@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_text
-      value: Cancels the effects of  <b>all Kings</b>, including any in this hand.
+      value: Cancels effects of <b>all Kings</b> including any in this hand.
       objectReference: {fileID: 0}
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
@@ -40,12 +40,12 @@ PrefabInstance:
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_fontSize
-      value: 5
+      value: 5.6
       objectReference: {fileID: 0}
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_fontSizeBase
-      value: 5
+      value: 5.6
       objectReference: {fileID: 0}
     - target: {fileID: 656963584109813927, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}

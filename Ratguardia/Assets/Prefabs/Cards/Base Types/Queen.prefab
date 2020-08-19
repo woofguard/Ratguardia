@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_text
-      value: +1 DEF for each Queen in this hand
+      value: +1 DEF for each Queen in this hand.
       objectReference: {fileID: 0}
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
