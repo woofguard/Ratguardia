@@ -10,8 +10,7 @@ PrefabInstance:
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_text
-      value: "Cancels the effects of \n<b>all Kings</b>, \nincluding any in this
-        hand."
+      value: Cancels the effects of  <b>all Kings</b>, including any in this hand.
       objectReference: {fileID: 0}
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
@@ -164,6 +163,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951400669638786088, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6373571988361414722, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}

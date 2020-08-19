@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_text
-      value: DEF of this card is 10  if all 4 Peasants are collected.
+      value: +10 DEF if all 4 Peasants in hand
       objectReference: {fileID: 0}
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
@@ -40,12 +40,17 @@ PrefabInstance:
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_fontSize
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_fontSizeBase
-      value: 5
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 656963584109813927, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
@@ -163,6 +168,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951400669638786088, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6373571988361414722, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
