@@ -21,7 +21,7 @@ public class ScriptParser : MonoBehaviour
             Dialogue dialogue = new Dialogue();
             dialogue.name = segments[0];
             dialogue.line = segments[1];
-            dialogue.effect = ""; // right now there are no effects so whatevs
+            dialogue.effects = segments[2].Split(','); // right now there are no effects so whatevs
 
             dialogues.Add(dialogue);
         }
@@ -35,5 +35,5 @@ public struct Dialogue
 {
     public string name;
     public string line;
-    public string effect;
+    public string[] effects;
 }

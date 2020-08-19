@@ -1,0 +1,23 @@
+Scene	Pre-vs.King(Spare)		
+Character	Line	Special	Notes
+The Jester	Finally, we've done it. Thank you all.		
+The Cavalier	What a game! I've quite enjoyed myself.	ifAlive	
+The Peasant	I... I've failed. I've doomed my village.	ifAlive	
+The Knight	Why! Why must my suffering continue!	ifAlive	
+The Assassin	Cheer up, you. 'Least your head's still on your shoulders.	ifAlive,updatePos	
+The Preyrider	Feh.	ifAlive,updatePos	
+The King	Players, your attention!		
+The King	Hear my words and accept them as truth.		
+The King	The Jester has won this tournament of Ratguardia.		
+The Jester	It is an honor. Thank you.		
+The King	Now, Jester. You wish to become my royal fool, yes?		
+The King	You understand that by doing so, these weaklings shall all be fed to The Monster.		
+The Jester	Ah. About that, my lord.		
+The Jester	I request a different reward.		
+The King	Interesting. Out with it!		
+The Jester	Please allow the players of the last match to continue on.		
+The Jester	However, I must ask the player in fourth place to withdraw with their life maintained.		
+The Jester	Step down to the table, King! I challenge you to Ratguardia!		
+The King	How delightfully stupid.		
+The King	Very well!	updatePos,hideLast	
+The Jester	Then let us begin.		
