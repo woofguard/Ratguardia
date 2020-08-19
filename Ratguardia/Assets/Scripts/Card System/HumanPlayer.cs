@@ -64,6 +64,9 @@ public class HumanPlayer : Player
             cursor.confirmPressed = false;
             cursor.clickedCard = null;
 
+            // for online
+            SendDrawPacket();
+
             Card drawn = Draw();
             return true;
         }
@@ -135,6 +138,41 @@ public class HumanPlayer : Player
         else
         {
             return false;
+        }
+    }
+
+    // if game is online, send data to other players that player drew
+    private void SendDrawPacket()
+    {
+        if(NetworkManager.main.isNetworkGame)
+        {
+            // literally send one byte
+            byte[] packet = new byte[1];
+            packet[0] = (byte)RMP.Draw;
+
+            // whether player is client/server
+            if(NetworkManager.main.isServer)
+            {
+                NetworkManager.main.SendToAllClients(packet);
+            }
+            else
+            {
+                NetworkManager.main.clientSocket.Send(packet);
+            }        
+        }
+    }
+
+    // if game is online, tell players what card was discarded
+    private void SendDiscardPacket(Card card)
+    {
+        if(NetworkManager.main.isNetworkGame)
+        {
+            // discard byte, index byte
+            byte[] packet = new byte[2];
+            packet[0] = (byte)RMP.Discard;
+
+            // look for index of card in hand
+            int index = hand.IndexOf(card);
         }
     }
 }

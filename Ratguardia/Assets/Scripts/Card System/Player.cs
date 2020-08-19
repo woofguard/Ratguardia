@@ -8,7 +8,6 @@ public abstract class Player : MonoBehaviour
     public bool faceUp; // whether the hand is face up or not (true for human player)
     public bool revealed;
 
-    // public Character character;
     [HideInInspector] public int score;
     [HideInInspector] public bool hasTurn;
     [HideInInspector] public bool isStealing;

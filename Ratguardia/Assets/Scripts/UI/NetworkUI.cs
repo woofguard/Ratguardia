@@ -13,7 +13,9 @@ public class NetworkUI : MonoBehaviour
     public TextMeshProUGUI ipv4Text;
     public TextMeshProUGUI joinStatus;
     public TextMeshProUGUI hostStatus;
-    public TextMeshProUGUI testPackets;
+    public Button startButton;
+
+    private bool buttonPressed = false;
 
     // this needs to be a coroutine bc otherwise itll run before the socket is finished being
     // created and give a null reference exception bc telepathy is actually multithreaded
@@ -32,6 +34,8 @@ public class NetworkUI : MonoBehaviour
         ipv6Text.text = ipv6;
         ipv4Text.text = ipv4;
         UpdateNumPlayers();
+
+        startButton.gameObject.SetActive(true);
     }
 
     // displays how many playeres are connected to the server
@@ -86,5 +90,23 @@ public class NetworkUI : MonoBehaviour
         te.text = ipv4Text.text.Trim();
         te.SelectAll();
         te.Copy();
+    }
+
+    public bool GameStarted()
+    {
+        if(buttonPressed)
+        {
+            buttonPressed = false;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void ButtonPressed()
+    {
+        buttonPressed = true;
     }
 }

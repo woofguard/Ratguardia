@@ -103,7 +103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2580892978111472119
 RectTransform:
   m_ObjectHideFlags: 0
@@ -203,7 +203,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6436237923794252622}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6167522659664086238}
+        m_MethodName: ButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &990231793433095082
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +244,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9045584065762318965
 RectTransform:
   m_ObjectHideFlags: 0
@@ -505,8 +527,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 706, y: 71}
-  m_SizeDelta: {x: 276.80225, y: 32.09376}
+  m_AnchoredPosition: {x: 702.9, y: 71}
+  m_SizeDelta: {x: 270.38654, y: 55.190243}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1299178109561840575
 CanvasRenderer:
@@ -929,7 +951,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Copy IPv6 to clipboard
+  m_text: 'Copy IP Address to clipboard
 
 '
   m_isRightToLeft: 0
@@ -1331,7 +1353,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Your IPv6 Address: '
+  m_text: 'Your IP Address: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dd2ca8a3fba08d4439a8530dc416287f, type: 2}
   m_sharedMaterial: {fileID: 2909930370518870728, guid: dd2ca8a3fba08d4439a8530dc416287f,
@@ -2257,7 +2279,7 @@ MonoBehaviour:
   ipv4Text: {fileID: 3824639746533039984}
   joinStatus: {fileID: 3024460148547816253}
   hostStatus: {fileID: 3024460149152407882}
-  testPackets: {fileID: 2195603358117896581}
+  startButton: {fileID: 2078466846727011104}
 --- !u!1 &3024460149698916030
 GameObject:
   m_ObjectHideFlags: 0
@@ -2594,7 +2616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4404759828758729865
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2978,8 +3000,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 65.6, y: 60.999985}
-  m_SizeDelta: {x: 759.2843, y: 98.327095}
+  m_AnchoredPosition: {x: 88.9, y: 60.999985}
+  m_SizeDelta: {x: 805.7982, y: 98.327095}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5508097843761040731
 CanvasRenderer:
@@ -3008,7 +3030,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Your IPv4 Address (try if above does not work): '
+  m_text: 'Alternate IP Address (try if above does not work): '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dd2ca8a3fba08d4439a8530dc416287f, type: 2}
   m_sharedMaterial: {fileID: 2909930370518870728, guid: dd2ca8a3fba08d4439a8530dc416287f,
@@ -3096,7 +3118,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4283433567410355272
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3519,7 +3541,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Copy IPv4 to clipboard
+  m_text: Copy alternate IP to clipboard
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3624,8 +3646,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 708, y: 193}
-  m_SizeDelta: {x: 269.32654, y: 33.58883}
+  m_AnchoredPosition: {x: 708, y: 177.8}
+  m_SizeDelta: {x: 269.32654, y: 52.83587}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7839857494935379818
 CanvasRenderer:
