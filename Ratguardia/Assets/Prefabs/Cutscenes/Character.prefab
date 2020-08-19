@@ -68,8 +68,9 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dd2ca8a3fba08d4439a8530dc416287f, type: 2}
+  m_sharedMaterial: {fileID: 2909930370518870728, guid: dd2ca8a3fba08d4439a8530dc416287f,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -101,11 +102,11 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -7.07
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -2.25
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -299,8 +300,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Come sit down and play. We must know if you have a chance at a better life.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dbe85d702631eca44a2cc41352d0adc8, type: 2}
+  m_sharedMaterial: {fileID: 8429637822075275645, guid: dbe85d702631eca44a2cc41352d0adc8,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -475,7 +477,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -650, y: 225}
+  m_AnchoredPosition: {x: -628, y: 225}
   m_SizeDelta: {x: 2048, y: 640}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &6698293232914346676
@@ -505,7 +507,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 961bba24469cfc24baaa2af1675b6dd7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 37f3795405dc2584f9425405c7f8f660, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
