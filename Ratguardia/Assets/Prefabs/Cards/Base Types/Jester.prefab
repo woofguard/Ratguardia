@@ -47,6 +47,11 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 5.6
       objectReference: {fileID: 0}
+    - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_lineSpacing
+      value: -72.4
+      objectReference: {fileID: 0}
     - target: {fileID: 656963584109813927, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_Mesh
