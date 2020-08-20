@@ -191,9 +191,10 @@ public class NetworkManager : MonoBehaviour
             }
             yield return null;
         }
-
+        if(!isNetworkGame) yield break;
         // send clients message that game started
         SendToAllClients(new byte[]{((byte)RMP.StartGame)});
+        Debug.Log("Starting multiplayer");
         StateManager.main.StartMultiplayer();
     }
 

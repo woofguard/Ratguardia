@@ -7,7 +7,11 @@ public class StateManager : MonoBehaviour
 {
     public static StateManager main;
 
-    public int round;
+    public static int roundNum;
+    public int round
+    {
+        get { return StateManager.roundNum; }
+    }
     public static int roundsPerMatch = 3;
 
     public static int match;
@@ -32,7 +36,7 @@ public class StateManager : MonoBehaviour
             main = this;
             DontDestroyOnLoad(this.gameObject);
             match = 0;
-            round = 1;
+            roundNum = 1;
             combatants = new string[] { "The Jester", "The Peasant", "The Knight", "The Cavalier" };
 
             replacements = new Stack<string>();
@@ -156,12 +160,13 @@ public class StateManager : MonoBehaviour
     
     public void StartMultiplayer()
     {
+        Debug.Log("Starting multiplayer");
         SceneManager.LoadScene("CardGame");
     }
 
     public void CardGameEnd()
     {
-        round++;
+        roundNum = roundNum + 1;
 
         Board.main.refBoardUI.continuePrompt.SetActive(true);
 
@@ -170,6 +175,7 @@ public class StateManager : MonoBehaviour
 
     public void RestartCardGame()
     {
+        Debug.Log("Restarting card game");
         inCutscene = false;
         SceneManager.LoadScene("CardGame");
     }
@@ -177,25 +183,36 @@ public class StateManager : MonoBehaviour
     public void ResetMatch()
     {
         Debug.Log("Resetting Match");
-        round = 1;
+        roundNum = 1;
         matchScores = new int[] { 0, 0, 0, 0 };
         RestartCardGame();
     }
 
     public void EndMatch()
     {
-        Debug.Log("Ending Match");
-        Debug.Log("the match was " + match);
+        Debug.Log(NetworkManager.main.isNetworkGame + " " + charDeath + " " + match);
+        if (!NetworkManager.main.isNetworkGame && charDeath == 0 && match >= 1)
+        {
+            Board.main.refBoardUI.DisplayGameOver(); // display gameOver if player dies
+            roundNum = 1;
+            return;
+        }
+
         match = match + 1;
-        round = 1;
+        roundNum = 1;
         inCutscene = false;
         matchScores = new int[] { 0, 0, 0, 0 };
-        Debug.Log("the match was " + (match - 1) + " but is now " + match);
         AudioManager.main.cardTheme.Stop();
 
-        if (charDeath == 0 && match > 1) ReturnToTitle(); // just exit the game if you die bro
-
         AdvanceNarrative();
+    }
+
+    public void RetryMatch()
+    {
+        Debug.Log("Retrying Match");
+        Debug.Log("the match was " + match);
+        AudioManager.main.cardTheme.Stop();
+        ResetMatch();
     }
 
     public void LoadNetworkTest()
@@ -206,7 +223,7 @@ public class StateManager : MonoBehaviour
     public void ReturnToTitle()
     {
         match = 0;
-        round = 1;
+        roundNum = 1;
         combatants = new string[] { "The Jester", "The Peasant", "The Knight", "The Cavalier" };
 
         replacements = new Stack<string>();
@@ -216,7 +233,7 @@ public class StateManager : MonoBehaviour
         matchScores = new int[] { 0, 0, 0, 0 };
         currentCutscene = "Intro";
 
-        Destroy(AudioManager.main.gameObject);
+        if(AudioManager.main != null) Destroy(AudioManager.main.gameObject);
         SceneManager.LoadScene("TitleScreen");
     }
 
