@@ -15,6 +15,9 @@ public class NetworkUI : MonoBehaviour
     public TextMeshProUGUI hostStatus;
     public Button startButton;
 
+    public string userName;
+    public Sprite userIcon;
+
     private bool buttonPressed = false;
 
     private void Awake()
@@ -78,6 +81,7 @@ public class NetworkUI : MonoBehaviour
         hostStatus.text = "Status: not hosting";
         ipv6Text.text = "";
         ipv4Text.text = "";
+        buttonPressed = false;
     }
 
     // functions to copy ip to clipboard
@@ -112,6 +116,7 @@ public class NetworkUI : MonoBehaviour
 
     public void ButtonPressed()
     {
+        Debug.Log("Button Pressed");
         buttonPressed = true;
     }
 
@@ -130,5 +135,10 @@ public class NetworkUI : MonoBehaviour
     {
         NetworkManager.main.CloseSocket();
         ResetStatus();
+    }
+
+    public void ReturnToTitleButton()
+    {
+        StateManager.main.ReturnToTitle();
     }
 }
