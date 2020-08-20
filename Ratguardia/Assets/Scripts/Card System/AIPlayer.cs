@@ -39,6 +39,7 @@ public class AIPlayer : Player
     public override IEnumerator DecideSteal()
     {
         yield return new WaitForSeconds(stealWaitTime);
+        doneStealing = false;
 
         // decide whether to steal based on AI type
         switch (aiType)
@@ -53,7 +54,7 @@ public class AIPlayer : Player
                 combatant = null;
                 break;
         }
-        yield return null;
+        doneStealing = true;
     }
 
     // just discards the last card drawn

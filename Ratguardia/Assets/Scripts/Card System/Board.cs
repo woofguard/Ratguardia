@@ -383,6 +383,20 @@ public class Board : MonoBehaviour
         }
     }
 
+    // is true when every player is done deciding to steal
+    public bool PlayersDoneStealing()
+    {
+        foreach(var player in players)
+        {
+            // if any player is still deciding, return false
+            if(!player.doneStealing)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     // resolves a battle, returns the winning player's card
     public IEnumerator Battle(List<Card> combatants)
     {

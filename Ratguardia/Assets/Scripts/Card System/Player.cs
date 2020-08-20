@@ -14,6 +14,7 @@ public abstract class Player : MonoBehaviour
     [HideInInspector] public bool isStealing;
     [HideInInspector] public int playerIndex; // which index this player is in the Board array
     [HideInInspector] public Card combatant;  // card fighting in battle, used for stealing
+    [HideInInspector] public bool doneStealing = true;
 
     public GameObject fiveCardLayout;
     public GameObject sixCardLayout;
@@ -146,13 +147,20 @@ public abstract class Player : MonoBehaviour
             // if not the player who discarded and player can steal
             if(player.playerIndex != this.playerIndex && player.CanSteal())
             {
-                // if player decides to steal, add card to combatants list
-                yield return StartCoroutine(player.DecideSteal());
-                if(player.combatant != null)
-                {
-                    combatants.Add(player.combatant);
-                }
+                // ask concurrently now, wait for everyone to finish later
+                StartCoroutine(player.DecideSteal());   
             }
+        }
+
+        yield return new WaitUntil(() => Board.main.PlayersDoneStealing());
+
+        foreach(var player in Board.main.players)
+        {
+           // if player decides to steal, add card to combatants list
+            if(player.combatant != null)
+            {
+                combatants.Add(player.combatant);
+            } 
         }
 
         // if anyone wants to steal, run the battle
