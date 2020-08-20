@@ -28,6 +28,10 @@ public class NetworkManager : MonoBehaviour
     // temporary storage for other scripts to read from
     [HideInInspector] public byte[] packet;
 
+    // makes sure steal packets go to the right person
+    [HideInInspector] public byte[][] stealPackets;
+    [HideInInspector] public bool[] packetRecieved;
+
     // UI reference
     public NetworkUI ui;
 
@@ -43,6 +47,14 @@ public class NetworkManager : MonoBehaviour
             Telepathy.Logger.Log = Debug.Log;
             Telepathy.Logger.LogWarning = Debug.LogWarning;
             Telepathy.Logger.LogError = Debug.LogError;
+
+            // initialize arrays
+            stealPackets = new byte[4][];
+            packetRecieved = new bool[4];
+            for(int i = 0; i < packetRecieved.Length; i++)
+            {
+                packetRecieved[i] = false;
+            }
         }
         else
         {
@@ -289,6 +301,7 @@ public class NetworkManager : MonoBehaviour
                             received = true;
                             packet = msg.data;
                             ForwardPacket(packet);
+                            ParseStealPacket(packet);
                         }
                     }
                 }
@@ -304,11 +317,25 @@ public class NetworkManager : MonoBehaviour
                         {
                             received = true;
                             packet = msg.data;
+                            ParseStealPacket(packet);
                         }
                     }
                 }
             }
             yield return null;
+        }
+    }
+
+    // puts a steal packet in the correct part of the array for right player to read
+    private void ParseStealPacket(byte[] packet)
+    {
+        // if it is a steal packet
+        if(packet[0] == (byte)RMP.Steal || packet[0] == (byte)RMP.NoSteal)
+        {
+            // put it in the right place
+            int index = packet[2];
+            stealPackets[index] = packet;
+            packetRecieved[index] = true;
         }
     }
 

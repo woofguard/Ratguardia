@@ -329,6 +329,58 @@ public abstract class Player : MonoBehaviour
         }
     }
 
+    // if game is online, tell players that player is stealing, and with which card
+    protected void SendStealPacket()
+    {
+        if(NetworkManager.main.isNetworkGame)
+        {
+            // steal byte, player byte, index byte, combatant byte, index byte
+            byte[] packet = new byte[5];
+            packet[0] = (byte)RMP.Steal;
+            packet[1] = (byte)RMP.Player;
+            packet[3] = (byte)RMP.Combatant;
+
+            // convert player index & combatant index to bytes
+            packet[2] = Convert.ToByte(playerIndex);
+            packet[4] = Convert.ToByte(hand.IndexOf(combatant));
+
+            // send to client/server
+            if(NetworkManager.main.isServer)
+            {
+                NetworkManager.main.SendToAllClients(packet);
+            }
+            else
+            {
+                NetworkManager.main.clientSocket.Send(packet);
+            }
+        }
+    }
+
+    // if game is online, tell players that player is not stealing
+    protected void SendNoStealPacket()
+    {
+        if(NetworkManager.main.isNetworkGame)
+        {
+            // steal byte, player byte, index byte
+            byte[] packet = new byte[3];
+            packet[0] = (byte)RMP.NoSteal;
+            packet[1] = (byte)RMP.Player;
+
+            // convert player index to byte
+            packet[2] = Convert.ToByte(playerIndex);
+
+            // send to client/server
+            if(NetworkManager.main.isServer)
+            {
+                NetworkManager.main.SendToAllClients(packet);
+            }
+            else
+            {
+                NetworkManager.main.clientSocket.Send(packet);
+            }
+        }
+    }
+
     // if game is online, tell players that turn is over
     protected void SendEndTurnPacket()
     {

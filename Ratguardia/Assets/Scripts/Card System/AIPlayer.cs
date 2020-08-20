@@ -54,6 +54,16 @@ public class AIPlayer : Player
                 combatant = null;
                 break;
         }
+
+        if(combatant != null)
+        {
+            SendStealPacket();
+        }
+        else
+        {
+            SendNoStealPacket();
+        }
+
         doneStealing = true;
     }
 

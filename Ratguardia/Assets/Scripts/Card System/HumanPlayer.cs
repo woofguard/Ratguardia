@@ -42,12 +42,14 @@ public class HumanPlayer : Player
             yield return new WaitUntil(() => PlayerDecidesCombatant());
 
             Board.main.refBoardUI.PromptChooseSteal(false);
+            SendStealPacket();
 
             isStealing = false;
             doneStealing = true;
         }
         else
         {
+            SendNoStealPacket();
             cursor.confirmPressed = false;
             isStealing = false;
             doneStealing = true;
