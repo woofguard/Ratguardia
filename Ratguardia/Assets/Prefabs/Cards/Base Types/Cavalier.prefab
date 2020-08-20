@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_text
-      value: If used to steal, the stolen card gains +1 DEF.
+      value: If used to steal, +1 DEF to stolen card.
       objectReference: {fileID: 0}
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
@@ -40,12 +40,12 @@ PrefabInstance:
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_fontSize
-      value: 5.5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 134774305941149755, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
       propertyPath: m_fontSizeBase
-      value: 5.5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 656963584109813927, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
@@ -214,6 +214,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951400669638786088, guid: c473f3e648497c6a5b667175eb754fa9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6373571988361414722, guid: c473f3e648497c6a5b667175eb754fa9,
         type: 3}
