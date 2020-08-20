@@ -160,6 +160,7 @@ public class StateManager : MonoBehaviour
     
     public void StartMultiplayer()
     {
+        Debug.Log("Starting multiplayer");
         SceneManager.LoadScene("CardGame");
     }
 
@@ -174,6 +175,7 @@ public class StateManager : MonoBehaviour
 
     public void RestartCardGame()
     {
+        Debug.Log("Restarting card game");
         inCutscene = false;
         SceneManager.LoadScene("CardGame");
     }
@@ -231,7 +233,7 @@ public class StateManager : MonoBehaviour
         matchScores = new int[] { 0, 0, 0, 0 };
         currentCutscene = "Intro";
 
-        Destroy(AudioManager.main.gameObject);
+        if(AudioManager.main != null) Destroy(AudioManager.main.gameObject);
         SceneManager.LoadScene("TitleScreen");
     }
 
