@@ -216,7 +216,32 @@ public class AIPlayer : Player
 
     public override void ArrangeHand()
     {
-        Transform layout = transform.Find("Layout" + playerIndex);
+        int pIndex = Board.main.GetHumanPlayer().playerIndex;
+
+        int layoutIndex = 1;
+
+        switch(pIndex)
+        {
+            case 0:
+                layoutIndex = playerIndex;
+                break;
+            case 1:
+                layoutIndex = playerIndex - 1;
+                if (layoutIndex == -1) layoutIndex = 3;
+                break;
+            case 2:
+                layoutIndex = playerIndex + 2;
+                if (layoutIndex == 5) layoutIndex = 1;
+                break;
+            case 3:
+                layoutIndex = playerIndex + 1;
+                break;
+            default:
+                Debug.Log("player index outside the array hewwo???");
+                break;
+        }
+
+        Transform layout = transform.Find("Layout" + layoutIndex);
         Debug.Log(layout);
         if (layout == null) return;
         if (!(hand.Count == 5 || hand.Count == 6)) return;

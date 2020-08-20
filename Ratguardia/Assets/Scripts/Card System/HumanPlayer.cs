@@ -76,8 +76,11 @@ public class HumanPlayer : Player
 
     public override Card Draw()
     {
-        // for online
-        SendDrawPacket();
+        if(!Board.main.initializing)
+        {
+           SendDrawPacket();
+           AudioManager.main.sfxDraw.Play();
+        }
 
         var newCard = Board.main.deck.Pop();
         Board.main.refBoardUI.UpdateDeckUI();
@@ -91,8 +94,7 @@ public class HumanPlayer : Player
 
         hand.Add(newCard);
         newCard.transform.SetParent(transform);
-
-        AudioManager.main.sfxDraw.Play();
+     
         ArrangeHand();
 
         newCard.visualCard.FlipUp();

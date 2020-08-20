@@ -8,6 +8,8 @@ public class Board : MonoBehaviour
 {
     public static Board main; // static reference
 
+    [HideInInspector] public bool initializing; // true while board is setting up
+
     public Player[] players;
     [HideInInspector] public int turn; // which player's turn it is
     public int[] scores;
@@ -69,8 +71,8 @@ public class Board : MonoBehaviour
     private IEnumerator InitializeBoard()
     {
         Debug.Log("setting up board");
+        initializing = true;
 
-        players = new Player[4];
         turn = 0; // might randomize this in the future or something
         scores = new int[4];
 
@@ -91,9 +93,6 @@ public class Board : MonoBehaviour
         AudioManager.main.cardTheme.Play();
         AudioManager.main.sfxShuffle.Play();
 
-        // dont play draw sfx when dealing cards
-        AudioManager.main.sfxDraw.mute = true;
-
         // deal each player 5 cards
         for(int i = 0; i < 5; i++)
         {
@@ -106,18 +105,16 @@ public class Board : MonoBehaviour
         // Debug.Log("Cards dealt, num remaining in deck: " + deck.stack.Count);
 
         yield return new WaitForSeconds(0.25f);
-        AudioManager.main.sfxDraw.mute = false;
+        initializing = false;
         GiveTurn(turn);
-
-        yield return null;
     }
 
     // initialize board as server, send initial board state to clients
     private IEnumerator InitializeBoardServer()
     {
         Debug.Log("setting up board as server");
+        initializing = true;
 
-        players = new Player[4];
         turn = 0; // might randomize this in the future or something
         scores = new int[4];
 
@@ -129,7 +126,8 @@ public class Board : MonoBehaviour
             deck.Push(card);
         }
 
-        AudioManager.main.cardTheme.Play();
+        // commented out for my testing sanity
+        // AudioManager.main.cardTheme.Play();
         AudioManager.main.sfxShuffle.Play();
 
         // shuffle deck, record each card in byte array
@@ -146,9 +144,6 @@ public class Board : MonoBehaviour
             NetworkManager.main.serverSocket.Send(i, playerPacket);
         }
 
-        // dont play draw sfx when dealing cards
-        AudioManager.main.sfxDraw.mute = true;
-
         // deal out cards, player order is synced so it should turn out the same for clients
         for(int i = 0; i < 5; i++)
         {
@@ -159,16 +154,15 @@ public class Board : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.25f);
-        AudioManager.main.sfxDraw.mute = false;
+        initializing = false;
         GiveTurn(turn);
-
-        yield return null;
     }
 
     // receive data from server and construct board from it
     private IEnumerator InitializeBoardClient()
     {
         Debug.Log("setting up board as client");
+        initializing = true;
 
         turn = 0;
         scores = new int[4];
@@ -189,7 +183,8 @@ public class Board : MonoBehaviour
             dictCards[card.suit.ToString()][card.cardName] = card;
         }
 
-        AudioManager.main.cardTheme.Play();
+        // commented out for my testing sanity
+        // AudioManager.main.cardTheme.Play();
         AudioManager.main.sfxShuffle.Play();
 
         // receive deck data from server
@@ -236,7 +231,7 @@ public class Board : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.25f);
-        AudioManager.main.sfxDraw.mute = false;
+        initializing = false;
         GiveTurn(turn);
     }
 
@@ -327,7 +322,7 @@ public class Board : MonoBehaviour
             else
             {
                 // maybe let the players choose ai type later
-                packet[i] = (byte)RMP.RandomAI;
+                packet[i] = (byte)RMP.BasicAI;
             }
         }
 
@@ -345,16 +340,20 @@ public class Board : MonoBehaviour
             {
                 case (byte)RMP.Human:
                     players[i] = Instantiate(humanPlayerPrefab).GetComponent<Player>();
+                    players[i].playerIndex = i;
                     break;
                 case (byte)RMP.Network:
                     players[i] = Instantiate(networkPlayerPrefab).GetComponent<Player>();
+                    players[i].playerIndex = i;
                     break;
                 case (byte)RMP.RandomAI:
                     players[i] = Instantiate(AIPlayerPrefab).GetComponent<Player>();
+                    players[i].playerIndex = i;
                     (players[i] as AIPlayer).aiType = "random";
                     break;
                 case (byte)RMP.BasicAI:
                     players[i] = Instantiate(AIPlayerPrefab).GetComponent<Player>();
+                    players[i].playerIndex = i;
                     (players[i] as AIPlayer).aiType = "basic";
                     break;
             }

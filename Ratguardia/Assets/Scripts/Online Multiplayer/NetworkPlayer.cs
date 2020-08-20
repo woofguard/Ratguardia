@@ -7,6 +7,8 @@ public class NetworkPlayer : Player
 {
     public override IEnumerator TakeTurn()
     {
+        icon.transform.Find("Outline").gameObject.SetActive(true);
+
         // wait for player to draw
         yield return StartCoroutine(NetworkManager.main.WaitForPacket(RMP.Draw));
         Draw();

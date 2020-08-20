@@ -52,6 +52,7 @@ public abstract class Player : MonoBehaviour
     {
         // if not in battle
         yield return new WaitWhile(() => Board.main.refBoardUI.stealUI.activeSelf);
+        SendEndTurnPacket();
         Board.main.GiveTurn(Board.main.NextPlayer());
         icon.transform.Find("Outline").gameObject.SetActive(false);
         yield return null;
@@ -59,7 +60,11 @@ public abstract class Player : MonoBehaviour
 
     public virtual Card Draw()
     {
-        SendDrawPacket();
+        if(!Board.main.initializing)
+        {
+            SendDrawPacket();
+            AudioManager.main.sfxDraw.Play();
+        }
 
         var newCard = Board.main.deck.Pop();
         Board.main.refBoardUI.UpdateDeckUI();
@@ -74,7 +79,6 @@ public abstract class Player : MonoBehaviour
         hand.Add(newCard);
         newCard.transform.SetParent(transform);
         
-        AudioManager.main.sfxDraw.Play();
         ArrangeHand();
         
         score = CalculateScore();
@@ -274,7 +278,7 @@ public abstract class Player : MonoBehaviour
     // if game is online, send data to other players that player drew
     protected void SendDrawPacket()
     {
-        if(NetworkManager.main.isNetworkGame)
+        if(NetworkManager.main.isNetworkGame && this is HumanPlayer)
         {
             // literally send one byte
             byte[] packet = new byte[1];
@@ -295,7 +299,7 @@ public abstract class Player : MonoBehaviour
     // if game is online, tell players what card was discarded
     protected void SendDiscardPacket(Card card)
     {
-        if(NetworkManager.main.isNetworkGame)
+        if(NetworkManager.main.isNetworkGame && this is HumanPlayer)
         {
             // discard byte, index byte
             byte[] packet = new byte[2];
@@ -314,6 +318,27 @@ public abstract class Player : MonoBehaviour
             {
                 NetworkManager.main.clientSocket.Send(packet);
             }  
+        }
+    }
+
+    // if game is online, tell players that turn is over
+    protected void SendEndTurnPacket()
+    {
+        if(NetworkManager.main.isNetworkGame && this is HumanPlayer)
+        {
+            // literally just 1 byte again
+            byte[] packet = new byte[1];
+            packet[0] = (byte)RMP.EndTurn;
+
+            // send to client/server
+            if(NetworkManager.main.isServer)
+            {
+                NetworkManager.main.SendToAllClients(packet);
+            }
+            else
+            {
+                NetworkManager.main.clientSocket.Send(packet);
+            }
         }
     }
 }
