@@ -34,7 +34,6 @@ public class NetworkPlayer : Player
         {
             yield return StartCoroutine(NetworkManager.main.WaitForPacket(RMP.Steal, RMP.NoSteal));
         }
-
         // if player decided to steal
         if(NetworkManager.main.stealPackets[playerIndex][0] == (byte)RMP.Steal)
         {

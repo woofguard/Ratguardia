@@ -177,7 +177,7 @@ public class NetworkManager : MonoBehaviour
             for(int i = 1; i <= numPlayers; i++)
             {
                 // dont send to the player whos turn it is, they already know
-                if(i != Board.main.turn)
+                if(i != Board.main.turn || !Board.main.PlayersDoneStealing())
                 {
                     serverSocket.Send(i, packet);
                 }
@@ -467,6 +467,7 @@ public class NetworkManager : MonoBehaviour
             int index = packet[2];
             stealPackets[index] = packet;
             packetRecieved[index] = true;
+            Debug.Log(BitConverter.ToString(stealPackets[index]));
         }
     }
 
