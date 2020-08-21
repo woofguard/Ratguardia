@@ -47,7 +47,13 @@ public enum RMP: byte
     // game status/timing stuff?
     QueryPlayers = 0xC1, // client asks server if room is full (standalone)
     NumPlayers = 0xC2,   // server tells if room is full (followed by num players)
-    StartGame = 0xC3
+    StartGame = 0xC3,
+
+    // player name/portrait info
+    Character = 0xD1, // followed by player index, icon, name
+    Icon = 0xD2,      // followed by index in portrait array
+    Name = 0xD3,      // followed by num chars in name, then by name string in bytes
+    EndCharacter = 0xD4
 }
 
 // this class doesn't do anything right now, maybe helper functions later or something

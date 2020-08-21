@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
@@ -32,6 +33,12 @@ public class NetworkManager : MonoBehaviour
     [HideInInspector] public byte[][] stealPackets;
     [HideInInspector] public bool[] packetRecieved;
 
+    // stores player portraits and names
+    [HideInInspector] public Sprite[] portraits;
+    [HideInInspector] public Sprite[] playerPortraits;
+    [HideInInspector] public string[] names;
+
+
     // UI reference
     public NetworkUI ui;
 
@@ -48,18 +55,27 @@ public class NetworkManager : MonoBehaviour
             Telepathy.Logger.LogWarning = Debug.LogWarning;
             Telepathy.Logger.LogError = Debug.LogError;
 
-            // initialize arrays
-            stealPackets = new byte[4][];
-            packetRecieved = new bool[4];
-            for(int i = 0; i < packetRecieved.Length; i++)
-            {
-                packetRecieved[i] = false;
-            }
+            Initialize();
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    // run this again when starting another lobby
+    public void Initialize()
+    {
+        // initialize arrays
+        stealPackets = new byte[4][];
+        packetRecieved = new bool[4];
+        for(int i = 0; i < packetRecieved.Length; i++)
+        {
+            packetRecieved[i] = false;
+        }
+
+        playerPortraits = new Sprite[4];
+        names = new string[4];
     }
 
     // opens up socket for players to join
@@ -191,8 +207,13 @@ public class NetworkManager : MonoBehaviour
                         ui.UpdateNumPlayers();
                         break;
                     case Telepathy.EventType.Data:
-                        string data = BitConverter.ToString(msg.data);
-                        Debug.Log("Data: " + data);
+                        // if we get character data, set it
+                        if(msg.data[0] == (byte)RMP.Character)
+                        {
+                            byte[] packet = msg.data;
+                            packet[1] = Convert.ToByte(msg.connectionId);
+                            ParseCharacterPacket(packet);
+                        }
                         break;
                     case Telepathy.EventType.Disconnected:
                         Debug.Log("Disconnected");
@@ -240,6 +261,114 @@ public class NetworkManager : MonoBehaviour
             }
             yield return null;
         } 
+    }
+
+    // sends character portrait/name data without index
+    public void SendCharacterPacket(Sprite portrait, string name)
+    {
+        // get index of portrait in array
+        int portraitIndex = Array.IndexOf(portraits, portrait);
+
+        // convert character name string to bytes
+        byte[] nameBytes = Encoding.ASCII.GetBytes(name);
+
+        byte[] packet = new byte[nameBytes.Length + 6];
+
+        // Character, playerIndex, Icon, iconIndex, Name, name.Length, name string
+        packet[0] = (byte)RMP.Character;
+        packet[2] = (byte)RMP.Icon;
+        packet[3] = Convert.ToByte(portraitIndex);
+        packet[4] = (byte)RMP.Name;
+        packet[5] = Convert.ToByte(nameBytes.Length);
+
+        // set the the rest of the bytes in the packet to the name bytes
+        for(int i = 0; i < nameBytes.Length; i++)
+        {
+            packet[6 + i] = nameBytes[i];
+        }
+
+        if(isServer)
+        {
+            SendToAllClients(packet);
+        }
+        else
+        {
+            clientSocket.Send(packet);
+        }
+    }
+
+    // overload if we know the player index
+    public void SendCharacterPacket(int playerIndex, Sprite portrait, string name)
+    {
+        // get index of portrait in array
+        int portraitIndex = Array.IndexOf(portraits, portrait);
+
+        // convert character name string to bytes
+        byte[] nameBytes = Encoding.ASCII.GetBytes(name);
+
+        byte[] packet = new byte[nameBytes.Length + 6];
+
+        // Character, playerIndex, Icon, iconIndex, Name, name.Length, name string
+        packet[0] = (byte)RMP.Character;
+        packet[1] = Convert.ToByte(playerIndex);
+        packet[2] = (byte)RMP.Icon;
+        packet[3] = Convert.ToByte(portraitIndex);
+        packet[4] = (byte)RMP.Name;
+        packet[5] = Convert.ToByte(nameBytes.Length);
+
+        // set the the rest of the bytes in the packet to the name bytes
+        for(int i = 0; i < nameBytes.Length; i++)
+        {
+            packet[6 + i] = nameBytes[i];
+        }
+
+        if(isServer)
+        {
+            SendToAllClients(packet);
+        }
+        else
+        {
+            clientSocket.Send(packet);
+        }
+    }
+
+    public void SendEndCharPacket()
+    {
+        byte[] packet = new byte[1];
+        packet[0] = (byte)RMP.EndCharacter;
+        SendToAllClients(packet);
+    }
+
+    // sets the data directly as server
+    public void SetCharacterData(int index, Sprite portrait, string name)
+    {
+        playerPortraits[index] = portrait;
+        names[index] = name;
+    }
+
+    // recieves a character data packet and sets the correct values
+    public void ParseCharacterPacket(byte[] packet)
+    {
+        int playerIndex = packet[1];
+        int portraitIndex = packet[3];
+        int nameLength = packet[5];
+
+        byte[] nameBytes = new byte[nameLength];
+
+        // put the bytes from packet into name array
+        for(int i = 0; i < nameBytes.Length; i++)
+        {
+            nameBytes[i] = packet[6 + i];
+        }
+
+        // convert name back to string
+        string name = Encoding.ASCII.GetString(nameBytes);
+
+        // get portrait from array
+        Sprite portrait = portraits[portraitIndex];
+
+        // set the character's data
+        SetCharacterData(playerIndex, portrait, name);
     }
 
     // waits to recieve to send a certain type of data packet

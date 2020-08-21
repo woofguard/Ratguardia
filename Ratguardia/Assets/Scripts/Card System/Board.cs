@@ -144,6 +144,22 @@ public class Board : MonoBehaviour
             NetworkManager.main.serverSocket.Send(i, playerPacket);
         }
 
+        // send player character data to clients
+        for(int i = 0; i <= NetworkManager.main.numPlayers; i++)
+        {
+            Sprite portrait = NetworkManager.main.playerPortraits[i];
+            string name = NetworkManager.main.names[i];
+
+            // dont send if either are null
+            if(portrait != null && name != null)
+            {
+                NetworkManager.main.SendCharacterPacket(i, portrait, name);
+            }
+        }
+
+        // send end character packet to clients
+        NetworkManager.main.SendEndCharPacket();
+
         // deal out cards, player order is synced so it should turn out the same for clients
         for(int i = 0; i < 5; i++)
         {
@@ -279,6 +295,7 @@ public class Board : MonoBehaviour
         // player 0 is human player for server
         players[0] = Instantiate(humanPlayerPrefab).GetComponent<Player>();
         players[0].playerIndex = 0;
+        players[0].SetCharacterOnline(NetworkManager.main.playerPortraits[0], NetworkManager.main.names[0]);
 
         // create network players based on how many players are connected
         for(int i = 1; i < 4; i++)
@@ -288,6 +305,7 @@ public class Board : MonoBehaviour
             {
                 players[i] = Instantiate(networkPlayerPrefab).GetComponent<Player>();
                 players[i].playerIndex = i;
+                players[i].SetCharacterOnline(NetworkManager.main.playerPortraits[i], NetworkManager.main.names[i]);
             }
             // else create an ai player
             else

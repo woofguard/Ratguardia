@@ -21,6 +21,7 @@ public class CharacterSelect : MonoBehaviour
     {
         nui.userIcon = portraits[index];
         portrait.sprite = nui.userIcon;
+        NetworkManager.main.portraits = this.portraits; // i need this actually
     }
 
     public void SetCharacterInfo()
@@ -28,6 +29,17 @@ public class CharacterSelect : MonoBehaviour
         nui.userName = nameInput.text;
         nui.userIcon = portraits[index];
         nameDisplay.text = nui.userName;
+
+        // if server, set it directly
+        if(NetworkManager.main.isServer)
+        {
+            NetworkManager.main.SetCharacterData(0, nui.userIcon, nui.userName);
+        }
+        // if client, send a packet
+        else
+        {
+            NetworkManager.main.SendCharacterPacket(nui.userIcon, nui.userName);
+        }
     }
 
     public void NextPortrait()

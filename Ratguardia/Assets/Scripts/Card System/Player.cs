@@ -40,6 +40,17 @@ public abstract class Player : MonoBehaviour
         SetIcon();
     }
 
+    public void SetCharacterOnline(Sprite portrait, string name)
+    {
+        // dont set them if null, just use default
+        if(portrait != null && name != null)
+        {
+            character.portrait = portrait;
+            character.title = name;
+            SetIcon();
+        } 
+    }
+
     public void SetIcon()
     {
         icon.GetComponentInChildren<SpriteRenderer>().sprite = character.portrait;
