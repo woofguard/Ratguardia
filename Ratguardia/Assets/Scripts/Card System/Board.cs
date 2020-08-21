@@ -127,7 +127,7 @@ public class Board : MonoBehaviour
         }
 
         // commented out for my testing sanity
-        // AudioManager.main.cardTheme.Play();
+        AudioManager.main.cardTheme.Play();
         AudioManager.main.sfxShuffle.Play();
 
         // shuffle deck, record each card in byte array
@@ -200,7 +200,7 @@ public class Board : MonoBehaviour
         }
 
         // commented out for my testing sanity
-        // AudioManager.main.cardTheme.Play();
+        AudioManager.main.cardTheme.Play();
         AudioManager.main.sfxShuffle.Play();
 
         // receive deck data from server
