@@ -127,7 +127,7 @@ public class Board : MonoBehaviour
         }
 
         // commented out for my testing sanity
-        AudioManager.main.cardTheme.Play();
+        // AudioManager.main.cardTheme.Play();
         AudioManager.main.sfxShuffle.Play();
 
         // shuffle deck, record each card in byte array
@@ -200,7 +200,7 @@ public class Board : MonoBehaviour
         }
 
         // commented out for my testing sanity
-        AudioManager.main.cardTheme.Play();
+        // AudioManager.main.cardTheme.Play();
         AudioManager.main.sfxShuffle.Play();
 
         // receive deck data from server
@@ -233,6 +233,31 @@ public class Board : MonoBehaviour
 
         // generate players from server data
         players = GenerateClientGame(playerPacket);
+
+        // recieve character portrait data from the server
+        do
+        {
+            yield return StartCoroutine(NetworkManager.main.WaitForPacket(RMP.Character, RMP.EndCharacter));
+            
+            // dont parse it if its not character
+            if(NetworkManager.main.packet[0] == (byte)RMP.Character)
+            {
+                NetworkManager.main.ParseCharacterPacket(NetworkManager.main.packet);
+            }
+        }
+        while(NetworkManager.main.packet[0] != (byte)RMP.EndCharacter);
+
+        // set character portraits/names
+        for(int i = 0; i < 4; i++)
+        {
+            Sprite portrait = NetworkManager.main.playerPortraits[i];
+            string name = NetworkManager.main.names[i];
+
+            if(portrait != null && name != null)
+            {
+                players[i].SetCharacterOnline(portrait, name);
+            }
+        }
 
         // dont play draw sfx when dealing cards
         AudioManager.main.sfxDraw.mute = true;
@@ -296,6 +321,12 @@ public class Board : MonoBehaviour
         players[0] = Instantiate(humanPlayerPrefab).GetComponent<Player>();
         players[0].playerIndex = 0;
         players[0].SetCharacterOnline(NetworkManager.main.playerPortraits[0], NetworkManager.main.names[0]);
+
+        for(int i = 0; i < 4; i++)
+        {
+            Debug.Log(NetworkManager.main.playerPortraits[i]);
+            Debug.Log(NetworkManager.main.names[i]);
+        }
 
         // create network players based on how many players are connected
         for(int i = 1; i < 4; i++)

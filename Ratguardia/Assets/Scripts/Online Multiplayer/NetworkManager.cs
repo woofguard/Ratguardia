@@ -334,9 +334,9 @@ public class NetworkManager : MonoBehaviour
 
     public void SendEndCharPacket()
     {
-        byte[] packet = new byte[1];
-        packet[0] = (byte)RMP.EndCharacter;
-        SendToAllClients(packet);
+        byte[] endPacket = new byte[1];
+        endPacket[0] = (byte)RMP.EndCharacter;
+        SendToAllClients(endPacket);
     }
 
     // sets the data directly as server
@@ -389,6 +389,7 @@ public class NetworkManager : MonoBehaviour
                     {
                         received = true;
                         packet = msg.data;
+                        Debug.Log(BitConverter.ToString(packet));
                         ForwardPacket(packet);
                     }
                 }
@@ -429,6 +430,7 @@ public class NetworkManager : MonoBehaviour
                         {
                             received = true;
                             packet = msg.data;
+                            Debug.Log(BitConverter.ToString(packet));
                             ForwardPacket(packet);
                             ParseStealPacket(packet);
                         }

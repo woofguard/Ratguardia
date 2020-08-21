@@ -14,7 +14,7 @@ public abstract class Player : MonoBehaviour
     [HideInInspector] public bool isStealing;
     [HideInInspector] public int playerIndex; // which index this player is in the Board array
     [HideInInspector] public Card combatant;  // card fighting in battle, used for stealing
-    [HideInInspector] public bool doneStealing = true;
+    public bool doneStealing = true;
 
     public GameObject fiveCardLayout;
     public GameObject sixCardLayout;
@@ -40,6 +40,7 @@ public abstract class Player : MonoBehaviour
         SetIcon();
     }
 
+    // Sword CArt Online
     public void SetCharacterOnline(Sprite portrait, string name)
     {
         // dont set them if null, just use default
