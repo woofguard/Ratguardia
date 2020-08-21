@@ -1239,7 +1239,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Network Test
+  m_text: Play Online
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 69593e61888652a4483fc9e79f96f22f, type: 2}
   m_sharedMaterial: {fileID: 5720887984057883869, guid: 69593e61888652a4483fc9e79f96f22f,
