@@ -20,6 +20,8 @@ public class NetworkUI : MonoBehaviour
 
     private bool buttonPressed = false;
 
+    public GameObject charSelect;
+
     private void Awake()
     {
         NetworkManager.main.ui = this;
@@ -44,6 +46,7 @@ public class NetworkUI : MonoBehaviour
         UpdateNumPlayers();
 
         startButton.gameObject.SetActive(true);
+        charSelect.gameObject.SetActive(true);
     }
 
     // displays how many playeres are connected to the server
@@ -67,6 +70,7 @@ public class NetworkUI : MonoBehaviour
             // update network manager fields
             NetworkManager.main.isNetworkGame = true;
             NetworkManager.main.isServer = false;
+            charSelect.SetActive(true);
         }
         else
         {
@@ -82,6 +86,8 @@ public class NetworkUI : MonoBehaviour
         ipv6Text.text = "";
         ipv4Text.text = "";
         buttonPressed = false;
+        charSelect.gameObject.SetActive(false);
+        startButton.gameObject.SetActive(false);
     }
 
     // functions to copy ip to clipboard

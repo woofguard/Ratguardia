@@ -396,14 +396,19 @@ public class Board : MonoBehaviour
                     players[i].playerIndex = i;
                     break;
                 case (byte)RMP.RandomAI:
-                    players[i] = Instantiate(AIPlayerPrefab).GetComponent<Player>();
+                    // actually dont do that, make a network player instead
+                    players[i] = Instantiate(networkPlayerPrefab).GetComponent<Player>();
                     players[i].playerIndex = i;
-                    (players[i] as AIPlayer).aiType = "random";
+                    // players[i] = Instantiate(AIPlayerPrefab).GetComponent<Player>();
+                    // players[i].playerIndex = i;
+                    // (players[i] as AIPlayer).aiType = "random";
                     break;
                 case (byte)RMP.BasicAI:
-                    players[i] = Instantiate(AIPlayerPrefab).GetComponent<Player>();
+                    players[i] = Instantiate(networkPlayerPrefab).GetComponent<Player>();
                     players[i].playerIndex = i;
-                    (players[i] as AIPlayer).aiType = "basic";
+                    // players[i] = Instantiate(AIPlayerPrefab).GetComponent<Player>();
+                    // players[i].playerIndex = i;
+                    // (players[i] as AIPlayer).aiType = "basic";
                     break;
             }
         }

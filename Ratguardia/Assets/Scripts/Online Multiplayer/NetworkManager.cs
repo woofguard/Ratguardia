@@ -170,15 +170,16 @@ public class NetworkManager : MonoBehaviour
     }
 
     // when recieving a packet as server, sends to the rest of the players besides the one who sent it
-    public void ForwardPacket(byte[] packet)
+    public void ForwardPacket(Message msg)
     {
         if(isServer)
         {
             for(int i = 1; i <= numPlayers; i++)
             {
-                // dont send to the player whos turn it is, they already know
-                if(i != Board.main.turn || !Board.main.PlayersDoneStealing())
+                // dont send to the player who sent the message
+                if(i != msg.connectionId)
                 {
+                    byte[] packet = msg.data;
                     serverSocket.Send(i, packet);
                 }
             }
@@ -390,7 +391,7 @@ public class NetworkManager : MonoBehaviour
                         received = true;
                         packet = msg.data;
                         Debug.Log(BitConverter.ToString(packet));
-                        ForwardPacket(packet);
+                        ForwardPacket(msg);
                     }
                 }
             }
@@ -431,7 +432,7 @@ public class NetworkManager : MonoBehaviour
                             received = true;
                             packet = msg.data;
                             Debug.Log(BitConverter.ToString(packet));
-                            ForwardPacket(packet);
+                            ForwardPacket(msg);
                             ParseStealPacket(packet);
                         }
                     }

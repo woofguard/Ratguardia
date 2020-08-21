@@ -14,7 +14,7 @@ public abstract class Player : MonoBehaviour
     [HideInInspector] public bool isStealing;
     [HideInInspector] public int playerIndex; // which index this player is in the Board array
     [HideInInspector] public Card combatant;  // card fighting in battle, used for stealing
-    public bool doneStealing = true;
+    [HideInInspector] public bool doneStealing = true;
 
     public GameObject fiveCardLayout;
     public GameObject sixCardLayout;
@@ -298,7 +298,7 @@ public abstract class Player : MonoBehaviour
     // if game is online, send data to other players that player drew
     protected void SendDrawPacket()
     {
-        if(NetworkManager.main.isNetworkGame && this is HumanPlayer)
+        if(NetworkManager.main.isNetworkGame && (this is HumanPlayer || this is AIPlayer))
         {
             // literally send one byte
             byte[] packet = new byte[1];
@@ -319,7 +319,7 @@ public abstract class Player : MonoBehaviour
     // if game is online, tell players what card was discarded
     protected void SendDiscardPacket(Card card)
     {
-        if(NetworkManager.main.isNetworkGame && this is HumanPlayer)
+        if(NetworkManager.main.isNetworkGame && (this is HumanPlayer || this is AIPlayer))
         {
             // discard byte, index byte
             byte[] packet = new byte[2];
@@ -396,7 +396,7 @@ public abstract class Player : MonoBehaviour
     // if game is online, tell players that turn is over
     protected void SendEndTurnPacket()
     {
-        if(NetworkManager.main.isNetworkGame && this is HumanPlayer)
+        if(NetworkManager.main.isNetworkGame && (this is HumanPlayer || this is AIPlayer))
         {
             // literally just 1 byte again
             byte[] packet = new byte[1];
