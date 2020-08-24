@@ -343,6 +343,7 @@ public class Board : MonoBehaviour
             {
                 players[i] = Instantiate(AIPlayerPrefab).GetComponent<Player>();
                 players[i].playerIndex = i;
+                (players[i] as AIPlayer).aiType = "basicOnline";
             }
         }
 
