@@ -29,15 +29,6 @@ public class LetterBoxer : MonoBehaviour
         }
     }
 
-    public void Update()
-    {
-        // perform sizing if onUpdate is set
-        if (onUpdate)
-        {
-            PerformSizing();
-        }
-    }
-
     private void OnValidate()
     {
         x = Mathf.Max(1, x);
