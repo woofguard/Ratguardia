@@ -7,6 +7,17 @@ public class BeginRoundDisplay : MonoBehaviour
 {
     public PlayerResult[] players;
     public TextMeshProUGUI roundNum;
+    public GameObject beginPrompt;
+
+    // can i just disable this in an online game... will this work....
+    private void Start()
+    {
+        if(NetworkManager.main.isNetworkGame)
+        {
+            gameObject.SetActive(false);
+            beginPrompt.SetActive(false);
+        }
+    }
 
     // display results of current round
     public void DisplayNewRound()

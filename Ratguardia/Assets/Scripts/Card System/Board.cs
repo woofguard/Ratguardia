@@ -127,7 +127,7 @@ public class Board : MonoBehaviour
         }
 
         // commented out for my testing sanity
-        // AudioManager.main.cardTheme.Play();
+        AudioManager.main.cardTheme.Play();
         AudioManager.main.sfxShuffle.Play();
 
         // shuffle deck, record each card in byte array
@@ -143,6 +143,22 @@ public class Board : MonoBehaviour
             byte[] playerPacket = CreatePlayerDataPacket(i);
             NetworkManager.main.serverSocket.Send(i, playerPacket);
         }
+
+        // send player character data to clients
+        for(int i = 0; i <= NetworkManager.main.numPlayers; i++)
+        {
+            Sprite portrait = NetworkManager.main.playerPortraits[i];
+            string name = NetworkManager.main.names[i];
+
+            // dont send if either are null
+            if(portrait != null && name != null)
+            {
+                NetworkManager.main.SendCharacterPacket(i, portrait, name);
+            }
+        }
+
+        // send end character packet to clients
+        NetworkManager.main.SendEndCharPacket();
 
         // deal out cards, player order is synced so it should turn out the same for clients
         for(int i = 0; i < 5; i++)
@@ -184,7 +200,7 @@ public class Board : MonoBehaviour
         }
 
         // commented out for my testing sanity
-        // AudioManager.main.cardTheme.Play();
+        AudioManager.main.cardTheme.Play();
         AudioManager.main.sfxShuffle.Play();
 
         // receive deck data from server
@@ -217,6 +233,31 @@ public class Board : MonoBehaviour
 
         // generate players from server data
         players = GenerateClientGame(playerPacket);
+
+        // recieve character portrait data from the server
+        do
+        {
+            yield return StartCoroutine(NetworkManager.main.WaitForPacket(RMP.Character, RMP.EndCharacter));
+            
+            // dont parse it if its not character
+            if(NetworkManager.main.packet[0] == (byte)RMP.Character)
+            {
+                NetworkManager.main.ParseCharacterPacket(NetworkManager.main.packet);
+            }
+        }
+        while(NetworkManager.main.packet[0] != (byte)RMP.EndCharacter);
+
+        // set character portraits/names
+        for(int i = 0; i < 4; i++)
+        {
+            Sprite portrait = NetworkManager.main.playerPortraits[i];
+            string name = NetworkManager.main.names[i];
+
+            if(portrait != null && name != null)
+            {
+                players[i].SetCharacterOnline(portrait, name);
+            }
+        }
 
         // dont play draw sfx when dealing cards
         AudioManager.main.sfxDraw.mute = true;
@@ -279,6 +320,13 @@ public class Board : MonoBehaviour
         // player 0 is human player for server
         players[0] = Instantiate(humanPlayerPrefab).GetComponent<Player>();
         players[0].playerIndex = 0;
+        players[0].SetCharacterOnline(NetworkManager.main.playerPortraits[0], NetworkManager.main.names[0]);
+
+        for(int i = 0; i < 4; i++)
+        {
+            Debug.Log(NetworkManager.main.playerPortraits[i]);
+            Debug.Log(NetworkManager.main.names[i]);
+        }
 
         // create network players based on how many players are connected
         for(int i = 1; i < 4; i++)
@@ -288,12 +336,14 @@ public class Board : MonoBehaviour
             {
                 players[i] = Instantiate(networkPlayerPrefab).GetComponent<Player>();
                 players[i].playerIndex = i;
+                players[i].SetCharacterOnline(NetworkManager.main.playerPortraits[i], NetworkManager.main.names[i]);
             }
             // else create an ai player
             else
             {
                 players[i] = Instantiate(AIPlayerPrefab).GetComponent<Player>();
                 players[i].playerIndex = i;
+                (players[i] as AIPlayer).aiType = "basicOnline";
             }
         }
 
@@ -347,14 +397,19 @@ public class Board : MonoBehaviour
                     players[i].playerIndex = i;
                     break;
                 case (byte)RMP.RandomAI:
-                    players[i] = Instantiate(AIPlayerPrefab).GetComponent<Player>();
+                    // actually dont do that, make a network player instead
+                    players[i] = Instantiate(networkPlayerPrefab).GetComponent<Player>();
                     players[i].playerIndex = i;
-                    (players[i] as AIPlayer).aiType = "random";
+                    // players[i] = Instantiate(AIPlayerPrefab).GetComponent<Player>();
+                    // players[i].playerIndex = i;
+                    // (players[i] as AIPlayer).aiType = "random";
                     break;
                 case (byte)RMP.BasicAI:
-                    players[i] = Instantiate(AIPlayerPrefab).GetComponent<Player>();
+                    players[i] = Instantiate(networkPlayerPrefab).GetComponent<Player>();
                     players[i].playerIndex = i;
-                    (players[i] as AIPlayer).aiType = "basic";
+                    // players[i] = Instantiate(AIPlayerPrefab).GetComponent<Player>();
+                    // players[i].playerIndex = i;
+                    // (players[i] as AIPlayer).aiType = "basic";
                     break;
             }
         }
@@ -381,6 +436,20 @@ public class Board : MonoBehaviour
             Debug.Log("Player " + player + "'s turn");
             StartCoroutine(players[player].TakeTurn()); 
         }
+    }
+
+    // is true when every player is done deciding to steal
+    public bool PlayersDoneStealing()
+    {
+        foreach(var player in players)
+        {
+            // if any player is still deciding, return false
+            if(!player.doneStealing)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     // resolves a battle, returns the winning player's card

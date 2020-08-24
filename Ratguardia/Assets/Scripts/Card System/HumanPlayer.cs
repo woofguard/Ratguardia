@@ -27,6 +27,7 @@ public class HumanPlayer : Player
     public override IEnumerator DecideSteal()
     {
         isStealing = true;
+        doneStealing = false;
 
         Board.main.refBoardUI.PromptSteal(true);
         yield return new WaitUntil(() => Board.main.refBoardUI.stealChosen);
@@ -41,13 +42,17 @@ public class HumanPlayer : Player
             yield return new WaitUntil(() => PlayerDecidesCombatant());
 
             Board.main.refBoardUI.PromptChooseSteal(false);
+            SendStealPacket();
 
             isStealing = false;
+            doneStealing = true;
         }
         else
         {
+            SendNoStealPacket();
             cursor.confirmPressed = false;
             isStealing = false;
+            doneStealing = true;
         }
 
         Board.main.refBoardUI.ResetSteal();

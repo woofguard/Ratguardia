@@ -27,6 +27,36 @@ public class NetworkPlayer : Player
 
     public override IEnumerator DecideSteal()
     {
+        doneStealing = false;
+
+        // recieve packets until one for this player arrives
+        while(!NetworkManager.main.packetRecieved[playerIndex])
+        {
+            yield return StartCoroutine(NetworkManager.main.WaitForPacket(RMP.Steal, RMP.NoSteal));
+        }
+        // if player decided to steal
+        if(NetworkManager.main.stealPackets[playerIndex][0] == (byte)RMP.Steal)
+        {
+            // set combatant from recieved index
+            int combatantIndex = NetworkManager.main.stealPackets[playerIndex][4];
+            combatant = hand[combatantIndex];
+
+            // reset the packet data so we dont steal again
+            NetworkManager.main.stealPackets[playerIndex] = null;
+            NetworkManager.main.packetRecieved[playerIndex] = false;
+        }
+        // player decided not to steal
+        else if(NetworkManager.main.stealPackets[playerIndex][0] == (byte)RMP.NoSteal)
+        {
+            // no combatant
+            combatant = null;
+
+            // reset the packet data so we dont steal again
+            NetworkManager.main.stealPackets[playerIndex] = null;
+            NetworkManager.main.packetRecieved[playerIndex] = false;
+        }
+
+        doneStealing = true;
         yield return null;
     }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
@@ -28,6 +29,16 @@ public class NetworkManager : MonoBehaviour
     // temporary storage for other scripts to read from
     [HideInInspector] public byte[] packet;
 
+    // makes sure steal packets go to the right person
+    [HideInInspector] public byte[][] stealPackets;
+    [HideInInspector] public bool[] packetRecieved;
+
+    // stores player portraits and names
+    [HideInInspector] public Sprite[] portraits;
+    [HideInInspector] public Sprite[] playerPortraits;
+    [HideInInspector] public string[] names;
+
+
     // UI reference
     public NetworkUI ui;
 
@@ -43,11 +54,28 @@ public class NetworkManager : MonoBehaviour
             Telepathy.Logger.Log = Debug.Log;
             Telepathy.Logger.LogWarning = Debug.LogWarning;
             Telepathy.Logger.LogError = Debug.LogError;
+
+            Initialize();
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    // run this again when starting another lobby
+    public void Initialize()
+    {
+        // initialize arrays
+        stealPackets = new byte[4][];
+        packetRecieved = new bool[4];
+        for(int i = 0; i < packetRecieved.Length; i++)
+        {
+            packetRecieved[i] = false;
+        }
+
+        playerPortraits = new Sprite[4];
+        names = new string[4];
     }
 
     // opens up socket for players to join
@@ -142,15 +170,16 @@ public class NetworkManager : MonoBehaviour
     }
 
     // when recieving a packet as server, sends to the rest of the players besides the one who sent it
-    public void ForwardPacket(byte[] packet)
+    public void ForwardPacket(Message msg)
     {
         if(isServer)
         {
             for(int i = 1; i <= numPlayers; i++)
             {
-                // dont send to the player whos turn it is, they already know
-                if(i != Board.main.turn)
+                // dont send to the player who sent the message
+                if(i != msg.connectionId)
                 {
+                    byte[] packet = msg.data;
                     serverSocket.Send(i, packet);
                 }
             }
@@ -179,8 +208,13 @@ public class NetworkManager : MonoBehaviour
                         ui.UpdateNumPlayers();
                         break;
                     case Telepathy.EventType.Data:
-                        string data = BitConverter.ToString(msg.data);
-                        Debug.Log("Data: " + data);
+                        // if we get character data, set it
+                        if(msg.data[0] == (byte)RMP.Character)
+                        {
+                            byte[] packet = msg.data;
+                            packet[1] = Convert.ToByte(msg.connectionId);
+                            ParseCharacterPacket(packet);
+                        }
                         break;
                     case Telepathy.EventType.Disconnected:
                         Debug.Log("Disconnected");
@@ -230,6 +264,114 @@ public class NetworkManager : MonoBehaviour
         } 
     }
 
+    // sends character portrait/name data without index
+    public void SendCharacterPacket(Sprite portrait, string name)
+    {
+        // get index of portrait in array
+        int portraitIndex = Array.IndexOf(portraits, portrait);
+
+        // convert character name string to bytes
+        byte[] nameBytes = Encoding.ASCII.GetBytes(name);
+
+        byte[] packet = new byte[nameBytes.Length + 6];
+
+        // Character, playerIndex, Icon, iconIndex, Name, name.Length, name string
+        packet[0] = (byte)RMP.Character;
+        packet[2] = (byte)RMP.Icon;
+        packet[3] = Convert.ToByte(portraitIndex);
+        packet[4] = (byte)RMP.Name;
+        packet[5] = Convert.ToByte(nameBytes.Length);
+
+        // set the the rest of the bytes in the packet to the name bytes
+        for(int i = 0; i < nameBytes.Length; i++)
+        {
+            packet[6 + i] = nameBytes[i];
+        }
+
+        if(isServer)
+        {
+            SendToAllClients(packet);
+        }
+        else
+        {
+            clientSocket.Send(packet);
+        }
+    }
+
+    // overload if we know the player index
+    public void SendCharacterPacket(int playerIndex, Sprite portrait, string name)
+    {
+        // get index of portrait in array
+        int portraitIndex = Array.IndexOf(portraits, portrait);
+
+        // convert character name string to bytes
+        byte[] nameBytes = Encoding.ASCII.GetBytes(name);
+
+        byte[] packet = new byte[nameBytes.Length + 6];
+
+        // Character, playerIndex, Icon, iconIndex, Name, name.Length, name string
+        packet[0] = (byte)RMP.Character;
+        packet[1] = Convert.ToByte(playerIndex);
+        packet[2] = (byte)RMP.Icon;
+        packet[3] = Convert.ToByte(portraitIndex);
+        packet[4] = (byte)RMP.Name;
+        packet[5] = Convert.ToByte(nameBytes.Length);
+
+        // set the the rest of the bytes in the packet to the name bytes
+        for(int i = 0; i < nameBytes.Length; i++)
+        {
+            packet[6 + i] = nameBytes[i];
+        }
+
+        if(isServer)
+        {
+            SendToAllClients(packet);
+        }
+        else
+        {
+            clientSocket.Send(packet);
+        }
+    }
+
+    public void SendEndCharPacket()
+    {
+        byte[] endPacket = new byte[1];
+        endPacket[0] = (byte)RMP.EndCharacter;
+        SendToAllClients(endPacket);
+    }
+
+    // sets the data directly as server
+    public void SetCharacterData(int index, Sprite portrait, string name)
+    {
+        playerPortraits[index] = portrait;
+        names[index] = name;
+    }
+
+    // recieves a character data packet and sets the correct values
+    public void ParseCharacterPacket(byte[] packet)
+    {
+        int playerIndex = packet[1];
+        int portraitIndex = packet[3];
+        int nameLength = packet[5];
+
+        byte[] nameBytes = new byte[nameLength];
+
+        // put the bytes from packet into name array
+        for(int i = 0; i < nameBytes.Length; i++)
+        {
+            nameBytes[i] = packet[6 + i];
+        }
+
+        // convert name back to string
+        string name = Encoding.ASCII.GetString(nameBytes);
+
+        // get portrait from array
+        Sprite portrait = portraits[portraitIndex];
+
+        // set the character's data
+        SetCharacterData(playerIndex, portrait, name);
+    }
+
     // waits to recieve to send a certain type of data packet
     public IEnumerator WaitForPacket(RMP data)
     {
@@ -248,7 +390,8 @@ public class NetworkManager : MonoBehaviour
                     {
                         received = true;
                         packet = msg.data;
-                        ForwardPacket(packet);
+                        Debug.Log(BitConverter.ToString(packet));
+                        ForwardPacket(msg);
                     }
                 }
             }
@@ -288,7 +431,9 @@ public class NetworkManager : MonoBehaviour
                         {
                             received = true;
                             packet = msg.data;
-                            ForwardPacket(packet);
+                            Debug.Log(BitConverter.ToString(packet));
+                            ForwardPacket(msg);
+                            ParseStealPacket(packet);
                         }
                     }
                 }
@@ -304,11 +449,26 @@ public class NetworkManager : MonoBehaviour
                         {
                             received = true;
                             packet = msg.data;
+                            ParseStealPacket(packet);
                         }
                     }
                 }
             }
             yield return null;
+        }
+    }
+
+    // puts a steal packet in the correct part of the array for right player to read
+    private void ParseStealPacket(byte[] packet)
+    {
+        // if it is a steal packet
+        if(packet[0] == (byte)RMP.Steal || packet[0] == (byte)RMP.NoSteal)
+        {
+            // put it in the right place
+            int index = packet[2];
+            stealPackets[index] = packet;
+            packetRecieved[index] = true;
+            Debug.Log(BitConverter.ToString(stealPackets[index]));
         }
     }
 

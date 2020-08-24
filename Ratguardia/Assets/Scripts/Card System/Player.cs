@@ -14,6 +14,7 @@ public abstract class Player : MonoBehaviour
     [HideInInspector] public bool isStealing;
     [HideInInspector] public int playerIndex; // which index this player is in the Board array
     [HideInInspector] public Card combatant;  // card fighting in battle, used for stealing
+    [HideInInspector] public bool doneStealing = true;
 
     public GameObject fiveCardLayout;
     public GameObject sixCardLayout;
@@ -37,6 +38,18 @@ public abstract class Player : MonoBehaviour
         }
         //if(i == charList.Length) character = transform.GetComponentInChildren<Character>();
         SetIcon();
+    }
+
+    // Sword CArt Online
+    public void SetCharacterOnline(Sprite portrait, string name)
+    {
+        // dont set them if null, just use default
+        if(portrait != null && name != null)
+        {
+            character.portrait = portrait;
+            character.title = name;
+            SetIcon();
+        } 
     }
 
     public void SetIcon()
@@ -146,13 +159,20 @@ public abstract class Player : MonoBehaviour
             // if not the player who discarded and player can steal
             if(player.playerIndex != this.playerIndex && player.CanSteal())
             {
-                // if player decides to steal, add card to combatants list
-                yield return StartCoroutine(player.DecideSteal());
-                if(player.combatant != null)
-                {
-                    combatants.Add(player.combatant);
-                }
+                // ask concurrently now, wait for everyone to finish later
+                StartCoroutine(player.DecideSteal());   
             }
+        }
+
+        yield return new WaitUntil(() => Board.main.PlayersDoneStealing());
+
+        foreach(var player in Board.main.players)
+        {
+           // if player decides to steal, add card to combatants list
+            if(player.combatant != null)
+            {
+                combatants.Add(player.combatant);
+            } 
         }
 
         // if anyone wants to steal, run the battle
@@ -278,7 +298,7 @@ public abstract class Player : MonoBehaviour
     // if game is online, send data to other players that player drew
     protected void SendDrawPacket()
     {
-        if(NetworkManager.main.isNetworkGame && this is HumanPlayer)
+        if(NetworkManager.main.isNetworkGame && (this is HumanPlayer || this is AIPlayer))
         {
             // literally send one byte
             byte[] packet = new byte[1];
@@ -299,7 +319,7 @@ public abstract class Player : MonoBehaviour
     // if game is online, tell players what card was discarded
     protected void SendDiscardPacket(Card card)
     {
-        if(NetworkManager.main.isNetworkGame && this is HumanPlayer)
+        if(NetworkManager.main.isNetworkGame && (this is HumanPlayer || this is AIPlayer))
         {
             // discard byte, index byte
             byte[] packet = new byte[2];
@@ -321,10 +341,62 @@ public abstract class Player : MonoBehaviour
         }
     }
 
+    // if game is online, tell players that player is stealing, and with which card
+    protected void SendStealPacket()
+    {
+        if(NetworkManager.main.isNetworkGame)
+        {
+            // steal byte, player byte, index byte, combatant byte, index byte
+            byte[] packet = new byte[5];
+            packet[0] = (byte)RMP.Steal;
+            packet[1] = (byte)RMP.Player;
+            packet[3] = (byte)RMP.Combatant;
+
+            // convert player index & combatant index to bytes
+            packet[2] = Convert.ToByte(playerIndex);
+            packet[4] = Convert.ToByte(hand.IndexOf(combatant));
+
+            // send to client/server
+            if(NetworkManager.main.isServer)
+            {
+                NetworkManager.main.SendToAllClients(packet);
+            }
+            else
+            {
+                NetworkManager.main.clientSocket.Send(packet);
+            }
+        }
+    }
+
+    // if game is online, tell players that player is not stealing
+    protected void SendNoStealPacket()
+    {
+        if(NetworkManager.main.isNetworkGame)
+        {
+            // steal byte, player byte, index byte
+            byte[] packet = new byte[3];
+            packet[0] = (byte)RMP.NoSteal;
+            packet[1] = (byte)RMP.Player;
+
+            // convert player index to byte
+            packet[2] = Convert.ToByte(playerIndex);
+
+            // send to client/server
+            if(NetworkManager.main.isServer)
+            {
+                NetworkManager.main.SendToAllClients(packet);
+            }
+            else
+            {
+                NetworkManager.main.clientSocket.Send(packet);
+            }
+        }
+    }
+
     // if game is online, tell players that turn is over
     protected void SendEndTurnPacket()
     {
-        if(NetworkManager.main.isNetworkGame && this is HumanPlayer)
+        if(NetworkManager.main.isNetworkGame && (this is HumanPlayer || this is AIPlayer))
         {
             // literally just 1 byte again
             byte[] packet = new byte[1];

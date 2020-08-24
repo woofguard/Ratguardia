@@ -28,6 +28,9 @@ public class AIPlayer : Player
             case "basic":
                 yield return StartCoroutine(BasicAI());
                 break;
+            case "basicOnline":
+                yield return StartCoroutine(BasicAI());
+                break;
             default:
                 yield return StartCoroutine(PlaceholderAI());
                 break;
@@ -39,6 +42,7 @@ public class AIPlayer : Player
     public override IEnumerator DecideSteal()
     {
         yield return new WaitForSeconds(stealWaitTime);
+        doneStealing = false;
 
         // decide whether to steal based on AI type
         switch (aiType)
@@ -49,11 +53,24 @@ public class AIPlayer : Player
             case "basic":
                 combatant = BasicSteal();
                 break;
+            case "basicOnline":
+                combatant = null;
+                break;
             default:
                 combatant = null;
                 break;
         }
-        yield return null;
+
+        if(combatant != null)
+        {
+            SendStealPacket();
+        }
+        else
+        {
+            SendNoStealPacket();
+        }
+
+        doneStealing = true;
     }
 
     // just discards the last card drawn
