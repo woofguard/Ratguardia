@@ -152,19 +152,19 @@ public class DisplayCard : MonoBehaviour
     // highlights the card by moving up a bit
     public void Highlight()
     {
-        pos = card.transform.localPosition;
-        card.transform.localPosition = new Vector3(pos.x, pos.y + 0.2f, pos.z);
-       // anim.StopPlayback();
-       // anim.Play("RetractBattleCard");
+        //pos = card.transform.localPosition;
+        //card.transform.localPosition = new Vector3(pos.x, pos.y + 0.2f, pos.z);
+        anim.StopPlayback();
+        anim.Play("HoverCard");
     }
 
     // moves the card back down
     public void UnHighlight()
     {
-        pos = card.transform.localPosition;
-        card.transform.localPosition = new Vector3(pos.x, pos.y - 0.2f, pos.z);
-        // anim.StopPlayback();
-        // anim.Play("RetractBattleCard");
+        //pos = card.transform.localPosition;
+        //card.transform.localPosition = new Vector3(pos.x, pos.y - 0.2f, pos.z);
+        anim.StopPlayback();
+        anim.Play("UnHoverCard");
     }
 
 }
