@@ -23,9 +23,12 @@ public class DisplayCard : MonoBehaviour
 
     public Animator anim;
 
+    private Vector3 pos;
+
     private void Awake()
     {
         anim = gameObject.GetComponent<Animator>();
+        pos = transform.localPosition;
     }
 
     // set card display to current information
@@ -79,6 +82,7 @@ public class DisplayCard : MonoBehaviour
         {
             cardBack.gameObject.SetActive(true);
         }
+        pos = transform.localPosition;
     }
     
     public void HideCard()
@@ -114,27 +118,53 @@ public class DisplayCard : MonoBehaviour
     public void UpdateRubble()
     {
         rubble.gameObject.SetActive(card.rubble);
+        pos = transform.localPosition;
     }
 
     public void FlipUp()
     {
-       // if (!card.faceUp) return;
+        // if (!card.faceUp) return;
+        anim.StopPlayback();
         anim.Play("CardFlipUp");
+        pos = transform.localPosition;
     }
 
     public void FlipDown()
     {
-        if (!card.faceUp) return;
+        //if (!card.faceUp) return;
+        anim.StopPlayback();
         anim.Play("CardFlipDown");
+        pos = transform.localPosition;
     }
 	//plays send card to battle animation
 	public void sendCard()
 	{
+        anim.StopPlayback();
 		anim.Play("SendBattleCard");
 	}
 	//plays the retract card from battle animation 
 	public void retractCard()
 	{
-		anim.Play("RetractBattleCard");
+        anim.StopPlayback();
+        anim.Play("RetractBattleCard");
 	}
+
+    // highlights the card by moving up a bit
+    public void Highlight()
+    {
+        pos = card.transform.localPosition;
+        card.transform.localPosition = new Vector3(pos.x, pos.y + 0.2f, pos.z);
+       // anim.StopPlayback();
+       // anim.Play("RetractBattleCard");
+    }
+
+    // moves the card back down
+    public void UnHighlight()
+    {
+        pos = card.transform.localPosition;
+        card.transform.localPosition = new Vector3(pos.x, pos.y - 0.2f, pos.z);
+        // anim.StopPlayback();
+        // anim.Play("RetractBattleCard");
+    }
+
 }

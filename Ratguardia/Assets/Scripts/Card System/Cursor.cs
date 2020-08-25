@@ -13,6 +13,9 @@ public class Cursor : MonoBehaviour
     [HideInInspector] public bool cancelPressed;
     [HideInInspector] public bool cancelReleased;
     [HideInInspector] public Card clickedCard;
+    [HideInInspector] public Card hoveredCard;
+
+    [HideInInspector] public Vector2 lastPos;
 
     private void Awake()
     {
@@ -30,6 +33,42 @@ public class Cursor : MonoBehaviour
         cancelPressed = false;
         cancelReleased = false;
         clickedCard = null;
+
+        lastPos = new Vector2(0f, 0f);
+    }
+
+    private void Update()
+    {
+        if (confirmPressed || cancelPressed) return;
+
+        Vector2 pos = controls.CardGame.CursorPosition.ReadValue<Vector2>();
+        if (pos.x == lastPos.x && pos.y == lastPos.y) return;
+
+        // get position of cursor
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(pos);
+
+        // whatever the heck a raycast is
+        var hoveredObj = Physics2D.Raycast(new Vector2(mousePos.x, mousePos.y), Vector2.zero);
+
+        // if we clicked anything
+        if (hoveredObj.collider != null)
+        {
+            // get the clicked card and store it for HumanPlayer to read
+            Card hc = hoveredObj.collider.gameObject.GetComponent<DisplayCard>().card;
+
+            if (hc != hoveredCard && hc.owner == player.playerIndex)
+            {
+                if(hoveredCard != null) hoveredCard.visualCard.UnHighlight();
+                hoveredCard = hc;
+                hoveredCard.visualCard.Highlight();
+            } 
+        }
+        else if(hoveredCard != null)
+        {
+            hoveredCard.visualCard.UnHighlight();
+            hoveredCard = null;
+        }
+        lastPos = pos;
     }
 
     public void OnConfirm(InputAction.CallbackContext context)

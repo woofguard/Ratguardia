@@ -28,6 +28,9 @@ public class AIPlayer : Player
             case "basic":
                 yield return StartCoroutine(BasicAI());
                 break;
+            case "basicOnline":
+                yield return StartCoroutine(BasicAI());
+                break;
             default:
                 yield return StartCoroutine(PlaceholderAI());
                 break;
@@ -49,6 +52,9 @@ public class AIPlayer : Player
                 break;
             case "basic":
                 combatant = BasicSteal();
+                break;
+            case "basicOnline":
+                combatant = null;
                 break;
             default:
                 combatant = null;

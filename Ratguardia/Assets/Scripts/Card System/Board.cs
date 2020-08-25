@@ -343,6 +343,7 @@ public class Board : MonoBehaviour
             {
                 players[i] = Instantiate(AIPlayerPrefab).GetComponent<Player>();
                 players[i].playerIndex = i;
+                (players[i] as AIPlayer).aiType = "basicOnline";
             }
         }
 
@@ -475,6 +476,7 @@ public class Board : MonoBehaviour
         // reset combatant data for all players
         foreach(Player player in players)
         {
+            if(player == GetHumanPlayer() && player.combatant != null && player.combatant != winner) player.combatant.visualCard.retractCard();
             player.combatant = null;
         }
     }
