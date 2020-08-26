@@ -84,7 +84,7 @@ public class DialogueManager : MonoBehaviour
                         if (StateManager.lastVictor > -1 && StateManager.main.combatants[StateManager.lastVictor] == line.name) skipLine = true;
                         break;
                     case "updatePos":
-                        character.transform.position = GetUpdatedPosition(line.name);
+                        character.transform.position = GetUpdatedPosition(line.name, character.gameObject);
                         break;
                     case "hideLast":
                         if (StateManager.charDeath > -1) transform.Find(StateManager.main.combatants[StateManager.charDeath]).gameObject.SetActive(false);
@@ -127,7 +127,7 @@ public class DialogueManager : MonoBehaviour
         yield return null;
     }
 
-    Vector3 GetUpdatedPosition(string name)
+    Vector3 GetUpdatedPosition(string name, GameObject character)
     {
         
         int ind = -1;
@@ -145,6 +145,13 @@ public class DialogueManager : MonoBehaviour
         switch(ind)
         {
             case 1:
+                RectTransform tbox = character.transform.Find("Textbox") as RectTransform;
+                Vector3 pos = tbox.anchoredPosition;
+                pos.x = -628f;
+                tbox.anchoredPosition = pos;
+                Vector3 scale = new Vector3(1f, 1f, 1f);
+                tbox.localScale = scale;
+                tbox.Find("Text (TMP)").localScale = scale;
                 return transform.Find("The Peasant").position;
             case 2:
                 return transform.Find("The Knight").position;
